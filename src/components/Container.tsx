@@ -1,13 +1,12 @@
 import React from 'react';
-import { Typography, Box } from "@mui/material"
-import Header from './Header';
+import { Box } from "@mui/material"
+import Products from './Products';
 
 
 const Container: React.FC = () => {
   return (
     <Box>
-        <Header title='Container'/>
-        <Typography variant='body1'>Container text</Typography>    
+        <Products />   
     </Box>
   )
 }

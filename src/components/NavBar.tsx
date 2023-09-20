@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 const NavBar: React.FC = () => {
     
     const navItems = [
-      { label: 'Categories', path: '/categories' },
-      { label: 'Offers', path: '/offerss' },
-      { label: 'Support', path: '/support' },
+      { id: 1,  label: 'Categories', path: '/categories' },
+      { id: 2,  label: 'Offers', path: '/offerss' },
+      { id: 3,  label: 'Support', path: '/support' },
     ];
     return (
       <Box
@@ -31,6 +31,7 @@ const NavBar: React.FC = () => {
         >
           {navItems.map((navItem) => 
             <Typography
+              key={navItem.id}
               sx={{
                 textTransform: 'uppercase',
                 color: 'white',
