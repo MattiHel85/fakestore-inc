@@ -28,7 +28,7 @@ const Products: React.FC = () => {
             <p>Description: {product.description}</p>
 
             {product.images.map((img) => (
-              <img key={img} src={img}></img>
+              <img key={img} src={img} alt={`Images of ${product.title}`}/>
             ))}
           </li>
         ))}
