@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchProducts } from '../store/reducers/productSlice';
-import { Product } from '../types/types';
+import { Product } from '../types/Product';
 import { AppDispatch } from '../store/store';
 
 import Header from './Header';
