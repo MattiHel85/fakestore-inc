@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchUsers } from '../store/reducers/userSlice';
+import { fetchUsers } from '../redux/slices/userSlice';
 import { User } from '../types/User';
-import { AppDispatch } from '../store/store';
+import { AppDispatch } from '../redux/store';
 
 import Header from './Header';
 

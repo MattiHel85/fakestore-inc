@@ -1,9 +1,9 @@
 import { configureStore, AnyAction } from "@reduxjs/toolkit";
 import { ThunkAction } from 'redux-thunk'
 
-import productReducer from './reducers/productSlice'
-import userReducer from './reducers/userSlice'
-import {rootReducer, RootState} from "./reducers/rootSlice";
+import productReducer from './slices/productSlice'
+import userReducer from './slices/userSlice'
+import {rootReducer, RootState} from "./slices/rootSlice";
 
 export type AppDispatch = typeof store.dispatch;
 
