@@ -5,6 +5,7 @@ import { Box } from "@mui/material"
 
 import Products from './Products';
 import Users from './Users';
+import Categories from './Categories';
 
 
 const Container: React.FC = () => {
@@ -14,6 +15,7 @@ const Container: React.FC = () => {
           <Routes>
             <Route path='/products' element={<Products />} />
             <Route path='/users' element={<Users />} />
+            <Route path='/categories' element={<Categories />} />
           </Routes>
         </Router>      
     </Box>

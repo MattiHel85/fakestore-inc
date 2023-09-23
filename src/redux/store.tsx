@@ -3,6 +3,7 @@ import { ThunkAction } from 'redux-thunk'
 
 import productReducer from './slices/productSlice'
 import userReducer from './slices/userSlice'
+import categoryReducer from './slices/categorySlice'
 import {rootReducer, RootState} from "./slices/rootSlice";
 
 export type AppDispatch = typeof store.dispatch;
@@ -14,6 +15,7 @@ export const store = configureStore({
     reducer: {
         rootReducer,
         products: productReducer,
-        users: userReducer
+        users: userReducer,
+        categories: categoryReducer
     },
 })
