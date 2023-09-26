@@ -10,7 +10,9 @@ import Categories from './Categories';
 
 const Container: React.FC = () => {
   return (
-    <Box>
+    <Box 
+      sx={{width: '80%', margin: 'auto'}}
+    >
         <Router>
           <Routes>
             <Route path='/products' element={<Products />} />

@@ -20,3 +20,8 @@ export interface Product {
     loading: boolean
     error: string | null
 }
+
+export interface ProductCardProps {
+  product: Product;  
+  onAddToCart: (product: Product) => void; 
+}
