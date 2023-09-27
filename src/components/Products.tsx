@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+
+
 import Header from './Header';
 import ProductCard from './ProductCard';
 
@@ -25,6 +27,7 @@ const Products: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage: number = 5; // You can adjust the number of items per page
   const { items } = useSelector((state: RootState) => state.cart)
+  
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -59,9 +62,23 @@ const Products: React.FC = () => {
       };
   
       dispatch(addToCartAsync(cartItem)); // Add a new item
+
     }
   };
+  const debounce = (func: any, delay: any) => {
+    let timeoutId: any;
   
+    return (...args: any) => {
+      clearTimeout(timeoutId);
+  
+      timeoutId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+  
+  
+  const debouncedHandleAddToCart = debounce(handleAddToCart, 750);
 
   const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
@@ -89,7 +106,7 @@ const Products: React.FC = () => {
           <ProductCard 
             key={product.id} 
             product={product}
-            onAddToCart={handleAddToCart}
+            onAddToCart={debouncedHandleAddToCart}
           />
         ))}
       </Box>
