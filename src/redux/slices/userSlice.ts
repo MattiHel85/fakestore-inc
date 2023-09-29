@@ -12,6 +12,28 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     }
 })
 
+export const registerUser = createAsyncThunk('users/registerUser', async (userData: User) => {
+  try {
+    const res = await fetch('https://api.escuelajs.co/api/v1/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log('User created successfully')
+      return data as User;
+    } else {
+      throw new Error('User registration failed');
+    }
+  } catch (error) {
+    throw error;
+  }
+});
+
 const initialState: UserState = {
     users: [],
     loading: true,
@@ -37,6 +59,19 @@ const userSlice = createSlice({
             state.loading = false;
             state.users = [];
             state.error = action.error.message || 'An error occurred.';
+          })
+          .addCase(registerUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+          })
+          .addCase(registerUser.fulfilled, (state, action) => {
+            state.loading = false;
+            state.users.push(action.payload);
+            state.error = null;
+          })
+          .addCase(registerUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'User registration failed.';
           });
       },
       

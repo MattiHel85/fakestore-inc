@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, Box, Button, TextField } from "@mui/material";
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { registerUser } from '../redux/slices/userSlice';
 
 const SignUp: React.FC = () => {
   const [userData, setUserData] = useState({
+    
     name: '',
     email: '',
     password: '',
@@ -11,6 +15,7 @@ const SignUp: React.FC = () => {
     role: 'customer',
   });
 
+  const dispatch: AppDispatch = useDispatch();
   const adminCode = 'makeMeAdmin'
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,27 +37,8 @@ const SignUp: React.FC = () => {
     }
   };
 
-  const handleSignUp = async () => {
-    try {
-      const response = await fetch('https://api.escuelajs.co/api/v1/users/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (response.ok) {
-        console.log('User created successfully');
-        // Redirect to a different page after successful signup
-        // For example, you can navigate to the login page
-        // history.push('/login');
-      } else {
-        console.error('Error creating user:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error creating user:', error);
-    }
+  const handleSignUp = () => {
+    dispatch(registerUser(userData));
   };
 
   return (
