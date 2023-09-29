@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 // import Toolbar from '@mui/material/Toolbar';
@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
     
     const navItems = [
       { id: 1,  label: 'Categories', path: '/categories' },
-      { id: 2,  label: 'Offers', path: '/offers' },
+      { id: 2,  label: 'All products', path: '/products' },
       { id: 3,  label: 'Support', path: '/support' },
     ];
     return (
@@ -30,6 +30,7 @@ const NavBar: React.FC = () => {
           }}
         >
           {navItems.map((navItem) => 
+          <Link to={navItem.path} style={{textDecoration:'none'}}>
             <Typography
               key={navItem.id}
               sx={{
@@ -43,6 +44,7 @@ const NavBar: React.FC = () => {
             >
               {navItem.label}
             </Typography>
+          </Link>
           )}
         </Box>
       </ Box>

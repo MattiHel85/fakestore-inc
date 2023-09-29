@@ -1,23 +1,22 @@
 import { configureStore, AnyAction } from "@reduxjs/toolkit";
 import { ThunkAction } from 'redux-thunk'
-
-import productReducer from './slices/productSlice'
-import userReducer from './slices/userSlice'
-import categoryReducer from './slices/categorySlice'
-import cartReducer from './slices/cartSlice'
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import {rootReducer, RootState} from "./slices/rootSlice";
 
 export type AppDispatch = typeof store.dispatch;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
 
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: {
-        rootReducer,
-        products: productReducer,
-        users: userReducer,
-        categories: categoryReducer,
-        cart: cartReducer
-    },
+    reducer: persistedReducer
 })
+
+export const persistor = persistStore(store);

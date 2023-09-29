@@ -33,9 +33,9 @@ const Products: React.FC = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log('Cart Items:', items);
-  }, [items]);
+  // useEffect(() => {
+  //   console.log('Cart Items:', items);
+  // }, [items]);
 
   const handleAddToCart = (product: Product) => {
     // Check if the product is already in the cart

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,24 +8,20 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import AddIcon from '@mui/icons-material/Add';
-// import RemoveIcon from '@mui/icons-material/Remove';
-// import DeleteIcon from '@mui/icons-material/Delete';
 
 import Container from '@mui/material/Container';
 // import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import LoginIcon from '@mui/icons-material/Login';
 import { styled } from '@mui/material/styles';
 
+import { AppDispatch } from '../redux/store';
 import { RootState } from "../redux/slices/rootSlice";
+import { logout } from '../redux/slices/authSlice';
 import Cart from './Cart';
+import SignIn from './SignIn';
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -37,15 +33,15 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }));
 
 function TopAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [anchorElCart, setAnchorElCart] = React.useState<null | HTMLElement>(null); // Add state for cart menu
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null); // Add state for cart menu
 
-  // const dispatch: AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -55,9 +51,9 @@ function TopAppBar() {
     setAnchorElCart(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -66,8 +62,28 @@ function TopAppBar() {
   const handleCloseCartMenu = () => { // Add handler for closing cart menu
     setAnchorElCart(null);
   };
+
+  const handleGoToCheckout = () => {
+    handleCloseCartMenu()
+    navigate('/checkout')
+  }
   
   const { items } = useSelector((state: RootState) => state.cart)
+
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  const handleLogout = () => {
+    // Dispatch the logout action
+    dispatch(logout());
+
+    handleCloseUserMenu(); 
+
+    //reroute after slight delay
+    setTimeout(() => {
+      navigate('/products');
+    }, 1000)
+  };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: 'white' }}>
@@ -95,13 +111,29 @@ function TopAppBar() {
 
           {/* User Menu */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Tooltip title="Admin control panel">
-              <Link to={'/users'}>
+            {/* <Tooltip title="Admin control panel">
+              <Link to={'/admin'}>
                 <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
                   <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >admin</Typography>
                 </IconButton>
               </Link>
+            </Tooltip> */}
+            { isAuthenticated ? (
+              <Tooltip title="username">
+                <>
+                {/* <Link to={'/admin'}> */}
+                <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
+                  <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >user: {user.access_token.length}</Typography>
+                </IconButton>
+              {/* </Link> */}
+              <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }} onClick={handleLogout}>
+                  <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >sign out</Typography>
+                </IconButton>
+                </>
+              
             </Tooltip>
+            ) : 
+            <>
             <Tooltip title="sign in">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, color: 'black', mr: '0.05em' }}>
                 <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >
@@ -136,23 +168,13 @@ function TopAppBar() {
                   padding: '16px'
                 }}
               >
-                <MenuItem>
-                  <TextField label="Username" sx={{borderRadius: '25px !important'}}/>
-                </MenuItem>
-                <MenuItem>
-                  <TextField label="Password" type="password" />
-                </MenuItem>
-                <MenuItem>
-                  <Button sx={{borderRadius: '25px'}}>Sign In</Button>
-                </MenuItem>
-                <MenuItem>
-                  <Typography>FORGOT YOUR PASSWORD?</Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography>SIGN UP</Typography>
-                </MenuItem>
+                <SignIn />
               </Box>
             </Menu>
+            </>
+          }
+            
+            
           </Box>
 
           {/* Cart Menu */}
@@ -186,7 +208,7 @@ function TopAppBar() {
               open={Boolean(anchorElCart)}
               onClose={handleCloseCartMenu}
             >
-                <Cart />
+                <Cart handleGoToCheckout={handleGoToCheckout} />
             </Menu>
             
           </Box>

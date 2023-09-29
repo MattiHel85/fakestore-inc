@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
@@ -13,10 +16,12 @@ import IconButton from '@mui/material/IconButton';
 import { RootState } from '../redux/slices/rootSlice';
 import { increaseQuantity, decreaseQuantity, removeFromCart } from '../redux/slices/cartSlice';
 import { AppDispatch } from '../redux/store';
+import { CartProps } from '../types/Cart';
 
-const Cart: React.FC = () => {
+const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
 
     const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { items } = useSelector((state: RootState) => state.cart)
       
@@ -34,6 +39,9 @@ const Cart: React.FC = () => {
         dispatch(removeFromCart(productId)); 
       };
       
+    const handleBrowse = () => {
+      navigate('/products')
+    }
 
   return (
     <>
@@ -88,15 +96,30 @@ const Cart: React.FC = () => {
                       Price: €
                       {items.reduce((total: any, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
                     </Typography>
-                    <Button>Go to checkout</Button>
+                    <Button onClick={handleGoToCheckout}>Go to checkout</Button>
                 </Box>
             </>
         )}
 
         {items.length === 0 && (
-            <Box sx={{padding: '1.75rem', width: '20rem'}}>
+            <Box sx={{
+              padding: '1.75rem', 
+              width: '30rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+              }}
+            >
               <Typography variant='h5' sx={{marginTop: '1em', textAlign: 'center'}}>Cart Empty</Typography>
               <Typography variant='body1' sx={{marginTop: '1em', textAlign: 'center'}}>You've not added anything yet!</Typography>
+                <Button sx={{
+                  width: '50%',
+                  margin: 'auto'
+                }} 
+                onClick={handleBrowse}
+                >
+                  Browse our products
+                </Button>
             </Box>
         )}
     </>

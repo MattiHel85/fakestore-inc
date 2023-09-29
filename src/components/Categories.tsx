@@ -24,7 +24,7 @@ const Categories: React.FC = () => {
         {categories.map((category: Category) => (
           <li key={category.id}>
             <h2>{category.name}</h2>
-            <img src={category.image} alt={`Image for category: ${category.name}`}/>
+            <img src={category.image} alt={`Category: ${category.name}`}/>
           </li>
         ))}
       </ul>

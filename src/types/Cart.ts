@@ -10,3 +10,7 @@ export interface CartState {
     loading: boolean;
     error: string | null;
 }
+
+export interface CartProps {
+    handleGoToCheckout: () => void;
+}

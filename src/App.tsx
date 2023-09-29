@@ -7,6 +7,9 @@ import NavBar from './components/NavBar'
 import Products from './components/Products'
 import Users from './components/Users'
 import Categories from './components/Categories'
+import AdminPanel from './components/AdminPanel'
+import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
 
 const App = () => {
   return (
@@ -16,9 +19,20 @@ const App = () => {
           <TopAppBar />
           <NavBar />
           <Routes>
-            <Route path='/products' element={<Products />} />
-            <Route path='/users' element={<Users />} />
+            {/* product routes */}
             <Route path='/categories' element={<Categories />} />
+            <Route path='/products' element={<Products />} />
+            {/* <Route path='/cart' element={<Cart/>} /> */}
+
+            {/* user routes  */}
+            <Route path='/users' element={<Users />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/signin' element={<SignIn />} />
+
+            
+            {/* admin routes */}
+            <Route path='/admin' element={<AdminPanel />} />
+
           </Routes>
         </Router> 
       </StyledEngineProvider>
