@@ -45,9 +45,9 @@ const handleSignInChange = (e: any) => {
     >
         <TextField
           label="Username"
-          name="email" // Set the name attribute to "email"
+          name="email" 
           value={signInData.email}
-          onChange={handleSignInChange} // Use handleSignInChange for input changes
+          onChange={handleSignInChange} 
           sx={{ 
             margin: '5px'
            }}
@@ -55,9 +55,9 @@ const handleSignInChange = (e: any) => {
         <TextField
           label="Password"
           type="password"
-          name="password" // Set the name attribute to "password"
+          name="password" 
           value={signInData.password}
-          onChange={handleSignInChange} // Use handleSignInChange for input changes
+          onChange={handleSignInChange} 
           sx={{ 
             margin: '5px'
            }}

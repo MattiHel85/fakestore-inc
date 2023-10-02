@@ -37,8 +37,8 @@ const initialState: AuthState = {
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState, // Specify the initial state here
-    reducers: {}, // Define your action creators here
+    initialState, 
+    reducers: {}, 
     extraReducers: (builder) => {
         builder
             .addCase(loginUser.pending, (state, action) => {

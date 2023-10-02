@@ -10,6 +10,8 @@ import Categories from './components/Categories'
 import AdminPanel from './components/AdminPanel'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
+import SingleProduct from './components/SingleProduct'
+import debouncedHandleAddToCart from './utils/cartHelpers'
 
 const App = () => {
   return (
@@ -22,6 +24,7 @@ const App = () => {
             {/* product routes */}
             <Route path='/categories' element={<Categories />} />
             <Route path='/products' element={<Products />} />
+            <Route path='/products/:id' element={<SingleProduct onAddToCart={debouncedHandleAddToCart}/>} />
             {/* <Route path='/cart' element={<Cart/>} /> */}
 
             {/* user routes  */}

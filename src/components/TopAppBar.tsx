@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -121,14 +121,14 @@ function TopAppBar() {
             { isAuthenticated ? (
               <Tooltip title="username">
                 <>
-                {/* <Link to={'/admin'}> */}
-                <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
-                  <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >user: {user.access_token.length}</Typography>
-                </IconButton>
-              {/* </Link> */}
-              <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }} onClick={handleLogout}>
-                  <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >sign out</Typography>
-                </IconButton>
+                  <Link to={'/admin'}>
+                    <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
+                      <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >user: {user.access_token.length}</Typography>
+                    </IconButton>
+                  </Link>
+                  <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }} onClick={handleLogout}>
+                    <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >sign out</Typography>
+                  </IconButton>
                 </>
               
             </Tooltip>

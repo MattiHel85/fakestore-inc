@@ -6,8 +6,7 @@ import { AppDispatch } from '../redux/store';
 import { registerUser } from '../redux/slices/userSlice';
 
 const SignUp: React.FC = () => {
-  const [userData, setUserData] = useState({
-    
+  const [userData, setUserData] = useState({    
     name: '',
     email: '',
     password: '',

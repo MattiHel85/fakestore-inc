@@ -5,7 +5,6 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
     try {
         const res = await fetch('https://api.escuelajs.co/api/v1/categories')
         const data = await res.json()
-        console.log(data)
         return data as Category[]
     } catch (err) {
         throw err;
