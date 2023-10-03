@@ -3,6 +3,12 @@ export interface AuthState {
     accessToken: string |null;
     refreshToken: string | null;
     user: any,
+    loading: boolean;
     error: string | null;
+}
+
+export interface LoginPayload {
+    email: string;
+    password: string;
 }
 

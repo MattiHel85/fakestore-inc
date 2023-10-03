@@ -26,16 +26,16 @@ const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
     const { items } = useSelector((state: RootState) => state.cart)
       
     
-    const handleIncreaseQuantity = (productId: any) => {
+    const handleIncreaseQuantity = (productId: number) => {
         dispatch(increaseQuantity(productId));        
     };
 
 
-    const handleDecreaseQuantity = (productId: any) => {
+    const handleDecreaseQuantity = (productId: number) => {
         dispatch(decreaseQuantity(productId));
     };  
 
-    const handleRemoveFromCart = (productId: any) => {
+    const handleRemoveFromCart = (productId: number) => {
         dispatch(removeFromCart(productId)); 
       };
       
@@ -90,11 +90,11 @@ const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
                     }}
                 >
                     <Typography variant='body2'>
-                        Total Products: {items.reduce((total: any, item: any) => total + item.quantity, 0)}
+                        Total Products: {items.reduce((total, item) => total + item.quantity, 0)}
                     </Typography>
                     <Typography variant='body2'>
                       Price: €
-                      {items.reduce((total: any, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
+                      {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
                     </Typography>
                     <Button onClick={handleGoToCheckout}>Go to checkout</Button>
                 </Box>

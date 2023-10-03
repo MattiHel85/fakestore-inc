@@ -1,6 +1,6 @@
 import { CartItem } from '../types/Cart';
 import { Product } from '../types/Product';
-import { clearCart, addToCartAsync } from '../redux/slices/cartSlice';
+import { clearCart, addToCart } from '../redux/slices/cartSlice';
 import { AppDispatch } from '../redux/store';
 import { debounce } from './debounce';
 
@@ -19,7 +19,7 @@ const handleAddToCart = (
     );
 
     dispatch(clearCart()); 
-    updatedCartItems.forEach((item) => dispatch(addToCartAsync(item))); 
+    updatedCartItems.forEach((item) => dispatch(addToCart(item))); 
   } else {
     const cartItem: CartItem = {
       id: product.id,
@@ -28,7 +28,7 @@ const handleAddToCart = (
       quantity: 1,
     };
 
-    dispatch(addToCartAsync(cartItem)); 
+    dispatch(addToCart(cartItem)); 
   }
 };
 

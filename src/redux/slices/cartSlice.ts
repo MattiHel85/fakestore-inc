@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { CartItem, CartState } from '../../types/Cart';
 
 
@@ -12,7 +12,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addToCart: (state, action) => {
+        addToCart: (state, action: PayloadAction<CartItem>) => {
             state.items.push(action.payload);
         },
         removeFromCart: (state, action) => {
@@ -38,34 +38,9 @@ const cartSlice = createSlice({
               item.quantity += 1;
             }
           },
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(addToCartAsync.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(addToCartAsync.fulfilled, (state, action) => {
-                state.items = [...state.items, action.payload];
-                state.loading = false;
-                state.error = null;
-            })
-            .addCase(addToCartAsync.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message || 'An error occurred.';
-            });
-    },
+    }
 })
 
 export const { addToCart, removeFromCart, clearCart, decreaseQuantity, increaseQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
-
-export const addToCartAsync = createAsyncThunk(
-    'cart/addToCart',
-    async (product: CartItem, { dispatch, getState}) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-  
-      return product;
-    }
-  );
