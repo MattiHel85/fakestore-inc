@@ -35,6 +35,14 @@ export interface SingleProductProps {
   onAddToCart: (product: Product, items: CartItem[], dispatch: AppDispatch) => void; 
 }
 
+export interface AddProductData {
+  title: String;
+  description: string;
+  price: number;
+  images: string[];
+  categoryId: Number;
+}
+
 export interface ProductData {
   id: Number;
   title: String;

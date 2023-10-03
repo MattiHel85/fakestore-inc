@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
 import { RootState } from '../redux/slices/rootSlice';
-import { increaseQuantity, decreaseQuantity, removeFromCart } from '../redux/slices/cartSlice';
+import { increaseQuantity, decreaseQuantity, removeFromCart, clearCart } from '../redux/slices/cartSlice';
 import { AppDispatch } from '../redux/store';
 import { CartProps } from '../types/Cart';
 
@@ -38,9 +38,14 @@ const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
     const handleRemoveFromCart = (productId: number) => {
         dispatch(removeFromCart(productId)); 
       };
+
+    const handleClearCart = () => {
+      dispatch(clearCart());
+    }
       
     const handleBrowse = () => {
       navigate('/products')
+      window.location.reload()
     }
 
   return (
@@ -96,6 +101,7 @@ const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
                       Price: €
                       {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
                     </Typography>
+                    <Button onClick={handleClearCart}>Clear cart</Button>
                     <Button onClick={handleGoToCheckout}>Go to checkout</Button>
                 </Box>
             </>

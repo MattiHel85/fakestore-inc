@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import { Product, ProductData, ProductState } from '../../types/Product'
+import { Product, AddProductData, ProductData, ProductState } from '../../types/Product'
 
-const initialState: ProductState = {
+export const initialState: ProductState = {
   products: [],
   loading: true,
   error: null
@@ -28,7 +28,7 @@ export const fetchProductById = createAsyncThunk('products/fetchProductById', as
   }
 });
 
-export const createProduct = createAsyncThunk('products/createProduct', async (newProduct: ProductData) => {
+export const createProduct = createAsyncThunk('products/createProduct', async (newProduct: AddProductData) => {
   try { 
     const res = await fetch('https://api.escuelajs.co/api/v1/products', {
       method: 'POST',
@@ -45,7 +45,7 @@ export const createProduct = createAsyncThunk('products/createProduct', async (n
   }
 });
 
-export const updateProduct = createAsyncThunk('products/updateProduct', async (updatedProduct: any) => {
+export const updateProduct = createAsyncThunk('products/updateProduct', async (updatedProduct: ProductData) => {
   try { 
     const res = await fetch(`https://api.escuelajs.co/api/v1/products/${updatedProduct.id}`, {
       method: 'PUT',
@@ -84,6 +84,7 @@ export const deleteProduct = createAsyncThunk('products/deleteProduct', async (p
       console.error('Delete Product API Error:', res.statusText);
       throw new Error(`Failed to delete product with id of ${productId}`);
     }
+    
   } catch (err) {
     console.error('Delete Product Error:', err);
     throw err;
@@ -92,7 +93,7 @@ export const deleteProduct = createAsyncThunk('products/deleteProduct', async (p
 
 
 
-const productSlice = createSlice({
+export const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {},
