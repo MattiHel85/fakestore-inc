@@ -3,7 +3,7 @@ import { Product, AddProductData, ProductData, ProductState } from '../../types/
 
 export const initialState: ProductState = {
   products: [],
-  loading: true,
+  loading: false,
   error: null
 }
 
