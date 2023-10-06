@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import { AuthState } from "../../types/Auth";
-import { LoginPayload } from "../../types/Auth";
+import { AuthState, LoginPayload, UserProfile } from "../../types/Auth";
+import { RootState } from "./rootSlice";
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser', 
@@ -14,21 +14,37 @@ export const loginUser = createAsyncThunk(
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
-      });   
-      if(!res.ok){
-        throw new Error('Authentication failed');
-      } 
-      const data = await res.json();
-      return data;
-    } catch (error: any) {
-       throw error.message;
+      });  
+      const authProfileUrl = 'https://api.escuelajs.co/api/v1/auth/profile'
+        const data = await res.json();
+        try {
+            const res = await fetch(authProfileUrl, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${data.access_token}`
+                }
+            })
+
+            if (!res.ok) {
+                throw new Error('Something went wrong')
+            }
+
+            const profileData = await res.json()
+            console.log(profileData)
+            return profileData 
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
+    } catch (error) {
+       return error
     }
 })
 
 export const logout = createAction('auth/logout')
 export const loginFailure = createAction<string>('auth/loginFailure')
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
     isAuthenticated: false,
     accessToken: null,
     refreshToken: null,
@@ -55,7 +71,7 @@ const authSlice = createSlice({
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isAuthenticated = false;
-                state.error = action.payload as string;
+                state.error = action.payload as string || 'An error occurred.';    
             })
             .addCase(logout, (state) => {
                 state.isAuthenticated = false;
@@ -68,7 +84,7 @@ const authSlice = createSlice({
             .addCase(loginFailure, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
     },
 });
 

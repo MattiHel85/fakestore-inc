@@ -52,7 +52,7 @@ const AddProduct: React.FC = () => {
 
   return (
     <>
-      <Typography variant='h3' sx={{ textAlign: 'center', my: '2.5em' }}>Add Product</Typography>
+      <Typography variant='h4' sx={{ textAlign: 'center', my: '2.5em' }}>Add Product</Typography>
       <Box
         sx={{
           padding: '16px',

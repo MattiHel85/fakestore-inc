@@ -5,7 +5,8 @@ import { fetchUsers } from '../redux/slices/userSlice';
 import { User } from '../types/User';
 import { AppDispatch } from '../redux/store';
 
-import Header from './Header';
+import UserCard from './UserCard';
+import { Container } from '@mui/system';
 
 const Users: React.FC = () => {
   const {users,loading,error} = useSelector((state: any) => state.users)
@@ -16,21 +17,16 @@ const Users: React.FC = () => {
   }, [dispatch])
 
   return (
-    <div>
-      <Header title='User List' />
+    <Container
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap'
+      }}
+    >
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      <ul>
-        {users.map((user: User) => (
-          <li key={user.id}>
-            <h2>{user.name}</h2>
-            <p>Email: {user.email}</p>
-            <p>Role: {user.role}</p>
-              <img src={user.avatar} alt={`Avatar for user: ${user.name}`}/>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {users.map((user: User) => <UserCard id={user.id} name={user.name} email={user.email} role={user.role} />)}
+    </ Container>
   );
 };
 

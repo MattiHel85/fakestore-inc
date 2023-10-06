@@ -28,6 +28,32 @@ export const fetchProductById = createAsyncThunk('products/fetchProductById', as
   }
 });
 
+export const fetchProductsByPriceRange = createAsyncThunk(
+  'products/fetchProductsByPriceRange',
+  async ({ minPrice, maxPrice }: { minPrice: number; maxPrice: number }) => {
+    try {
+      const res = await fetch(`https://api.escuelajs.co/api/v1/products/?price_min=${minPrice}&price_max=${maxPrice}`);
+      const data = await res.json();
+      return data as Product[];
+    } catch (err) {
+      throw err;
+    }
+  }
+);
+
+export const fetchProductsByCategory = createAsyncThunk(
+  'products/fetchProductsByCategory',
+  async (categoryId: number) => {
+    try {
+      const res = await fetch(`https://api.escuelajs.co/api/v1/products/?categoryId=${categoryId}`);
+      const data = await res.json();
+      return data as Product[];
+    } catch (err) {
+      throw err;
+    }
+  }
+)
+
 export const createProduct = createAsyncThunk('products/createProduct', async (newProduct: AddProductData) => {
   try { 
     const res = await fetch('https://api.escuelajs.co/api/v1/products', {
@@ -113,13 +139,35 @@ export const productSlice = createSlice({
             state.products = [];
             state.error = action.error.message || 'An error occurred.';
           })
+          .addCase(fetchProductsByPriceRange.pending, (state) => {
+            state.loading = true;
+          })
+          .addCase(fetchProductsByPriceRange.fulfilled, (state, action) => {
+            state.loading = false;
+            state.products = action.payload;
+          })
+          .addCase(fetchProductsByPriceRange.rejected, (state, action) => {
+            state.loading = false;
+            state.products = [];
+            state.error = action.error.message || 'An error occurred while fetching products by price range.';
+          })      
+          .addCase(fetchProductsByCategory.pending, (state) => {
+            state.loading = true;
+          })
+          .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+            state.loading = false;
+            state.products = action.payload;
+          })
+          .addCase(fetchProductsByCategory.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'An error occurred while fetching products by category.';
+          })    
           .addCase(fetchProductById.pending, (state) => {
             state.loading = true;
             state.error = null;
         })
         .addCase(fetchProductById.fulfilled, (state, action) => {
             state.loading = false;
-            // Assuming you want to store the fetched product in the state
             state.products = [action.payload];
             state.error = null;
         })
@@ -147,7 +195,6 @@ export const productSlice = createSlice({
         })
         .addCase(updateProduct.fulfilled, (state, action) => {
             state.loading = false;
-            // Update the product in the state
             const updatedProductIndex = state.products.findIndex(
                 (product) => product.id === action.payload.id
             );
@@ -166,7 +213,6 @@ export const productSlice = createSlice({
         })
         .addCase(deleteProduct.fulfilled, (state, action) => {
             state.loading = false;
-            // Remove the deleted product from the state
             state.products = state.products.filter((product) => product.id !== action.payload);
             state.error = null;
         })

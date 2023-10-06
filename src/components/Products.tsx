@@ -5,7 +5,7 @@ import Header from './Header';
 import ProductCard from './ProductCard';
 
 import Pagination from '@mui/material/Pagination';
-import { Box } from '@mui/material';
+import { Container } from '@mui/material';
 
 import { AppDispatch } from '../redux/store';
 
@@ -25,7 +25,7 @@ const Products: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage: number = 5; // You can adjust the number of items per page
+  const itemsPerPage: number = 6; // You can adjust the number of items per page
   const { items } = useSelector((state: RootState) => state.cart)
   
 
@@ -42,43 +42,51 @@ const Products: React.FC = () => {
   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <Box>
-      <Header title='Products' />
-      <Box
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap'
-      }}>
+    <>
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between'
+        }}
+      >
         
-        {loading && <p>Loading...</p>}
+          {loading && <p>Loading...</p>}
 
-        {error && <p>Error: {error}</p>}
+          {error && <p>Error: {error}</p>}
+          <Container
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap'
+           }}
+          >
+            {currentItems.map((product: Product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product}
+                items={items}
+                dispatch={dispatch}
+                onAddToCart={debouncedHandleAddToCart}
+              />
+            ))}
+          </Container>
 
-        {currentItems.map((product: Product) => (
-          <ProductCard 
-            key={product.id} 
-            product={product}
-            items={items}
-            dispatch={dispatch}
-            onAddToCart={debouncedHandleAddToCart}
+          <Pagination
+            count={Math.ceil(products.length / itemsPerPage)}
+            page={currentPage}
+            onChange={onPageChange}
+            variant="outlined"
+            shape="rounded"
+            sx={{
+              width: '30%',
+              margin: 'auto',
+              marginTop: '2em',
+              marginBottom: '2em'
+            }}
           />
-        ))}
-      </Box>
-      <Pagination
-          count={Math.ceil(products.length / itemsPerPage)}
-          page={currentPage}
-          onChange={onPageChange}
-          variant="outlined"
-          shape="rounded"
-          sx={{
-            width: '30%',
-            margin: 'auto',
-            marginTop: '2em',
-            marginBottom: '2em'
-          }}
-        />
-    </ Box>
+        </Container>
+    </>
   );
 };
 

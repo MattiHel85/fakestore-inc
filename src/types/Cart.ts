@@ -11,6 +11,6 @@ export interface CartState {
     error: string | null;
 }
 
-export interface CartProps {
-    handleGoToCheckout: () => void;
-}
+// export interface CartProps {
+//     handleGoToCheckout: () => void;
+// }

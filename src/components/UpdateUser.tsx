@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Typography, Container, Button, TextField } from "@mui/material";
+import { Typography, Box, Button, TextField } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { registerUser } from '../redux/slices/userSlice';
-import Header from './Header';
 
-const SignUp: React.FC = () => {
+const UpdateUser: React.FC = () => {
   const [userData, setUserData] = useState({    
     name: '',
     email: '',
@@ -42,7 +41,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <Container
+    <Box
         sx={{
             padding: '16px',
             display: 'flex',
@@ -51,12 +50,14 @@ const SignUp: React.FC = () => {
             margin: 'auto'
       }}
     >
-      <Header title='Sign Up' />
       <TextField
         label="Name"
         name="name"
         value={userData.name}
         onChange={handleInputChange}
+        sx={{ 
+            margin: '5px'
+           }}
       />
       <TextField
         label="Email"
@@ -106,8 +107,8 @@ const SignUp: React.FC = () => {
       <Typography sx={{textAlign: 'center'}}>
         <Link to={'/signin'} style={{textDecoration: 'none', color: 'black'}}>Already have an account? Sign In</Link>
       </Typography>
-    </Container>
+    </Box>
   );
 };
 
-export default SignUp;
+export default UpdateUser;

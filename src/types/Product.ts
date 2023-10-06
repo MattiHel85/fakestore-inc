@@ -26,9 +26,9 @@ export interface ProductState {
 
 export interface ProductCardProps {
   product: Product; 
-  items: CartItem[];
-  dispatch: AppDispatch; 
-  onAddToCart: (product: Product, items: CartItem[], dispatch: AppDispatch) => void; 
+  items?: CartItem[];
+  dispatch?: AppDispatch; 
+  onAddToCart?: (product: Product, items?: CartItem[], dispatch?: AppDispatch) => void; 
 }
 
 export interface SingleProductProps {
@@ -54,4 +54,7 @@ export interface ProductData {
 
 export interface updateProductProps {
   product: Product;
+}
+export interface ProductSearchProps {
+  products: Product[]; 
 }

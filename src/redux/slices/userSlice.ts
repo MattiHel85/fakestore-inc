@@ -34,7 +34,7 @@ export const registerUser = createAsyncThunk('users/registerUser', async (userDa
   }
 });
 
-const initialState: UserState = {
+export const initialState: UserState = {
     users: [],
     loading: true,
     error: null

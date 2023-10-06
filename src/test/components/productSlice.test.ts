@@ -5,6 +5,8 @@ import {
 
 import productSlice, { 
     fetchProducts, 
+    fetchProductsByPriceRange,
+    fetchProductsByCategory,
     fetchProductById,  
     createProduct,
     updateProduct,
@@ -60,6 +62,96 @@ describe('product reducer', () => {
         expect(state.products).toEqual([])
         expect(state.error).toBe('Rejected')
     })
+
+    it('should handle fetchProductsByPriceRange.pending', () => {
+        const state = productSlice(initialState, fetchProductsByPriceRange.pending);
+        expect(state.loading).toBe(true);
+        expect(state.error).toBeNull();
+      });
+
+    it('it should handle fetchProductsByPriceRange.fulfilled', () => {
+        const mockProducts = [
+            {
+                id: 1,
+                title: 'Product 1',
+                price: 10,
+                description: 'Description for Product 1',
+                images: ['image1.jpg', 'image2.jpg'],
+                creationAt: '2023-09-20T10:00:00Z',
+                updatedAt: '2023-09-20T10:00:00Z',
+                category: {
+                  id: 1,
+                  name: 'Category 1',
+                  image: 'category1.jpg',
+                  creationAt: '2023-09-20T10:00:00Z',
+                  updatedAt: '2023-09-20T10:00:00Z',
+                },
+            }
+        ];
+
+        const action = fetchProductsByPriceRange.fulfilled(mockProducts, '', { minPrice: 900, maxPrice: 1000 });
+        const stateBeforeFetch = productSlice(initialState, action);
+
+        expect(stateBeforeFetch.loading).toBe(false);
+        expect(stateBeforeFetch.products).toEqual(mockProducts);
+        expect(stateBeforeFetch.error).toBeNull();
+    });
+
+    it('should handle fetchProductsByPriceRange.rejected', () => {
+        const error = new Error('Rejected');
+        
+        const action = fetchProductsByPriceRange.rejected(error, '', { minPrice: 900, maxPrice: 1000 });
+        
+        const stateBeforeFetch = productSlice(initialState, action);
+        
+        expect(stateBeforeFetch.loading).toBe(false);
+        expect(stateBeforeFetch.products).toEqual([]);
+        expect(stateBeforeFetch.error).toBe('Rejected');
+    });
+
+    it('should handle fetchProductsByCategory.pending', () => {
+        const state = productSlice(initialState, fetchProductsByCategory.pending);
+        expect(state.loading).toBe(true);
+        expect(state.error).toBeNull();
+    });
+
+    it('it should handle fetchProductsByCategory.fulfilled', () => {
+      const mockProducts = [
+        {
+          id: 1,
+          title: 'Product 1',
+          price: 10,
+          description: 'Description for Product 1',
+          images: ['image1.jpg', 'image2.jpg'],
+          creationAt: '2023-09-20T10:00:00Z',
+          updatedAt: '2023-09-20T10:00:00Z',
+          category: {
+            id: 1,
+            name: 'Category 1',
+            image: 'category1.jpg',
+            creationAt: '2023-09-20T10:00:00Z',
+            updatedAt: '2023-09-20T10:00:00Z',
+          },
+        }
+      ];
+
+      const action = fetchProductsByCategory.fulfilled(mockProducts, '', 1); 
+      const stateBeforeFetch = productSlice(initialState, action);
+
+      expect(stateBeforeFetch.loading).toBe(false);
+      expect(stateBeforeFetch.products).toEqual(mockProducts);
+      expect(stateBeforeFetch.error).toBeNull();
+    });
+
+    it('should handle fetchProductsByCategory.rejected', () => {
+        const error = new Error('Rejected');
+        const action = fetchProductsByCategory.rejected(error, '', 1); 
+        const stateBeforeFetch = productSlice(initialState, action);
+    
+        expect(stateBeforeFetch.loading).toBe(false);
+        expect(stateBeforeFetch.products).toEqual([]);
+        expect(stateBeforeFetch.error).toBe('Rejected');
+    });
 
     it('should handle fetchProductsById.pending', () => {
         const state = productSlice(initialState, fetchProductById.pending)

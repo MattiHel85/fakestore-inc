@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { Typography, Box, Button, TextField } from "@mui/material";
+import { Typography, Container, Button, TextField } from "@mui/material";
 
 import { AppDispatch } from '../redux/store';
 import { loginUser } from '../redux/slices/authSlice';
+import Header from './Header';
 
 const SignIn: React.FC = () => {
   const [signInData, setSignInData] = useState({
@@ -27,22 +28,21 @@ const handleSignInChange = (e: any) => {
   const handleSignIn = async () => {
     try {
       const { email, password } = signInData;
-      console.log(signInData)
       await dispatch(loginUser({ email, password }));
-
-      
+      // dispatch(getUserProfile)      
     } catch (error) {
       console.error('Signin failed:', error)
     }
   }
   return (
-    <Box
+    <Container
       sx={{
         padding: '16px',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
+        {/* <Header title='Sign In' /> */}
         <TextField
           label="Username"
           name="email" 
@@ -65,17 +65,19 @@ const handleSignInChange = (e: any) => {
         <Button sx={{borderRadius: '25px', margin: '5px'}} onClick={handleSignIn}>Sign In</Button>
         <Typography
           sx={{ 
-            margin: '5px'
+            margin: '5px',
+            textAlign: 'center'
           }}
         >FORGOT YOUR PASSWORD?</Typography>
         <Link to={'/signup'} style={{textDecoration:'none', color: 'black'}}>
           <Typography 
             sx={{ 
-              margin: '5px'
+              margin: '5px',
+              textAlign: 'center'
             }}
            >SIGN UP</Typography>
         </Link>
-    </Box>
+    </Container>
   )
 }
 

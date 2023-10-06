@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 
 import Container from '@mui/material/Container';
 // import Avatar from '@mui/material/Avatar';
+import PersonIcon from '@mui/icons-material/Person'
 import Tooltip from '@mui/material/Tooltip';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge, { BadgeProps } from '@mui/material/Badge';
@@ -34,14 +35,15 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 
 function TopAppBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null); // Add state for cart menu
   const [anchorElCart, setAnchorElCart] = useState<null | HTMLElement>(null); // Add state for cart menu
 
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -51,9 +53,9 @@ function TopAppBar() {
     setAnchorElCart(event.currentTarget);
   };
 
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-  // };
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -62,11 +64,6 @@ function TopAppBar() {
   const handleCloseCartMenu = () => { // Add handler for closing cart menu
     setAnchorElCart(null);
   };
-
-  const handleGoToCheckout = () => {
-    handleCloseCartMenu()
-    navigate('/checkout')
-  }
   
   const { items } = useSelector((state: RootState) => state.cart)
 
@@ -86,6 +83,7 @@ function TopAppBar() {
   };
 
   return (
+
     <AppBar position="static" sx={{ backgroundColor: 'white' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -111,26 +109,52 @@ function TopAppBar() {
 
           {/* User Menu */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {/* <Tooltip title="Admin control panel">
-              <Link to={'/admin'}>
-                <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
-                  <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >admin</Typography>
-                </IconButton>
-              </Link>
-            </Tooltip> */}
             { isAuthenticated ? (
               <Tooltip title="username">
                 <>
-                  <Link to={'/admin'}>
-                    <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
-                      <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >user: {user.access_token.length}</Typography>
+                    <IconButton onClick={handleOpenNavMenu}>                    
+                      <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
+                        <PersonIcon />
+                        <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >{user?.name }</Typography>
+                      </IconButton>
                     </IconButton>
-                  </Link>
-                  <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }} onClick={handleLogout}>
-                    <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >sign out</Typography>
-                  </IconButton>
-                </>
-              
+                    <Menu
+                      sx={{ mt: '45px'}}
+                      id="menu-appbar"
+                      anchorEl={anchorElNav}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchorElNav)}
+                      onClose={handleCloseNavMenu}
+                    >
+                      <Box
+                        sx={{
+                          padding: '16px'
+                        }}
+                      >
+                        {
+                          user?.role === 'admin' && <Link to={'/admin'} style={{textDecoration: 'none', color: 'black'}}>
+                          <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >Admin</Typography>
+                        </Link>
+                        }
+
+                        <Link to={'/myprofile'} style={{textDecoration: 'none', color: 'black'}}>
+                          <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >My Profile</Typography>
+                        </Link>
+
+                        <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }} onClick={handleLogout}>
+                          <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >Sign out</Typography>
+                        </IconButton>
+                      </Box>
+                    </Menu>
+                </>              
             </Tooltip>
             ) : 
             <>
@@ -208,7 +232,7 @@ function TopAppBar() {
               open={Boolean(anchorElCart)}
               onClose={handleCloseCartMenu}
             >
-                <Cart handleGoToCheckout={handleGoToCheckout} />
+              <Cart />
             </Menu>
             
           </Box>

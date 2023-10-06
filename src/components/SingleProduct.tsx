@@ -1,4 +1,5 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { RootState } from "../redux/slices/rootSlice";
@@ -7,11 +8,19 @@ import { fetchProductById } from "../redux/slices/productSlice";
 import { SingleProductProps } from "../types/Product";
 import ProductCard from "./ProductCard";
 import UpdateProduct from "./UpdateProduct";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { deleteProduct } from "../redux/slices/productSlice";
+import styles from '../styles/ProductCard.module.css'
+import Container from "@mui/material/Container";
 
 const SingleProduct: React.FC<SingleProductProps> = ({ onAddToCart }) => {
+    const [openProductUpdateForm, setOpenProductUpdateForm] = useState(false)
+
     const {id} = useParams();
     const dispatch: AppDispatch = useDispatch();    
     const { products, loading, error } = useSelector((state: any) => state.products);
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (id) {
@@ -23,6 +32,13 @@ const SingleProduct: React.FC<SingleProductProps> = ({ onAddToCart }) => {
 
     
     const product = products.find((product: any) => product.id === Number(id));
+
+    const user = useSelector((state: RootState) => state.auth.user);
+
+    const handleToggleProductUpdateForm = () => {
+        openProductUpdateForm && setOpenProductUpdateForm(false)
+        !openProductUpdateForm && setOpenProductUpdateForm(true)
+    }
 
     
     if (loading) {
@@ -45,6 +61,10 @@ const SingleProduct: React.FC<SingleProductProps> = ({ onAddToCart }) => {
         }
     };
 
+    const handleDelete = () => {
+        dispatch(deleteProduct(product.id));
+    }
+
     return (
         <>
             <ProductCard 
@@ -54,7 +74,47 @@ const SingleProduct: React.FC<SingleProductProps> = ({ onAddToCart }) => {
                 dispatch={dispatch}
                 onAddToCart={handleAddToCart}
             />
-            <UpdateProduct product={product} />
+            { 
+                openProductUpdateForm ?  <UpdateProduct product={product} /> : <></>            
+            }  
+            { user?.role === 'admin' ? 
+                <Container 
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display:'flex',
+                            justifyContent: 'space-around',
+                            padding: '1em'
+                        }}
+                    >
+                        
+                            <Button 
+                                onClick={() => navigate(-1)} 
+                                className={styles.cardButton}
+                            >
+                                    Back
+                            </Button>
+                            <Button 
+                                onClick={handleToggleProductUpdateForm} 
+                                className={styles.cardUpdateButton}
+                            >
+                                    {
+                                        openProductUpdateForm ? 'Complete' : 'Update Item'
+                                    }
+                            </Button>
+                            <Button 
+                                onClick={handleDelete} 
+                                className={styles.cardDeleteButton}
+                            >
+                                    Delete 
+                            </Button>
+                    </Box>
+                </ Container> : <></>
+            }
         </>
     );
 };

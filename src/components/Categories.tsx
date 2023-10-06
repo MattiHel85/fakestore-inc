@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Category } from '../types/Category';
 import { AppDispatch } from '../redux/store';
 
-import Header from './Header';
+import Container from '@mui/material/Container';
 import { fetchCategories } from '../redux/slices/categorySlice';
 
 const Categories: React.FC = () => {
@@ -17,9 +17,15 @@ const Categories: React.FC = () => {
 
   return (
     <div>
-      <Header title='Categories' />
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}
+      >
       <ul>
         {categories.map((category: Category) => (
           <li key={category.id}>
@@ -28,6 +34,15 @@ const Categories: React.FC = () => {
           </li>
         ))}
       </ul>
+      </Container>
+      {/* <ul>
+        {categories.map((category: Category) => (
+          <li key={category.id}>
+            <h2>{category.name}</h2>
+            <img src={category.image} alt={`Category: ${category.name}`}/>
+          </li>
+        ))}
+      </ul> */}
     </div>
   );
 };

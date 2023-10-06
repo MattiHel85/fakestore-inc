@@ -2,7 +2,7 @@ export interface AuthState {
     isAuthenticated: boolean;
     accessToken: string |null;
     refreshToken: string | null;
-    user: any,
+    user: UserProfile | null,
     loading: boolean;
     error: string | null;
 }
@@ -12,3 +12,11 @@ export interface LoginPayload {
     password: string;
 }
 
+export interface UserProfile {
+    id: number;
+    email: string;
+    password: string;
+    name: string;
+    role: string;
+    avatar: string;
+}

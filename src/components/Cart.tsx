@@ -12,13 +12,14 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import Container from '@mui/material/Container';
 
 import { RootState } from '../redux/slices/rootSlice';
 import { increaseQuantity, decreaseQuantity, removeFromCart, clearCart } from '../redux/slices/cartSlice';
 import { AppDispatch } from '../redux/store';
-import { CartProps } from '../types/Cart';
+// import { CartProps } from '../types/Cart';
 
-const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
+const Cart: React.FC = () => {
 
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
@@ -47,68 +48,71 @@ const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
       navigate('/products')
       window.location.reload()
     }
-
+    const handleGoToCheckout = () => {
+      // handleCloseCartMenu()
+      navigate('/checkout')
+    }
   return (
-    <>
+    <Container>
         {items.length > 0 && (
-            <>
-                <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell sx={{ textAlign: 'center' }} >Decrease Quantity</TableCell>
-                          <TableCell sx={{ textAlign: 'center' }} >Increase Quantity</TableCell>
-                          <TableCell sx={{ textAlign: 'center' }} >Product Name</TableCell>
-                          <TableCell sx={{ textAlign: 'center' }} >Quantity</TableCell>
-                          <TableCell sx={{ textAlign: 'center' }} >Remove From Cart</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {items.map((item: any) => (
-                          <TableRow key={item.id}>
-                            <TableCell sx={{ textAlign: 'center' }}>
-                              <IconButton onClick={() => handleDecreaseQuantity(item.id)}>
-                                <RemoveIcon />
-                              </IconButton>
-                            </TableCell>
-                            <TableCell sx={{ textAlign: 'center' }}>
-                              <IconButton onClick={() => handleIncreaseQuantity(item.id)}>
-                                <AddIcon />
-                              </IconButton>
-                            </TableCell>
-                            <TableCell sx={{ textAlign: 'center' }}>{item.name}</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }}>{item.quantity}</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }}>
-                              <IconButton onClick={() => handleRemoveFromCart(item.id)}>
-                                <DeleteIcon />
-                              </IconButton>
-                            </TableCell>
+                <>
+                  <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell sx={{ textAlign: 'center' }} >Decrease Quantity</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} >Increase Quantity</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} >Product Name</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} >Quantity</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} >Remove From Cart</TableCell>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                </TableContainer>
-                <Box 
-                    sx={{
-                        display:'flex',
-                        justifyContent: 'space-between'
-                    }}
-                >
-                    <Typography variant='body2'>
-                        Total Products: {items.reduce((total, item) => total + item.quantity, 0)}
-                    </Typography>
-                    <Typography variant='body2'>
-                      Price: €
-                      {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
-                    </Typography>
-                    <Button onClick={handleClearCart}>Clear cart</Button>
-                    <Button onClick={handleGoToCheckout}>Go to checkout</Button>
-                </Box>
-            </>
+                        </TableHead>
+                        <TableBody>
+                          {items.map((item: any) => (
+                            <TableRow key={item.id}>
+                              <TableCell sx={{ textAlign: 'center' }}>
+                                <IconButton onClick={() => handleDecreaseQuantity(item.id)}>
+                                  <RemoveIcon />
+                                </IconButton>
+                              </TableCell>
+                              <TableCell sx={{ textAlign: 'center' }}>
+                                <IconButton onClick={() => handleIncreaseQuantity(item.id)}>
+                                  <AddIcon />
+                                </IconButton>
+                              </TableCell>
+                              <TableCell sx={{ textAlign: 'center' }}>{item.name}</TableCell>
+                              <TableCell sx={{ textAlign: 'center' }}>{item.quantity}</TableCell>
+                              <TableCell sx={{ textAlign: 'center' }}>
+                                <IconButton onClick={() => handleRemoveFromCart(item.id)}>
+                                  <DeleteIcon />
+                                </IconButton>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                  </TableContainer>
+                  <Box 
+                      sx={{
+                          display:'flex',
+                          justifyContent: 'space-between'
+                      }}
+                  >
+                      <Typography variant='body2'>
+                          Total Products: {items.reduce((total, item) => total + item.quantity, 0)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        Price: €
+                        {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
+                      </Typography>
+                      <Button onClick={handleClearCart}>Clear cart</Button>
+                      <Button onClick={handleGoToCheckout}>Go to checkout</Button>
+                  </Box>
+                </>            
         )}
 
         {items.length === 0 && (
-            <Box sx={{
+            <Container sx={{
               padding: '1.75rem', 
               width: '30rem',
               display: 'flex',
@@ -126,11 +130,11 @@ const Cart: React.FC<CartProps> = ({ handleGoToCheckout }) => {
                 >
                   Browse our products
                 </Button>
-            </Box>
+            </Container>
         )}
-    </>
-        
+
+    </ Container>
   )
 }
 
-export default Cart
+export default Cart;

@@ -67,7 +67,6 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
 
   return (
     <>
-      <Typography variant='h3' sx={{ textAlign: 'center', my: '2.5em' }}>Update Product</Typography>
       <Box
         sx={{
           padding: '16px',
