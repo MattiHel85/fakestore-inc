@@ -41,7 +41,7 @@ const App = () => {
             {/* user routes  */}
             <Route path='/signup' element={<SignUp />} />
             <Route path='/signin' element={[<Header title='Sign In' />,<SignIn />]} />
-            <Route path='/myprofile' element={<UserCard id={user?.id} name={user?.name} email={user?.email} role={user?.role} avatar={user?.avatar} />} />
+            <Route path='/myprofile' element={<UserCard user={user} />} />
 
             
             {/* admin routes */}

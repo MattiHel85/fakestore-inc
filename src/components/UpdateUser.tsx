@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Typography, Box, Button, TextField } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { Box, Button, TextField } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
-import { registerUser } from '../redux/slices/userSlice';
+import { updateUser } from '../redux/slices/userSlice'; 
+import { UpdateUserProps } from '../types/User';
+import { User } from '../types/User';
 
-const UpdateUser: React.FC = () => {
-  const [userData, setUserData] = useState({    
+const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
+  const [userData, setUserData] = useState<User>({
+    id: 0,
     name: '',
     email: '',
     password: '',
@@ -14,8 +16,23 @@ const UpdateUser: React.FC = () => {
     role: 'customer',
   });
 
+  useEffect(() => {
+    // Update the state when 'user' prop changes
+    if (user) {
+      setUserData(prevData => ({
+        ...prevData,
+        id: user.id || 0,
+        name: user.name || '',
+        email: user.email || '',
+        password: user.password || '',
+        avatar: user.avatar || '',
+        role: user.role || 'customer',
+      }));
+    }
+  }, [user]);
+
   const dispatch: AppDispatch = useDispatch();
-  const adminCode = 'makeMeAdmin'
+  const adminCode = 'makeMeAdmin';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,30 +41,32 @@ const UpdateUser: React.FC = () => {
       [name]: value,
     }));
 
-    // Check if the input field is for the admin code
-    if (name === 'adminCode') {
-      // If the admin code matches, set the role to 'admin'
-      if (value === adminCode) {
-        setUserData(prevData => ({
-          ...prevData,
-          role: 'admin',
-        }));
-      }
+    if (name === 'adminCode' && value === adminCode) {
+      setUserData(prevData => ({
+        ...prevData,
+        role: 'admin',
+      }));
     }
   };
 
-  const handleSignUp = () => {
-    dispatch(registerUser(userData));
+  const handleUpdateUser = () => {
+    console.log(userData)
+    dispatch(updateUser(userData));
   };
+
+  if (!user) {
+    return <div>Loading...</div>; 
+  }
+
 
   return (
     <Box
-        sx={{
-            padding: '16px',
-            display: 'flex',
-            flexDirection: 'column',
-            width: '50%',
-            margin: 'auto'
+      sx={{
+        padding: '16px',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '50%',
+        margin: 'auto'
       }}
     >
       <TextField
@@ -55,18 +74,18 @@ const UpdateUser: React.FC = () => {
         name="name"
         value={userData.name}
         onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
+        sx={{
+          margin: '5px'
+        }}
       />
       <TextField
         label="Email"
         name="email"
         value={userData.email}
         onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
+        sx={{
+          margin: '5px'
+        }}
       />
       <TextField
         label="Password"
@@ -74,39 +93,38 @@ const UpdateUser: React.FC = () => {
         name="password"
         value={userData.password}
         onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
+        sx={{
+          margin: '5px'
+        }}
       />
       <TextField
         label="Avatar URL"
         name="avatar"
         value={userData.avatar}
         onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
+        sx={{
+          margin: '5px'
+        }}
       />
       <TextField
         label="Admin Code (Optional)"
         name="adminCode"
         type="password"
         onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
+        sx={{
+          margin: '5px'
+        }}
       />
-      <Button 
-        sx={{ 
-            borderRadius: '25px',
-            width: '40%',
-            margin: 'auto'
-        }} 
-        onClick={handleSignUp}
-       >Sign Up</Button>
-      <Typography sx={{textAlign: 'center'}}>
-        <Link to={'/signin'} style={{textDecoration: 'none', color: 'black'}}>Already have an account? Sign In</Link>
-      </Typography>
+      <Button
+        sx={{
+          borderRadius: '25px',
+          width: '40%',
+          margin: 'auto'
+        }}
+        onClick={handleUpdateUser}
+      >
+        Update User
+      </Button>
     </Box>
   );
 };

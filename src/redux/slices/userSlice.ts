@@ -34,6 +34,33 @@ export const registerUser = createAsyncThunk('users/registerUser', async (userDa
   }
 });
 
+
+export const updateUser = createAsyncThunk('users/updateUser', async (userData: User) => {
+  try {
+    const res = await fetch(`https://api.escuelajs.co/api/v1/users/${userData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log(`User ${data.name} updated successfully`);
+      return data as User;
+    } else {
+      throw new Error('User update failed');
+    }
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
+});
+
+
+
+
 export const initialState: UserState = {
     users: [],
     loading: true,

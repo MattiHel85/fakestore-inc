@@ -8,6 +8,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import { RootState } from '../redux/slices/rootSlice';
 import Users from './Users';
 import UserCard from './UserCard';
+import UpdateUser from './UpdateUser';
 import AddProduct from './AddProduct';
 import ProductSearch from './ProductSearch';
 
@@ -18,6 +19,8 @@ const AdminPanel: React.FC = () => {
 
   const [chooseCurrentUser, setChooseCurrentUser] = useState(false)
   const [viewCurrentUser, setViewCurrentUser] = useState(false)
+  const [updateCurrentUser, setUpdateCurrentUser] = useState(false)
+
   const [chooseUsers, setChooseUsers] = useState(false)
   const [viewUsers, setViewUsers] = useState(false)
 
@@ -191,16 +194,25 @@ const AdminPanel: React.FC = () => {
               }}
             >
               <Button onClick={() => setViewCurrentUser(true)} sx={{margin: '1em'}}>View My Info</Button>
-              <Button sx={{margin: '1em'}}>Update My Info</Button>
+              <Button onClick={() => setUpdateCurrentUser(true)} sx={{margin: '1em'}}>Update My Info</Button>
               <Button onClick={() => setChooseCurrentUser(false)} sx={{margin: '1em'}}>Done</Button>
             </ButtonGroup>
             
             { viewCurrentUser && (
               [
-              <Button onClick={() => setViewCurrentUser(false)} sx={{margin: '1em'}}>Close Info</Button>, 
-              <UserCard id={user?.id} name={user?.name} email={user?.email} role={user?.role} avatar={user?.avatar} />
+                <Button onClick={() => setViewCurrentUser(false)} sx={{margin: '1em'}}>Close Info</Button>, 
+                <UserCard user={user}/>
               ]
-              ) }
+              ) 
+            }
+
+            { updateCurrentUser && 
+              [
+                <UpdateUser user={user} />, 
+                <Button onClick={() => setUpdateCurrentUser(false)} sx={{margin: '1em'}}>Close Info</Button>
+              ] 
+            }
+
           </Container>
         ) 
       }
