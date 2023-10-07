@@ -40,8 +40,7 @@ const App = () => {
             {/* user routes  */}
             <Route path='/signup' element={<SignUp />} />
             <Route path='/signin' element={[<Header title='Sign In' />,<SignIn />]} />
-            <Route path='/myprofile' element={ user ? <UserCard id={user?.id} name={user?.name} email={user?.email} role={user?.role} avatar={user?.avatar} /> : <Link to={'/signin'} style={{textDecoration: 'none', color: 'black'}}><Header title='Click here to sign in'/></Link>  } /> 
-            
+            <Route path='/myprofile' element={<UserCard user={user} />} />
 
             
             {/* admin routes */}

@@ -25,7 +25,7 @@ const Users: React.FC = () => {
     >
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {users.map((user: User) => <UserCard id={user.id} name={user.name} email={user.email} role={user.role} />)}
+      {users.map((user: User) => <UserCard user={user} />)}
     </ Container>
   );
 };
