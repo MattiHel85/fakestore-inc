@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 const NavBar: React.FC = () => {
     
     const navItems = [
-      { id: 1,  label: 'Categories', path: '/categories' },
+      { id: 1,  label: 'Signup', path: '/signup' },
       { id: 2,  label: 'All products', path: '/products' },
       { id: 3,  label: 'Support', path: '/support' },
     ];

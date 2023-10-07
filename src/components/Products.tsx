@@ -1,92 +1,123 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Header from './Header';
-import ProductCard from './ProductCard';
+import { Container, TextField, Button, MenuItem, FormControl } from '@mui/material';
 
-import Pagination from '@mui/material/Pagination';
-import { Container } from '@mui/material';
-
+import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';
-
-import { fetchProducts } from '../redux/slices/productSlice';
-import { RootState } from "../redux/slices/rootSlice";
-
-import { Product } from '../types/Product';
-
-
+import { fetchProducts, fetchProductsByPriceRange, fetchProductsByCategory } from '../redux/slices/productSlice';
 import debouncedHandleAddToCart from '../utils/cartHelpers';
 
-
+import ProductCard from './ProductCard';
 
 const Products: React.FC = () => {
-  const { products, loading, error } = useSelector((state: any) => state.products);
-
   const dispatch: AppDispatch = useDispatch();
-
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage: number = 6; // You can adjust the number of items per page
-  const { items } = useSelector((state: RootState) => state.cart)
-  
+  const products = useSelector((state: RootState) => state.products.products);
+  const categories = useSelector((state: RootState) => state.categories.categories);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(0);
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const { items } = useSelector((state: RootState) => state.cart);
+  const [selectedCategory, setSelectedCategory] = useState<number | ''>('');
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page);
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+  const handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMinPrice(Number(event.target.value));
+  };
+
+  const handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxPrice(Number(event.target.value));
+  };
+
+  const handleSearchByPrice = () => {
+    dispatch(fetchProductsByPriceRange({ minPrice, maxPrice }));
+  };
+  
+  const handleCategoryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedCategory(event.target.value as number | '');
+    dispatch(fetchProductsByCategory(event.target.value as number));
+  };
+
+  const handleShowSearch = () => {
+    showSearchForm && setShowSearchForm(false)
+    !showSearchForm && setShowSearchForm(true)
+  }
+
+  const filteredProducts = products.filter((filteredProduct) =>
+    filteredProduct.title?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (selectedCategory === '' || filteredProduct.category?.id === selectedCategory) &&
+    (minPrice === 0 || filteredProduct.price >= minPrice) &&
+    (maxPrice === 0 || filteredProduct.price <= maxPrice)
+  );
 
   return (
-    <>
+    <Container sx={{ width: '100%', marginTop: '2em', marginBottom: '2em', textAlign: 'center'  }}>
+      <Button onClick={handleShowSearch} sx={{marginBottom: '.75em'}}> { !showSearchForm ? 'Open Search' : 'Close Search'}</Button>
+      {
+        showSearchForm && <FormControl sx={{ display: 'flex', flexDirection: 'column', justifyContent:'center'}}>
+          <TextField
+            label="Search Products"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em'}}
+          />
+          <TextField
+            select
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            label="Category"
+            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em' }}
+          >
+            <MenuItem value="">All Categories</MenuItem>
+            {categories.map((category) => (
+              <MenuItem key={category.id} value={category.id}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            label="Min Price"
+            variant="outlined"
+            type="number"
+            value={minPrice}
+            onChange={handleMinPriceChange}
+            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em' }}
+          />
+          <TextField
+            label="Max Price"
+            variant="outlined"
+            type="number"
+            value={maxPrice}
+            onChange={handleMaxPriceChange}
+            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em' }}
+          />
+          <br />
+          <Button onClick={handleSearchByPrice}>Search by Price</ Button>
+        </FormControl>
+      }
       <Container
-        sx={{
+        style={{
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          flexWrap: 'wrap'
         }}
       >
-        
-          {loading && <p>Loading...</p>}
-
-          {error && <p>Error: {error}</p>}
-          <Container
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap'
-           }}
-          >
-            {currentItems.map((product: Product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product}
-                items={items}
-                dispatch={dispatch}
-                onAddToCart={debouncedHandleAddToCart}
-              />
-            ))}
-          </Container>
-
-          <Pagination
-            count={Math.ceil(products.length / itemsPerPage)}
-            page={currentPage}
-            onChange={onPageChange}
-            variant="outlined"
-            shape="rounded"
-            sx={{
-              width: '30%',
-              margin: 'auto',
-              marginTop: '2em',
-              marginBottom: '2em'
-            }}
-          />
-        </Container>
-    </>
+        {filteredProducts.map(product => (
+          <ProductCard key={product.id} product={product} items={items} dispatch={dispatch} onAddToCart={debouncedHandleAddToCart} />
+        ))}
+      </Container>
+    </Container>
+    
   );
 };
 

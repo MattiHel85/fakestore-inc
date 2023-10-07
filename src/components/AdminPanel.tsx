@@ -9,7 +9,7 @@ import { RootState } from '../redux/slices/rootSlice';
 import Users from './Users';
 import UserCard from './UserCard';
 import AddProduct from './AddProduct';
-import ProductSearch from './ProductSearch';
+import ProductSearch from './Products';
 
 const AdminPanel: React.FC = () => {
   const [chooseProducts, setChooseProducts] = useState(false)

@@ -1,13 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledEngineProvider } from '@mui/material'
 import { RootState } from './redux/slices/rootSlice'
 
 import TopAppBar from './components/TopAppBar'
 import NavBar from './components/NavBar'
-import Products from './components/Products'
 import Users from './components/Users'
-import Categories from './components/Categories'
 import AdminPanel from './components/AdminPanel'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -17,10 +15,12 @@ import Cart from './components/Cart'
 
 import debouncedHandleAddToCart from './utils/cartHelpers'
 import UserCard from './components/UserCard'
-import ProductSearch from './components/ProductSearch'
+import ProductSearch from './components/Products'
 
 const App = () => {
+  
   const user = useSelector((state: RootState) => state.auth.user);
+
   return (
     <>
       <StyledEngineProvider injectFirst>
@@ -33,7 +33,6 @@ const App = () => {
             <Route path='/' element={<Header title='Welcome Home!' /> } />
 
             {/* product routes */}
-            <Route path='/productsearch' element={<ProductSearch />} />
             <Route path='/products' element={<ProductSearch />} />
             <Route path='/products/:id' element={<SingleProduct onAddToCart={debouncedHandleAddToCart}/>} />
             <Route path='/checkout' element={<Cart/>} />
@@ -41,7 +40,8 @@ const App = () => {
             {/* user routes  */}
             <Route path='/signup' element={<SignUp />} />
             <Route path='/signin' element={[<Header title='Sign In' />,<SignIn />]} />
-            <Route path='/myprofile' element={<UserCard id={user?.id} name={user?.name} email={user?.email} role={user?.role} avatar={user?.avatar} />} />
+            <Route path='/myprofile' element={ user ? <UserCard id={user?.id} name={user?.name} email={user?.email} role={user?.role} avatar={user?.avatar} /> : <Link to={'/signin'} style={{textDecoration: 'none', color: 'black'}}><Header title='Click here to sign in'/></Link>  } /> 
+            
 
             
             {/* admin routes */}
