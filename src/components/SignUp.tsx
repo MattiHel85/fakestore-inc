@@ -57,6 +57,9 @@ const SignUp: React.FC = () => {
         name="name"
         value={userData.name}
         onChange={handleInputChange}
+        sx={{ 
+          margin: '5px'
+         }}
       />
       <TextField
         label="Email"

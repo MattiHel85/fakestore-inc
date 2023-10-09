@@ -4,20 +4,27 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { 
+  TableContainer, 
+  Table, 
+  TableHead, 
+  TableRow, 
+  TableCell, 
+  TableBody,
+  Button,
+  Typography,
+  Box,
+  IconButton,
+  Container
+ } from '@mui/material';
+ 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
 
 import { RootState } from '../redux/slices/rootSlice';
 import { increaseQuantity, decreaseQuantity, removeFromCart, clearCart } from '../redux/slices/cartSlice';
 import { AppDispatch } from '../redux/store';
-// import { CartProps } from '../types/Cart';
 
 const Cart: React.FC = () => {
 

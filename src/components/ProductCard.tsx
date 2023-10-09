@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { RootState } from "../redux/slices/rootSlice";
-
-import { deleteProduct } from "../redux/slices/productSlice";
 import { ProductCardProps } from "../types/Product";
+
 import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
 import styles from '../styles/ProductCard.module.css'
 

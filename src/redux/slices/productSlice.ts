@@ -3,6 +3,7 @@ import { Product, AddProductData, ProductData, ProductState } from '../../types/
 
 export const initialState: ProductState = {
   products: [],
+  product: null,
   loading: false,
   error: null
 }
@@ -122,7 +123,11 @@ export const deleteProduct = createAsyncThunk('products/deleteProduct', async (p
 export const productSlice = createSlice({
     name: 'products',
     initialState,
-    reducers: {},
+    reducers: {
+      removeProductOfTheMonth: (state) => {
+        state.product = null
+      }
+    },
     extraReducers: (builder) => {
         builder
           .addCase(fetchProducts.pending, (state) => {
@@ -168,12 +173,12 @@ export const productSlice = createSlice({
         })
         .addCase(fetchProductById.fulfilled, (state, action) => {
             state.loading = false;
-            state.products = [action.payload];
+            state.product = action.payload;
             state.error = null;
         })
         .addCase(fetchProductById.rejected, (state, action) => {
             state.loading = false;
-            state.products = [];
+            state.product = null;
             state.error = action.error.message || 'An error occurred.';
         })
         .addCase(createProduct.pending, (state) => {
@@ -224,4 +229,5 @@ export const productSlice = createSlice({
       
 })
 
+export const { removeProductOfTheMonth } = productSlice.actions;
 export default productSlice.reducer

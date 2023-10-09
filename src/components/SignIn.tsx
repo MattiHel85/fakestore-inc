@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
@@ -15,7 +15,7 @@ const SignIn: React.FC = ( ) => {
   })
 
 const dispatch: AppDispatch = useDispatch();
-
+const navigate = useNavigate()
 
 const handleSignInChange = (e: any) => {
     const {name, value} = e.target;
@@ -29,7 +29,7 @@ const handleSignInChange = (e: any) => {
     try {
       const { email, password } = signInData;
       await dispatch(loginUser({ email, password }));
-      
+      navigate('/')
     } catch (error) {
       console.error('Signin failed:', error)
     }

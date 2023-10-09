@@ -1,14 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/slices/rootSlice";
-import { User } from "../types/User";
+import { useNavigate } from "react-router-dom";
 
 import { UserCardProps } from "../types/User";
-import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
-import UpdateUser from "./UpdateUser";
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 const UserCard: React.FC<UserCardProps> = ({ user}) => {
-    // const user: User = { id, email, password, name, role, avatar}
+    const navigate = useNavigate()
+
+    const navigateToUser = () => {
+        navigate(`/users/${user?.id}`)
+    }
 
     return(
         <>
@@ -19,6 +20,7 @@ const UserCard: React.FC<UserCardProps> = ({ user}) => {
                         cursor: 'pointer'
                     }}
                     image={user?.avatar}
+                    onClick={navigateToUser}
                 />
                 <CardContent>
                     <Typography variant="h5">
@@ -32,7 +34,6 @@ const UserCard: React.FC<UserCardProps> = ({ user}) => {
                     </Typography>
                 </CardContent>
             </Card>   
-            <UpdateUser user={user} />
         </>
 
     )

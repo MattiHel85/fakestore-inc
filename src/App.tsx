@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledEngineProvider } from '@mui/material'
 import { RootState } from './redux/slices/rootSlice'
@@ -14,12 +15,31 @@ import Header from './components/Header'
 import Cart from './components/Cart'
 
 import debouncedHandleAddToCart from './utils/cartHelpers'
-import UserCard from './components/UserCard'
 import ProductSearch from './components/Products'
+import SingleUser from './components/SingleUser'
+import Home from './components/Home'
+import { Product } from './types/Product'
 
 const App = () => {
-  
+  const [productOfTheMonth, setProductOfTheMonth] = useState<Product>()
+  const [productOfTheMonthId, setProductOfTheMonthId] = useState<number>()
   const user = useSelector((state: RootState) => state.auth.user);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //       try {
+  //           const res = await fetch(`https://api.escuelajs.co/api/v1/products/${productOfTheMonthId}`);
+  //           const data = await res.json();
+  //           console.log('data: ',data)
+  //           setProductOfTheMonth(data); 
+  //       } catch (err) {
+  //           console.error("Error fetching product data:", err);
+  //       }
+  //   };
+    
+  //   fetchData(); 
+
+  // }, []);
 
   return (
     <>
@@ -30,17 +50,17 @@ const App = () => {
           <Routes>
 
             {/* Home route */}
-            <Route path='/' element={<Header title='Welcome Home!' /> } />
+            <Route path='/' element={<Home productOfTheMonthId={productOfTheMonthId} setProductOfTheMonth={setProductOfTheMonth} productOfTheMonth={productOfTheMonth} onAddToCart={debouncedHandleAddToCart}/> } />
 
             {/* product routes */}
             <Route path='/products' element={<ProductSearch />} />
-            <Route path='/products/:id' element={<SingleProduct onAddToCart={debouncedHandleAddToCart}/>} />
+            <Route path='/products/:id' element={<SingleProduct setProductOfTheMonthId={setProductOfTheMonthId} onAddToCart={debouncedHandleAddToCart}/>} />
             <Route path='/checkout' element={<Cart/>} />
 
             {/* user routes  */}
-            <Route path='/signup' element={<SignUp />} />
-            <Route path='/signin' element={<><Header title='Sign In' />,<SignIn /></>} />
-            <Route path='/myprofile' element={<UserCard user={user} />} />
+            <Route path='/signup' element={user ? <><Header title={`You're already signed in as user ${user.name}.`} />, <Header title='Log out in the top right corner if you wish to create a new account.'/></> : <SignUp />} />
+            <Route path='/signin' element={user ? <><Header title={`You're already signed in as user ${user.name}`} />, </> : <><Header title='Sign In' />,<SignIn /></>} />
+            <Route path='/users/:id' element={ <SingleUser />} />
 
             
             {/* admin routes */}

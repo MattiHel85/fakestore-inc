@@ -7,9 +7,10 @@ import { AppDispatch } from '../redux/store';
 
 import UserCard from './UserCard';
 import { Container } from '@mui/system';
+import { RootState } from '../redux/slices/rootSlice';
 
 const Users: React.FC = () => {
-  const {users,loading,error} = useSelector((state: any) => state.users)
+  const {users,loading,error} = useSelector((state: RootState) => state.users)
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {

@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import {Box, Typography} from '@mui/material';
 
 
 const NavBar: React.FC = () => {
     
     const navItems = [
-      { id: 1,  label: 'Signup', path: '/signup' },
-      { id: 2,  label: 'All products', path: '/products' },
+      { id: 1,  label: 'All products', path: '/products' },
+      { id: 2,  label: 'Cart', path: '/checkout' },
       { id: 3,  label: 'Support', path: '/support' },
     ];
     return (

@@ -17,7 +17,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
   });
 
   useEffect(() => {
-    // Update the state when 'user' prop changes
     if (user) {
       setUserData(prevData => ({
         ...prevData,
@@ -50,7 +49,6 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
   };
 
   const handleUpdateUser = () => {
-    console.log(userData)
     dispatch(updateUser(userData));
   };
 

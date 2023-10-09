@@ -145,7 +145,7 @@ function TopAppBar() {
                         </Link>
                         }
 
-                        <Link to={'/myprofile'} style={{textDecoration: 'none', color: 'black'}}>
+                        <Link to={`/users/${user?.id}`} style={{textDecoration: 'none', color: 'black'}}>
                           <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >My Profile</Typography>
                         </Link>
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
-import { Typography, Container, Box, ButtonGroup, Button, } from '@mui/material';
+import { Typography, Container, Box, ButtonGroup, Button } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import Inventory2Icon from '@mui/icons-material/Inventory2';

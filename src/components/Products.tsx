@@ -5,12 +5,14 @@ import { Container, TextField, Button, MenuItem, FormControl } from '@mui/materi
 
 import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';
+
 import { fetchProducts, fetchProductsByPriceRange, fetchProductsByCategory } from '../redux/slices/productSlice';
 import debouncedHandleAddToCart from '../utils/cartHelpers';
 
 import ProductCard from './ProductCard';
 
 const Products: React.FC = () => {
+  
   const dispatch: AppDispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.products);
   const categories = useSelector((state: RootState) => state.categories.categories);
