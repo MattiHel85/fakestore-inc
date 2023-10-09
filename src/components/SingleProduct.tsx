@@ -13,7 +13,6 @@ import Button from "@mui/material/Button";
 import { deleteProduct } from "../redux/slices/productSlice";
 import styles from '../styles/ProductCard.module.css'
 import Container from "@mui/material/Container";
-import { isNumericLiteral } from "typescript";
 
 const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, onAddToCart }) => {
     const [openProductUpdateForm, setOpenProductUpdateForm] = useState(false)
@@ -70,7 +69,6 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, o
         console.log('productId: ',productId)
         setProductOfTheMonthId?.(productId)
         navigate(`/`)
-        // navigate(`/products/${productId +5}`)
     }
 
     return (
@@ -90,6 +88,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, o
                         <img
                           srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                           src={`${item}?w=164&h=164&fit=crop&auto=format`}
+                          alt=''
                           loading="lazy"
                         />
                       </ImageListItem>

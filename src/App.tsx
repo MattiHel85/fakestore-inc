@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { StyledEngineProvider } from '@mui/material'
@@ -24,22 +24,6 @@ const App = () => {
   const [productOfTheMonth, setProductOfTheMonth] = useState<Product>()
   const [productOfTheMonthId, setProductOfTheMonthId] = useState<number>()
   const user = useSelector((state: RootState) => state.auth.user);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //       try {
-  //           const res = await fetch(`https://api.escuelajs.co/api/v1/products/${productOfTheMonthId}`);
-  //           const data = await res.json();
-  //           console.log('data: ',data)
-  //           setProductOfTheMonth(data); 
-  //       } catch (err) {
-  //           console.error("Error fetching product data:", err);
-  //       }
-  //   };
-    
-  //   fetchData(); 
-
-  // }, []);
 
   return (
     <>
