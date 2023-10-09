@@ -7,15 +7,15 @@ import { Typography, Container, Button, TextField } from "@mui/material";
 
 import { AppDispatch } from '../redux/store';
 import { loginUser } from '../redux/slices/authSlice';
-import Header from './Header';
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC = ( ) => {
   const [signInData, setSignInData] = useState({
     email: '',
     password: ''
   })
 
 const dispatch: AppDispatch = useDispatch();
+
 
 const handleSignInChange = (e: any) => {
     const {name, value} = e.target;
@@ -29,7 +29,7 @@ const handleSignInChange = (e: any) => {
     try {
       const { email, password } = signInData;
       await dispatch(loginUser({ email, password }));
-      // dispatch(getUserProfile)      
+      
     } catch (error) {
       console.error('Signin failed:', error)
     }
@@ -42,7 +42,6 @@ const handleSignInChange = (e: any) => {
         flexDirection: 'column',
       }}
     >
-        {/* <Header title='Sign In' /> */}
         <TextField
           label="Username"
           name="email" 

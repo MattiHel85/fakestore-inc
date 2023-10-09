@@ -39,7 +39,7 @@ const App = () => {
 
             {/* user routes  */}
             <Route path='/signup' element={<SignUp />} />
-            <Route path='/signin' element={[<Header title='Sign In' />,<SignIn />]} />
+            <Route path='/signin' element={<><Header title='Sign In' />,<SignIn /></>} />
             <Route path='/myprofile' element={<UserCard user={user} />} />
 
             

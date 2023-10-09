@@ -94,7 +94,7 @@ function TopAppBar() {
             href="/"
             sx={{
               display: 'flex',
-              alignItems: 'center', // Align items vertically
+              alignItems: 'center', 
               fontFamily: 'monospace',
               fontWeight: 900,
               letterSpacing: '.1rem',
