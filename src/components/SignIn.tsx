@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { Typography, Container, Button, TextField, FormControl } from "@mui/material";
+import { Typography, Container, Button, TextField } from "@mui/material";
 import styles from '../styles/SignIn.module.css'
 
 import { AppDispatch } from '../redux/store';

@@ -1,0 +1,12 @@
+@use './variables/colors';
+
+.card {
+    min-height: 20em;
+    width: 30%;
+    margin: 1em auto;
+}
+
+.cardMedia {
+    min-height: 10em;
+    cursor: pointer;
+}

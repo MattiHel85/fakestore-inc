@@ -8,6 +8,7 @@ import { AppDispatch } from '../redux/store';
 import UserCard from './UserCard';
 import { Container } from '@mui/system';
 import { RootState } from '../redux/slices/rootSlice';
+import styles from '../styles/Users.module.css'
 
 const Users: React.FC = () => {
   const {users,loading,error} = useSelector((state: RootState) => state.users)
@@ -18,12 +19,7 @@ const Users: React.FC = () => {
   }, [dispatch])
 
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap'
-      }}
-    >
+    <Container className={styles.usersContainer} >
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {users.map((user: User) => <UserCard user={user} />)}

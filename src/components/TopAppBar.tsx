@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 
 import Container from '@mui/material/Container';
-// import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@mui/icons-material/Person'
 import Tooltip from '@mui/material/Tooltip';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -23,7 +22,6 @@ import { RootState } from "../redux/slices/rootSlice";
 import { logout } from '../redux/slices/authSlice';
 import Cart from './Cart';
 import SignIn from './SignIn';
-import { Button } from '@mui/material';
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   '& .MuiBadge-badge': {

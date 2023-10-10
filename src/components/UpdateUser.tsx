@@ -5,6 +5,7 @@ import { AppDispatch } from '../redux/store';
 import { updateUser } from '../redux/slices/userSlice'; 
 import { UpdateUserProps } from '../types/User';
 import { User } from '../types/User';
+import styles from '../styles/SignIn.module.css'
 
 const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
   const [userData, setUserData] = useState<User>({
@@ -48,7 +49,8 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
     }
   };
 
-  const handleUpdateUser = () => {
+  const handleUpdateUser = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(updateUser(userData));
   };
 
@@ -58,71 +60,49 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
 
 
   return (
-    <Box
-      sx={{
-        padding: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-        width: '50%',
-        margin: 'auto'
-      }}
-    >
-      <TextField
-        label="Name"
-        name="name"
-        value={userData.name}
-        onChange={handleInputChange}
-        sx={{
-          margin: '5px'
-        }}
-      />
-      <TextField
-        label="Email"
-        name="email"
-        value={userData.email}
-        onChange={handleInputChange}
-        sx={{
-          margin: '5px'
-        }}
-      />
-      <TextField
-        label="Password"
-        type="password"
-        name="password"
-        value={userData.password}
-        onChange={handleInputChange}
-        sx={{
-          margin: '5px'
-        }}
-      />
-      <TextField
-        label="Avatar URL"
-        name="avatar"
-        value={userData.avatar}
-        onChange={handleInputChange}
-        sx={{
-          margin: '5px'
-        }}
-      />
-      <TextField
-        label="Admin Code (Optional)"
-        name="adminCode"
-        type="password"
-        onChange={handleInputChange}
-        sx={{
-          margin: '5px'
-        }}
-      />
-      <Button
-        sx={{
-          borderRadius: '25px',
-          width: '40%',
-          margin: 'auto'
-        }}
-        onClick={handleUpdateUser}
-      >
-        Update User
-      </Button>
+    <Box className={styles.signInContainer}>
+      <form onSubmit={handleUpdateUser} className={styles.signInForm}>
+        <TextField
+          label="Name"
+          name="name"
+          value={userData.name}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Email"
+          name="email"
+          value={userData.email}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          value={userData.password}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Avatar URL"
+          name="avatar"
+          value={userData.avatar}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Admin Code (Optional)"
+          name="adminCode"
+          type="password"
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <Button type='submit' className={styles.primaryButton}>
+          Update User
+        </Button>
+      </form>
+      
     </Box>
   );
 };

@@ -58,7 +58,6 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
         categoryId: productData.categoryId,
       };
 
-    // Dispatch action to update the product
     dispatch(updateProduct(updatedProduct));
   };
 

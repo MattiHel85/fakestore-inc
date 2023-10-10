@@ -6,10 +6,6 @@
   margin: auto;
   padding: 16px;
 }
-.formContainer .formHeader {
-  text-align: center;
-  margin-bottom: 20px;
-}
 .formContainer .form {
   display: flex;
   flex-direction: column;

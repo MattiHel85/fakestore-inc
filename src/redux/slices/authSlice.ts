@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import { AuthState, LoginPayload, UserProfile } from "../../types/Auth";
-import { RootState } from "./rootSlice";
+import { AuthState, LoginPayload } from "../../types/Auth";
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser', 

@@ -12,6 +12,7 @@ import productSlice, {
     updateProduct,
     deleteProduct,
     initialState,
+    removeProductOfTheMonth
 } from "../../redux/slices/productSlice";
 
 describe('product reducer', () => {
@@ -161,9 +162,7 @@ describe('product reducer', () => {
 
     it('it should handle fetchProductById.fulfilled', () => {
 
-        const mockProduct = 
-        [
-            {
+        const mockProduct = {
                 id: 1,
                 title: 'Product 1',
                 price: 10,
@@ -178,15 +177,14 @@ describe('product reducer', () => {
                   creationAt: '2023-09-20T10:00:00Z',
                   updatedAt: '2023-09-20T10:00:00Z',
                 },
-            }
-        ];
+            };
         
-        const action = fetchProducts.fulfilled(mockProduct, '', undefined, '');
+        const action = fetchProductById.fulfilled(mockProduct, '', 1);
 
         const state = productSlice(initialState, action)
 
         expect(state.loading).toBe(false);
-        expect(state.products).toEqual(mockProduct)
+        expect(state.product).toEqual(mockProduct)
         expect(state.error).toBeNull()
     })
 
@@ -198,7 +196,7 @@ describe('product reducer', () => {
         const state = productSlice(initialState, fetchProductById.rejected(error, '', mockProductId, undefined))
 
         expect(state.loading).toBe(false);
-        expect(state.products).toEqual([])
+        expect(state.product).toEqual([])
         expect(state.error).toBe('Rejected')
     })
 
@@ -444,5 +442,36 @@ describe('product reducer', () => {
         expect(state.loading).toBe(false);
         expect(state.products).toEqual([])
         expect(state.error).toBe('Rejected')
+    })
+
+    it('should handle removeProductOfTheMonth action', () => {
+        const mockProduct =         
+            {
+                id: 1,
+                title: 'Product 1',
+                price: 10,
+                description: 'Description for Product 1',
+                images: ['image1.jpg', 'image2.jpg'],
+                creationAt: '2023-09-20T10:00:00Z',
+                updatedAt: '2023-09-20T10:00:00Z',
+                category: {
+                  id: 1,
+                  name: 'Category 1',
+                  image: 'category1.jpg',
+                  creationAt: '2023-09-20T10:00:00Z',
+                  updatedAt: '2023-09-20T10:00:00Z',
+                },
+            }
+
+        const state = {
+            products: [],
+            product: mockProduct,
+            loading: false,
+            error: null
+        }
+
+        const nextState = productSlice(state, removeProductOfTheMonth());
+
+        expect(nextState.product).toBeNull();
     })
 })

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { UserCardProps } from "../types/User";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import styles from '../styles/UserCard.module.css'
 
 const UserCard: React.FC<UserCardProps> = ({ user}) => {
     const navigate = useNavigate()
@@ -13,12 +14,9 @@ const UserCard: React.FC<UserCardProps> = ({ user}) => {
 
     return(
         <>
-            <Card key={user?.id} sx={{minHeight: '20em', width: '30%', margin: 'auto', marginTop: '2em'}}>
+            <Card key={user?.id} className={styles.card}>
                 <CardMedia 
-                    sx={{
-                        minHeight: '10em',
-                        cursor: 'pointer'
-                    }}
+                    className={styles.cardMedia}
                     image={user?.avatar}
                     onClick={navigateToUser}
                 />

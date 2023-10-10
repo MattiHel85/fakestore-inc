@@ -6,7 +6,8 @@ import { removeProductOfTheMonth } from '../redux/slices/productSlice';
 import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Box, Button } from "@mui/material"
 import { HomeProps } from '../types/types';
-
+import Header from './Header';
+import styles from '../styles/Home.module.css'
 
 const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
   const dispatch: AppDispatch = useDispatch();
@@ -41,15 +42,8 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
         {
           product ? 
             <>
-            <Typography sx={{textAlign: 'center', margin: '0.5em', marginBottom: '0.75em'}} variant='h3'>Product of the Month!</Typography>
-              <Container
-                sx={{
-                  border: '2px solid rgb(0, 209, 255)',
-                  borderRadius: '25px',
-                  padding: '2em',
-                  boxShadow: '0px 0px 15px 0px rgba(0, 209, 255, 0.5)'
-                }}
-              >              
+            <Header title='Product of the month'/>
+              <Container className={styles.potmContainer}>              
                 <Box
                   sx={{
                     display: 'flex',

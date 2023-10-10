@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Button, TextField, Box } from "@mui/material";
 import styles from '../styles/ContactForm.module.css'
+import Header from './Header';
 
 const ContactForm: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -38,9 +39,7 @@ const ContactForm: React.FC = () => {
     <Container
       className={styles.formContainer}
     >
-      <Typography variant="h4" className={styles.formHeader}>
-        Contact Us
-      </Typography>
+      <Header title="Contact us" />
       <form 
         onSubmit={handleSubmit}
         className={styles.form}

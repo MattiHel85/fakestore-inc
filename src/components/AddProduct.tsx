@@ -4,7 +4,7 @@ import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';
 import { createProduct } from '../redux/slices/productSlice';
 import { fetchCategories } from '../redux/slices/categorySlice';
-import { Typography, Box, Button, TextField, Select, MenuItem } from '@mui/material';
+import { Typography, Button, TextField, Select, MenuItem } from '@mui/material';
 import { ProductData } from '../types/Product';
 import styles from '../styles/AddProduct.module.css';
 // import buttonStyles from '../styles/Button.module.css';

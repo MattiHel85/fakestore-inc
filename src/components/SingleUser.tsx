@@ -7,6 +7,7 @@ import { RootState } from "../redux/slices/rootSlice";
 import UpdateUser from "./UpdateUser";
 import { Button, Container, Box } from "@mui/material";
 import UserCard from "./UserCard";
+import styles from '../styles/SingleUser.module.css'
 
 const SingleUser: React.FC = () => {
     const {id} = useParams();
@@ -43,20 +44,13 @@ const SingleUser: React.FC = () => {
     }
     return (
         <>
-            <Container
-                sx={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}
-            >
+            <Container className={styles.userContainer}>
                 <UserCard user={user} />
-                <Box
-                    sx={{
-                        display:'flex',
-                        justifyContent: 'center'
-                    }}
-                >
-                    <Button sx={{marginTop: '2em'}} onClick={handleGoBack}>Go Back</Button>
+                <Box className={styles.buttonBox}>
+                    <Button className={styles.primaryButton} onClick={handleGoBack}>Go Back</Button>
                     { 
                         signedInUser?.role === 'admin' || user?.id === signedInUser?.id ?
-                            <Button sx={{marginTop: '2em'}} onClick={toggleUpdateUserForm}>{openUserUpdateForm ? 'Done' : 'Update User'}</Button> : 
+                            <Button className={styles.updateButton} onClick={toggleUpdateUserForm}>{openUserUpdateForm ? 'Done' : 'Update User'}</Button> : 
                             <></> 
                     }
                 </Box>

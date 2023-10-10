@@ -1,0 +1,33 @@
+@use './variables/colors';
+
+.userContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .buttonBox {
+        width: 40%;
+        margin: 2em auto;
+        display: flex;
+        justify-content: space-around;
+    }
+    .primaryButton {
+        background-color: colors.$primary-background-color;
+        color: white;
+        width: 150px;
+        margin: auto;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 25px;
+        padding: .5em;
+    }
+    .updateButton {
+        background-color: colors.$update-background-color;
+        color: white;
+        width: 150px;
+        margin: auto;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 25px;
+        padding: .5em;
+    }
+}
