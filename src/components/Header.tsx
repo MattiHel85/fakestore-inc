@@ -1,11 +1,12 @@
 import React from 'react';
-import { Typography } from "@mui/material"
-import { HeaderProps } from '../types/types';
 
+import { Typography } from "@mui/material"
+import styles from '../styles/Header.module.css'
+import { HeaderProps } from '../types/types';
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
-    <Typography variant='h3' sx={{textAlign: 'center', my: '2.5em'}}>
+    <Typography variant='h3' className={styles.headerText}>
                 {title}
     </Typography>
   )

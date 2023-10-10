@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { Typography, Container, Button, TextField } from "@mui/material";
+import { Typography, Container, Button, TextField, FormControl } from "@mui/material";
+import styles from '../styles/SignIn.module.css'
 
 import { AppDispatch } from '../redux/store';
 import { loginUser } from '../redux/slices/authSlice';
@@ -25,7 +26,8 @@ const handleSignInChange = (e: any) => {
     }))
   }
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       const { email, password } = signInData;
       await dispatch(loginUser({ email, password }));
@@ -35,21 +37,17 @@ const handleSignInChange = (e: any) => {
     }
   }
   return (
-    <Container
-      sx={{
-        padding: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <Container className={styles.signInContainer}>
+      <form
+        onSubmit={handleSignIn}
+        className={styles.signInForm}
+      >
         <TextField
           label="Username"
           name="email" 
           value={signInData.email}
           onChange={handleSignInChange} 
-          sx={{ 
-            margin: '5px'
-           }}
+          className={styles.textField}
         />
         <TextField
           label="Password"
@@ -57,24 +55,15 @@ const handleSignInChange = (e: any) => {
           name="password" 
           value={signInData.password}
           onChange={handleSignInChange} 
-          sx={{ 
-            margin: '5px'
-           }}
+          className={styles.textField}
         />
-        <Button sx={{borderRadius: '25px', margin: '5px'}} onClick={handleSignIn}>Sign In</Button>
-        <Typography
-          sx={{ 
-            margin: '5px',
-            textAlign: 'center'
-          }}
-        >FORGOT YOUR PASSWORD?</Typography>
-        <Link to={'/signup'} style={{textDecoration:'none', color: 'black'}}>
-          <Typography 
-            sx={{ 
-              margin: '5px',
-              textAlign: 'center'
-            }}
-           >SIGN UP</Typography>
+        <Button type='submit' className={styles.primaryButton}>Sign In</Button>
+      </form>
+        <Link to={'/forgotpassword'} className={styles.linkText}>        
+          <Typography className={styles.textNotInForm}>Forgot your password?</Typography>
+        </Link>
+        <Link to={'/signup'} className={styles.linkText}>
+          <Typography className={styles.textNotInForm} >No account? Sign up</Typography>
         </Link>
     </Container>
   )

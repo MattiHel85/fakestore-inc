@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { registerUser } from '../redux/slices/userSlice';
 import Header from './Header';
+import styles from '../styles/SignIn.module.css'
 
 const SignUp: React.FC = () => {
   const [userData, setUserData] = useState({    
@@ -37,78 +38,57 @@ const SignUp: React.FC = () => {
     }
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(registerUser(userData));
   };
 
   return (
-    <Container
-        sx={{
-            padding: '16px',
-            display: 'flex',
-            flexDirection: 'column',
-            width: '50%',
-            margin: 'auto'
-      }}
-    >
+    <Container className={styles.signInContainer}>
       <Header title='Sign Up' />
-      <TextField
-        label="Name"
-        name="name"
-        value={userData.name}
-        onChange={handleInputChange}
-        sx={{ 
-          margin: '5px'
-         }}
-      />
-      <TextField
-        label="Email"
-        name="email"
-        value={userData.email}
-        onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
-      />
-      <TextField
-        label="Password"
-        type="password"
-        name="password"
-        value={userData.password}
-        onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
-      />
-      <TextField
-        label="Avatar URL"
-        name="avatar"
-        value={userData.avatar}
-        onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
-      />
-      <TextField
-        label="Admin Code (Optional)"
-        name="adminCode"
-        type="password"
-        onChange={handleInputChange}
-        sx={{ 
-            margin: '5px'
-           }}
-      />
-      <Button 
-        sx={{ 
-            borderRadius: '25px',
-            width: '40%',
-            margin: 'auto'
-        }} 
-        onClick={handleSignUp}
-       >Sign Up</Button>
-      <Typography sx={{textAlign: 'center'}}>
-        <Link to={'/signin'} style={{textDecoration: 'none', color: 'black'}}>Already have an account? Sign In</Link>
-      </Typography>
+      <form onSubmit={handleSignUp} className={styles.signInForm}>
+        <TextField
+          label="Name"
+          name="name"
+          value={userData.name}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Email"
+          name="email"
+          value={userData.email}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          value={userData.password}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Avatar URL"
+          name="avatar"
+          value={userData.avatar}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Admin Code (Optional)"
+          name="adminCode"
+          type="password"
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <Button type='submit' className={styles.primaryButton}>Sign Up</Button>
+      </form>
+
+      <Link to={'/signin'} className={styles.linkText}>
+        <Typography className={styles.textNotInForm} >Already have an account? Sign In</Typography>
+      </Link>
     </Container>
   );
 };

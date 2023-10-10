@@ -1,0 +1,34 @@
+@use './variables/colors';
+
+.signInContainer {
+    padding: 16px;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    .signInForm{
+        display: flex;
+        flex-direction: column;
+        .textField {
+            margin: 5px;
+        }
+        .primaryButton {
+            background-color: colors.$primary-background-color;
+            color: white;
+            width: 150px;
+            margin: auto;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 25px;
+            padding: .5em;
+        }
+    }
+    .textNotInForm{
+        margin: 5px;
+        text-align: center;
+    }
+    .linkText{
+        text-decoration: none;
+        color: black;
+    }
+}
