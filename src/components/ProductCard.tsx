@@ -1,8 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-import { RootState } from "../redux/slices/rootSlice";
 import { ProductCardProps } from "../types/Product";
 
 import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
@@ -21,8 +18,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
     const handleAddToCart = () => {
         onAddToCart && onAddToCart(product, items, dispatch);
     }
-    
-    const user = useSelector((state: RootState) => state.auth.user);
 
     return(
         <>

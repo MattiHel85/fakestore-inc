@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 
 const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, onAddToCart }) => {
     const [openProductUpdateForm, setOpenProductUpdateForm] = useState(false)
+    const [showDeleteButton, setShowDeleteButton] = useState(false)
 
     const {id} = useParams();
     const dispatch: AppDispatch = useDispatch();    
@@ -63,12 +64,20 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, o
 
     const handleDelete = () => {
         dispatch(deleteProduct(product.id));
+        navigate('/products')
     }
 
     const handleSetProductOfTheMonthId = (productId: number) => {
-        console.log('productId: ',productId)
         setProductOfTheMonthId?.(productId)
         navigate(`/`)
+    }
+
+    const handleShowDeleteButton = () => {
+        setShowDeleteButton(true)
+    }
+    
+    const handleHideDeleteButton = () => {
+        setShowDeleteButton(false)
     }
 
     return (
@@ -141,12 +150,32 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, o
                                         openProductUpdateForm ? 'Complete' : 'Update Item'
                                     }
                             </Button>
-                            <Button 
-                                onClick={handleDelete} 
-                                className={styles.cardDeleteButton}
-                            >
-                                    Delete 
-                            </Button>
+                            {
+                                !showDeleteButton &&
+                                <Button
+                                    onClick={handleShowDeleteButton} 
+                                    className={styles.cardDeleteButton}
+                                >
+                                        Delete 
+                                </Button>
+                            }
+                            { 
+                                showDeleteButton && 
+                                <>
+                                    <Button
+                                        onClick={handleHideDeleteButton}
+                                        className={styles.cardUpdateButton}
+                                    >
+                                        Don't delete
+                                    </Button>
+                                    <Button 
+                                        onClick={handleDelete} 
+                                        className={styles.cardDeleteButton}
+                                    >
+                                        Yes, delete
+                                    </Button>                                
+                                </>
+                            }
                             <Button 
                                 onClick={() => handleSetProductOfTheMonthId(Number(product?.id))} 
                                 className={styles.cardDeleteButton}

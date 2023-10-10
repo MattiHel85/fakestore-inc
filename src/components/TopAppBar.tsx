@@ -23,6 +23,7 @@ import { RootState } from "../redux/slices/rootSlice";
 import { logout } from '../redux/slices/authSlice';
 import Cart from './Cart';
 import SignIn from './SignIn';
+import { Button } from '@mui/material';
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -49,7 +50,7 @@ function TopAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleOpenCartMenu = (event: React.MouseEvent<HTMLElement>) => { // Add handler for cart menu
+  const handleOpenCartMenu = (event: React.MouseEvent<HTMLElement>) => { 
     setAnchorElCart(event.currentTarget);
   };
 
@@ -61,7 +62,7 @@ function TopAppBar() {
     setAnchorElUser(null);
   };
 
-  const handleCloseCartMenu = () => { // Add handler for closing cart menu
+  const handleCloseCartMenu = () => { 
     setAnchorElCart(null);
   };
   
@@ -121,7 +122,7 @@ function TopAppBar() {
                     <Menu
                       sx={{ mt: '45px'}}
                       id="menu-appbar"
-                      anchorEl={anchorElNav}
+                      anchorEl={null}
                       anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'right',
@@ -140,9 +141,10 @@ function TopAppBar() {
                         }}
                       >
                         {
-                          user?.role === 'admin' && <Link to={'/admin'} style={{textDecoration: 'none', color: 'black'}}>
-                          <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >Admin</Typography>
-                        </Link>
+                          user?.role === 'admin' && 
+                          <Link to={'/admin'} style={{textDecoration: 'none', color: 'black'}}>
+                            <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >Admin</Typography>
+                          </Link>
                         }
 
                         <Link to={`/users/${user?.id}`} style={{textDecoration: 'none', color: 'black'}}>
@@ -233,6 +235,9 @@ function TopAppBar() {
               onClose={handleCloseCartMenu}
             >
               <Cart />
+              <Link style={{ textDecoration: 'none', color: 'rgb(0, 209, 255', fontWeight: 700, display: 'flex', justifyContent: 'flex-end', padding: '0.75em'}} to={'/checkout'}>
+                <Typography variant='body1'>Go to checkout</Typography>
+              </Link>
             </Menu>
             
           </Box>

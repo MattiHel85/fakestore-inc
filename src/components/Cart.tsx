@@ -28,37 +28,28 @@ import { AppDispatch } from '../redux/store';
 
 const Cart: React.FC = () => {
 
-    const dispatch: AppDispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const { items } = useSelector((state: RootState) => state.cart)
-      
-    
-    const handleIncreaseQuantity = (productId: number) => {
-        dispatch(increaseQuantity(productId));        
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const { items } = useSelector((state: RootState) => state.cart)
+  
+  const handleIncreaseQuantity = (productId: number) => {
+      dispatch(increaseQuantity(productId));        
+  };
+  const handleDecreaseQuantity = (productId: number) => {
+      dispatch(decreaseQuantity(productId));
+  };  
+  const handleRemoveFromCart = (productId: number) => {
+      dispatch(removeFromCart(productId)); 
     };
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  }
+    
+  const handleBrowse = () => {
+    navigate('/products')
+    window.location.reload()
+  }
 
-
-    const handleDecreaseQuantity = (productId: number) => {
-        dispatch(decreaseQuantity(productId));
-    };  
-
-    const handleRemoveFromCart = (productId: number) => {
-        dispatch(removeFromCart(productId)); 
-      };
-
-    const handleClearCart = () => {
-      dispatch(clearCart());
-    }
-      
-    const handleBrowse = () => {
-      navigate('/products')
-      window.location.reload()
-    }
-    const handleGoToCheckout = () => {
-      // handleCloseCartMenu()
-      navigate('/checkout')
-    }
   return (
     <Container>
         {items.length > 0 && (
@@ -70,6 +61,7 @@ const Cart: React.FC = () => {
                             <TableCell sx={{ textAlign: 'center' }} >Decrease Quantity</TableCell>
                             <TableCell sx={{ textAlign: 'center' }} >Increase Quantity</TableCell>
                             <TableCell sx={{ textAlign: 'center' }} >Product Name</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} >Price</TableCell>
                             <TableCell sx={{ textAlign: 'center' }} >Quantity</TableCell>
                             <TableCell sx={{ textAlign: 'center' }} >Remove From Cart</TableCell>
                           </TableRow>
@@ -88,6 +80,7 @@ const Cart: React.FC = () => {
                                 </IconButton>
                               </TableCell>
                               <TableCell sx={{ textAlign: 'center' }}>{item.name}</TableCell>
+                              <TableCell sx={{ textAlign: 'center' }}>€{item.price}</TableCell>
                               <TableCell sx={{ textAlign: 'center' }}>{item.quantity}</TableCell>
                               <TableCell sx={{ textAlign: 'center' }}>
                                 <IconButton onClick={() => handleRemoveFromCart(item.id)}>
@@ -109,11 +102,10 @@ const Cart: React.FC = () => {
                           Total Products: {items.reduce((total, item) => total + item.quantity, 0)}
                       </Typography>
                       <Typography variant='body2'>
-                        Price: €
+                        Subtotal: €
                         {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
                       </Typography>
                       <Button onClick={handleClearCart}>Clear cart</Button>
-                      <Button onClick={handleGoToCheckout}>Go to checkout</Button>
                   </Box>
                 </>            
         )}

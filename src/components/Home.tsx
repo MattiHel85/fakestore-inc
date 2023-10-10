@@ -41,36 +41,62 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
         {
           product ? 
             <>
-            <Typography sx={{textAlign: 'center', margin: '0.5em'}} variant='h3'>Product of the Month!</Typography>
-              <Box
+            <Typography sx={{textAlign: 'center', margin: '0.5em', marginBottom: '0.75em'}} variant='h3'>Product of the Month!</Typography>
+              <Container
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
+                  // border: '5px solid rgb(0, 209, 255)',
+                  borderRadius: '25px',
+                  padding: '2em',
+                  boxShadow: '0px 0px 10px 0px rgb(0, 209, 255)'
                 }}
-              >
-                <img style={{width: '500px', margin: 'auto'}} src={product?.images?.[0]} 
-                  alt={``} 
-                />
+              >              
                 <Box
                   sx={{
-                    width: '500px',
-                    margin: 'auto',
                     display: 'flex',
-                    justifyContent: 'space-around'
+                    flexDirection: 'row',
+                    justifyContent: 'center'
                   }}
                 >
-                  <Typography variant='h4'>€{product?.price}</Typography>
-                  <Typography variant='h4'>{product?.title}</Typography>
+                  <img style={{width: '300px', borderRadius: '25px'}} src={product?.images?.[0]} 
+                    alt={``} 
+                  />
+                  <Box
+                    sx={{
+                      width: '500px',
+                      margin: 'auto',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-around'
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <Typography variant='h4'>€{product?.price}</Typography>
+                      <Typography variant='h4'>{product?.title}</Typography>
+                    </Box>
+                    <Box>
+                    <Typography variant='body1'>{product?.description}</Typography>
+                      { user?.role === 'admin' ?
+                        <Button onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
+                        <></>
+                      }
+                      <Button onClick={handleAddToCart}>Add to cart</Button>
+                    </Box>
+                  </Box>
+                  {/* <Box>
+                  <Typography variant='body1'>{product?.description}</Typography>   
+                    { user?.role === 'admin' ?
+                      <Button onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
+                      <></>
+                    }
+                    <Button onClick={handleAddToCart}>Add to cart</Button>
+                  </Box> */}
                 </Box>
-                <Typography variant='body1'>{product?.description}</Typography>
-
-                { user?.role === 'admin' ?
-                  <Button onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
-                  <></>
-                }
-                <Button onClick={handleAddToCart}>Add to cart</Button>
-              </Box>
+              </Container>
             </> : 
             <>
               <Typography

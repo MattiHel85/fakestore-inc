@@ -39,7 +39,7 @@ const App = () => {
             {/* product routes */}
             <Route path='/products' element={<ProductSearch />} />
             <Route path='/products/:id' element={<SingleProduct setProductOfTheMonthId={setProductOfTheMonthId} onAddToCart={debouncedHandleAddToCart}/>} />
-            <Route path='/checkout' element={<Cart/>} />
+            <Route path='/checkout' element={<><Header title='Checkout' />,<Cart/></>} />
 
             {/* user routes  */}
             <Route path='/signup' element={user ? <><Header title={`You're already signed in as user ${user.name}.`} />, <Header title='Log out in the top right corner if you wish to create a new account.'/></> : <SignUp />} />
