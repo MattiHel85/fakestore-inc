@@ -1,0 +1,58 @@
+@use './variables/colors';
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.primaryButton {
+    background-color: colors.$primary-background-color;
+    color: white;
+    width: 150px;
+    margin: auto;
+    margin-bottom: 2em;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: .75em;
+}
+.secondaryButton {
+    background-color: colors.$update-background-color;
+    color: white;
+    min-width: 150px;
+    margin: auto;
+    margin-bottom: 2em;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: .75em;
+}
+.tertiaryButton {
+    background-color: colors.$confirm-background-color;
+    color: white;
+    min-width: 150px;
+    margin: auto;
+    margin-bottom: 2em;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: .75em;
+}
+.textField {
+    width: 50%;
+    margin: auto;
+    margin-bottom: .75em;
+}
+
+.productsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    padding-top: 5em;
+    text-align: center;
+}

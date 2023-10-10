@@ -44,10 +44,10 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
             <Typography sx={{textAlign: 'center', margin: '0.5em', marginBottom: '0.75em'}} variant='h3'>Product of the Month!</Typography>
               <Container
                 sx={{
-                  // border: '5px solid rgb(0, 209, 255)',
+                  border: '2px solid rgb(0, 209, 255)',
                   borderRadius: '25px',
                   padding: '2em',
-                  boxShadow: '0px 0px 10px 0px rgb(0, 209, 255)'
+                  boxShadow: '0px 0px 15px 0px rgba(0, 209, 255, 0.5)'
                 }}
               >              
                 <Box
@@ -87,14 +87,6 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
                       <Button onClick={handleAddToCart}>Add to cart</Button>
                     </Box>
                   </Box>
-                  {/* <Box>
-                  <Typography variant='body1'>{product?.description}</Typography>   
-                    { user?.role === 'admin' ?
-                      <Button onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
-                      <></>
-                    }
-                    <Button onClick={handleAddToCart}>Add to cart</Button>
-                  </Box> */}
                 </Box>
               </Container>
             </> : 

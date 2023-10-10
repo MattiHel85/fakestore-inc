@@ -19,6 +19,7 @@ import ProductSearch from './components/Products'
 import SingleUser from './components/SingleUser'
 import Home from './components/Home'
 import { Product } from './types/Product'
+import ContactForm from './components/ContactForm'
 
 const App = () => {
   const [productOfTheMonth, setProductOfTheMonth] = useState<Product>()
@@ -46,7 +47,10 @@ const App = () => {
             <Route path='/signin' element={user ? <><Header title={`You're already signed in as user ${user.name}`} />, </> : <><Header title='Sign In' />,<SignIn /></>} />
             <Route path='/users/:id' element={ <SingleUser />} />
 
-            
+            {/* misc routes  */}
+            <Route path='/contact' element={ <ContactForm />} />
+
+
             {/* admin routes */}
             <Route path='/users' element={ user?.role=== 'admin' ? <Users /> : <Header title='Access to users denied!'/>} />
             <Route path='/admin' element={ user?.role=== 'admin' ? <AdminPanel /> : <Header title='Access to admin panel denied!'/>} />

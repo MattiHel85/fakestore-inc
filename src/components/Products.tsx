@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Container, TextField, Button, MenuItem, FormControl } from '@mui/material';
+import { Container, TextField, Button, MenuItem, FormControl, Box } from '@mui/material';
+import styles from '../styles/Products.module.css'
 
 import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';
@@ -61,16 +62,19 @@ const Products: React.FC = () => {
   );
 
   return (
-    <Container sx={{ width: '100%', marginTop: '2em', marginBottom: '2em', textAlign: 'center'  }}>
-      <Button onClick={handleShowSearch} sx={{marginBottom: '.75em'}}> { !showSearchForm ? 'Open Search' : 'Close Search'}</Button>
+    <>
+      <Box className={styles.productsContainer}>
+        <Button onClick={handleShowSearch} className={styles.secondaryButton}> { !showSearchForm ? 'Open Search' : 'Close Search'}</Button>
+      </Box>
       {
-        showSearchForm && <FormControl sx={{ display: 'flex', flexDirection: 'column', justifyContent:'center'}}>
+        showSearchForm && 
+        <FormControl className={styles.form}>
           <TextField
             label="Search Products"
             variant="outlined"
             value={searchTerm}
             onChange={handleSearchChange}
-            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em'}}
+            className={styles.textField}
           />
           <TextField
             select
@@ -78,7 +82,7 @@ const Products: React.FC = () => {
             value={selectedCategory}
             onChange={handleCategoryChange}
             label="Category"
-            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em' }}
+            className={styles.textField}
           >
             <MenuItem value="">All Categories</MenuItem>
             {categories.map((category) => (
@@ -93,7 +97,7 @@ const Products: React.FC = () => {
             type="number"
             value={minPrice}
             onChange={handleMinPriceChange}
-            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em' }}
+            className={styles.textField}
           />
           <TextField
             label="Max Price"
@@ -101,24 +105,18 @@ const Products: React.FC = () => {
             type="number"
             value={maxPrice}
             onChange={handleMaxPriceChange}
-            sx={{ width: '50%', margin: 'auto', marginBottom: '.5em' }}
+            className={styles.textField}
           />
           <br />
-          <Button onClick={handleSearchByPrice}>Search by Price</ Button>
+          <Button onClick={handleSearchByPrice} className={styles.secondaryButton}>Search by Price</ Button>
         </FormControl>
       }
-      <Container
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap'
-        }}
-      >
+      <Container className={styles.productsContainer}>
         {filteredProducts.map(product => (
           <ProductCard key={product.id} product={product} items={items} dispatch={dispatch} onAddToCart={debouncedHandleAddToCart} />
         ))}
       </Container>
-    </Container>
+    </>
     
   );
 };

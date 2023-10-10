@@ -1,0 +1,41 @@
+@use './variables/colors';
+
+.primaryButton {
+    background-color: colors.$primary-background-color;
+    color: white;
+    width: 150px;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 25px;
+    padding: .5em;
+}
+
+.deleteButton {
+    background-color: colors.$delete-background-color;
+    color: white;
+    width: 150px;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 25px;
+    padding: .5em;
+}
+
+.updateButton {
+    background-color: colors.$update-background-color;
+    color: white;
+    width: 150px;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 25px;
+    padding: .5em;
+}
+
+.confirmButton {
+    background-color: colors.$update-background-color;
+    color: white;
+    width: 150px;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 25px;
+    padding: .5em;
+}

@@ -1,0 +1,62 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.secondaryButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  min-width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.tertiaryButton {
+  background-color: rgb(85, 200, 85);
+  color: white;
+  min-width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.textField {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 0.75em;
+}
+
+.productsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  padding-top: 5em;
+  text-align: center;
+}
+
+/*# sourceMappingURL=Products.module.css.map */

@@ -4,6 +4,7 @@ import { Typography, Container, Box, ButtonGroup, Button } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
+import styles from '../styles/AdminPanel.module.css'
 
 import { RootState } from '../redux/slices/rootSlice';
 import Users from './Users';
@@ -62,74 +63,34 @@ const AdminPanel: React.FC = () => {
 
   return (
     <>
-      <Typography variant='h3' sx={{ textAlign: 'center', my: '2.5em' }}>
+      <Typography variant='h3' className={styles.adminHeader}>
         Admin Panel for {user?.name}
       </Typography>
       <Container
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginBottom: '3em'
-        }}
+        className={styles.adminContainer}
       >
         <Box>
-          <PersonIcon onClick={openMyInfo} sx={{
-            fontSize: '10em',
-            color: 'rgb(0, 209, 255)',
-            "&:hover": {
-              cursor: "pointer" 
-            }
-          }}/>
+          <PersonIcon onClick={openMyInfo} className={styles.icon} />
           <Typography variant='subtitle1' sx={{ textAlign: 'center', fontWeight: '700'}}>My Info</Typography>
         </Box>
         <Box>
-          <GroupIcon onClick={openUsers} sx={{
-            fontSize: '10em',
-            color: 'rgb(0, 209, 255)',
-            "&:hover": {
-              cursor: "pointer" 
-            }
-          }}/>
+          <GroupIcon onClick={openUsers} className={styles.icon} />
           <Typography variant='subtitle1' sx={{ textAlign: 'center', fontWeight: '700'}}>Users</Typography>
         </Box>
         <Box>
-          <Inventory2Icon onClick={openProducts} sx={{
-            fontSize: '10em',
-            color: 'rgb(0, 209, 255)',
-            "&:hover": {
-              cursor: "pointer" 
-            }
-          }}/>
+          <Inventory2Icon onClick={openProducts} className={styles.icon} />
           <Typography variant='subtitle1' sx={{ textAlign: 'center', fontWeight: '700'}}>Products</Typography>
         </Box>
       </Container>
       
       { chooseProducts && (
-          <Container 
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              width: '70%',
-              margin: 'auto',
-              marginBottom: '2em',
-              border: '.5em solid rgb(0, 209, 255)',
-              borderRadius: '25px',
-              padding: '3.5em'
-            
-            }}
-          >
-            <Typography variant='h5' sx={{ textAlign: 'center'}}>What do you want to do?</Typography>
+          <Container className={styles.adminInnerContainer} >
+            <Typography variant='h5' className={styles.containerHeader}>What do you want to do?</Typography>
           
-            <ButtonGroup
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <Button onClick={() => setChooseAddProduct(true)} sx={{margin: '1em'}}>Add Product</Button>
-              <Button onClick={() => setChooseUpdateProduct(true)} sx={{margin: '1em'}}>Update Product</Button>
-              <Button onClick={() => setChooseProducts(false)} sx={{margin: '1em'}}>Done</Button>
+            <ButtonGroup className={styles.buttonGroup}>
+              <Button onClick={() => setChooseAddProduct(true)} className={styles.primaryButton}>Add Product</Button>
+              <Button onClick={() => setChooseUpdateProduct(true)} className={styles.secondaryButton}>Edit Product</Button>
+              <Button onClick={() => setChooseProducts(false)} className={styles.tertiaryButton}>Done</Button>
             </ButtonGroup>
             
             { chooseAddProduct && ([<AddProduct />, <Button onClick={() => setChooseAddProduct(false)} sx={{margin: '1em'}}>Done</Button>]) }
@@ -139,78 +100,41 @@ const AdminPanel: React.FC = () => {
       }
 
       { chooseUsers && (
-          <Container 
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              width: '70%',
-              margin: 'auto',
-              marginBottom: '2em',
-              border: '.5em solid rgb(0, 209, 255)',
-              borderRadius: '25px',
-              padding: '3.5em'
-            
-            }}
-          >
-            <Typography variant='h5' sx={{ textAlign: 'center'}}>What do you want to do?</Typography>
+          <Container className={styles.adminInnerContainer} >
+            <Typography variant='h5' className={styles.containerHeader}>What do you want to do?</Typography>
           
-            <ButtonGroup
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <Button onClick={() => setViewUsers(true)} sx={{margin: '1em'}}>View Users</Button>
-              <Button onClick={() => setChooseUsers(false)} sx={{margin: '1em'}}>Done</Button>
+            <ButtonGroup className={styles.buttonGroup}>
+              <Button onClick={() => setViewUsers(true)} className={styles.primaryButton}>View Users</Button>
+              <Button onClick={() => setChooseUsers(false)} className={styles.tertiaryButton}>Done</Button>
             </ButtonGroup>
             
-            { viewUsers && ([<Button onClick={() => setViewUsers(false)} sx={{margin: '1em'}}>Close Users</Button>, <Users />]) }
+            { viewUsers && ([<Button onClick={() => setViewUsers(false)} className={styles.tertiaryButton}>Close Users</Button>, <Users />]) }
           </Container>
         ) 
       }
 
       { chooseCurrentUser && (
-          <Container 
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              width: '70%',
-              margin: 'auto',
-              marginBottom: '2em',
-              border: '.5em solid rgb(0, 209, 255)',
-              borderRadius: '25px',
-              padding: '3.5em'
-            
-            }}
-          >
-            <Typography variant='h5' sx={{ textAlign: 'center'}}>What do you want to do?</Typography>
+          <Container className={styles.adminInnerContainer}>
+            <Typography variant='h5' className={styles.containerHeader}>What do you want to do?</Typography>
           
-            <ButtonGroup
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <Button onClick={() => setViewCurrentUser(true)} sx={{margin: '1em'}}>View My Info</Button>
-              <Button onClick={() => setUpdateCurrentUser(true)} sx={{margin: '1em'}}>Update My Info</Button>
-              <Button onClick={() => setChooseCurrentUser(false)} sx={{margin: '1em'}}>Done</Button>
+            <ButtonGroup className={styles.buttonGroup}>
+              <Button onClick={() => setViewCurrentUser(true)} className={styles.primaryButton}>View My Info</Button>
+              <Button onClick={() => setUpdateCurrentUser(true)} className={styles.secondaryButton}>Update My Info</Button>
+              <Button onClick={() => setChooseCurrentUser(false)} className={styles.tertiaryButton}>Done</Button>
             </ButtonGroup>
             
-            { viewCurrentUser && (
-              [
-                <Button onClick={() => setViewCurrentUser(false)} sx={{margin: '1em'}}>Close Info</Button>, 
+            { viewCurrentUser && 
+              <>
+                <Button onClick={() => setViewCurrentUser(false)} className={styles.tertiaryButton}>Close Info</Button>, 
                 <UserCard user={user}/>
-              ]
-              ) 
+              </>
             }
 
             { updateCurrentUser && 
-              [
-                <UpdateUser user={user} />, 
-                <Button onClick={() => setUpdateCurrentUser(false)} sx={{margin: '1em'}}>Close Info</Button>
-              ] 
+              <>
+                <Button onClick={() => setUpdateCurrentUser(false)} className={styles.tertiaryButton}>Close Info</Button>,
+                <UpdateUser user={user} />
+              </>
             }
 
           </Container>

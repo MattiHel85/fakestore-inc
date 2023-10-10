@@ -122,7 +122,7 @@ function TopAppBar() {
                     <Menu
                       sx={{ mt: '45px'}}
                       id="menu-appbar"
-                      anchorEl={null}
+                      anchorEl={anchorElNav}
                       anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'right',
@@ -204,7 +204,6 @@ function TopAppBar() {
           </Box>
 
           {/* Cart Menu */}
-          {/* Add the badge component from MUI instead of having the amount of items in brackets */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Open cart">
               <IconButton onClick={handleOpenCartMenu} sx={{ p: 0 }}>

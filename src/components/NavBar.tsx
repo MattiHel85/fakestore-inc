@@ -7,8 +7,8 @@ const NavBar: React.FC = () => {
     
     const navItems = [
       { id: 1,  label: 'All products', path: '/products' },
-      { id: 2,  label: 'Cart', path: '/checkout' },
-      { id: 3,  label: 'Support', path: '/support' },
+      { id: 2,  label: 'Checkout', path: '/checkout' },
+      { id: 3,  label: 'Contact us', path: '/contact' },
     ];
     return (
       <Box

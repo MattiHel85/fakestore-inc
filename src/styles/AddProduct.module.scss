@@ -1,0 +1,23 @@
+@use './variables/colors';
+
+.productForm {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+    margin: auto;
+    .textField {
+        margin: 5px;
+    }
+    .primaryButton {
+        background-color: colors.$primary-background-color;
+        color: white;
+        width: 150px;
+        margin: auto;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 25px;
+        padding: .5em;
+    }
+}

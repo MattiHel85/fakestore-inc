@@ -4,9 +4,10 @@ import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';
 import { updateProduct } from '../redux/slices/productSlice';
 import { fetchCategories } from '../redux/slices/categorySlice';
-import { Typography, Box, Button, TextField, Select, MenuItem } from '@mui/material';
+import { Button, TextField, Select, MenuItem } from '@mui/material';
 import { ProductData } from '../types/Product';
 import { updateProductProps } from '../types/Product';
+import styles from '../styles/AddProduct.module.css'
 
 const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch();
@@ -45,7 +46,9 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
 
   
 
-  const handleUpdateProduct = () => {
+  const handleUpdateProduct = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     const updatedProduct = {
         id: productData.id, 
         title: productData.title,
@@ -57,7 +60,6 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
 
     // Dispatch action to update the product
     dispatch(updateProduct(updatedProduct));
-    console.log(`Product: ${updatedProduct.title} updated successfully`);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,81 +68,59 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
   };
 
   return (
-    <>
-      <Box
-        sx={{
-          padding: '16px',
-          display: 'flex',
-          flexDirection: 'column',
-          width: '50%',
-          margin: 'auto',
-        }}
+    <form
+      onSubmit={handleUpdateProduct}
+      className={styles.productForm}
+    >
+      <TextField
+        name='title'
+        value={productData.title}
+        onChange={handleInputChange}
+        className={styles.textField}
+      />
+      <TextField
+        label='Description'
+        name='description'
+        value={productData.description}
+        onChange={handleInputChange}
+        className={styles.textField}
+      />
+      <TextField
+        label='Price'
+        type='number'
+        name='price'
+        value={productData.price}
+        onChange={handleInputChange}
+        className={styles.textField}
+      />
+      <Select
+        label='Category'
+        name='categoryId'
+        value={productData.categoryId}
+        onChange={handleCategoryChange}
+        className={styles.textField}
       >
-        <TextField
-          name='title'
-          value={productData.title}
-          onChange={handleInputChange}
-          sx={{
-            margin: '5px',
-          }}
-        />
-        <TextField
-          label='Description'
-          name='description'
-          value={productData.description}
-          onChange={handleInputChange}
-          sx={{
-            margin: '5px',
-          }}
-        />
-        <TextField
-          label='Price'
-          type='number'
-          name='price'
-          value={productData.price}
-          onChange={handleInputChange}
-          sx={{
-            margin: '5px',
-          }}
-        />
-        <Select
-          label='Category'
-          name='categoryId'
-          value={productData.categoryId}
-          onChange={handleCategoryChange}
-          sx={{
-            margin: '5px',
-          }}
-        >
-          <MenuItem value={0}>Select Category</MenuItem>
-          {categories.map((category: any) => (
-            <MenuItem key={category.id} value={category.id}>
-              {category.name}
-            </MenuItem>
-          ))}
-        </Select>
-        <TextField
-          label='Image URLs (comma-separated)'
-          name='images'
-          value={productData.images.join(',')} // Join the array into a comma-separated string for the input value
-          onChange={handleImageChange}
-          sx={{
-            margin: '5px',
-          }}
-        />
-        <Button
-          sx={{
-            borderRadius: '25px',
-            width: '40%',
-            margin: 'auto',
-            marginTop: '10px',
-          }}
-          onClick={handleUpdateProduct}
-        >
-          Update Product
-        </Button>
-      </Box>
-    </>
+        <MenuItem value={0}>Select Category</MenuItem>
+        {categories.map((category: any) => (
+          <MenuItem key={category.id} value={category.id}>
+            {category.name}
+          </MenuItem>
+        ))}
+      </Select>
+      <TextField
+        label='Image URLs (comma-separated)'
+        name='images'
+        value={productData.images.join(',')} // Join the array into a comma-separated string for the input value
+        onChange={handleImageChange}
+        className={styles.textField}
+      />
+      <Button
+        type='submit'
+        className={styles.primaryButton}
+      >
+        Update
+      </Button>
+    </form>
   );
 };
 
