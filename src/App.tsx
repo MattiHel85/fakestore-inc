@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux'
 import { StyledEngineProvider } from '@mui/material'
 import { RootState } from './redux/slices/rootSlice'
 
-import TopAppBar from './components/TopAppBar'
-import NavBar from './components/NavBar'
 import Users from './components/Users'
 import AdminPanel from './components/AdminPanel'
 import SignIn from './components/SignIn'
@@ -15,14 +13,13 @@ import Header from './components/Header'
 import Cart from './components/Cart'
 
 import debouncedHandleAddToCart from './utils/cartHelpers'
-import ProductSearch from './components/Products'
+// import Products from './components/Products'
 import SingleUser from './components/SingleUser'
-import Home from './components/Home'
-import { Product } from './types/Product'
 import ContactForm from './components/ContactForm'
+import LandingPage from './pages/LandingPage'
+import ProductsPage from './pages/ProductsPage'
 
 const App = () => {
-  const [productOfTheMonth, setProductOfTheMonth] = useState<Product>()
   const [productOfTheMonthId, setProductOfTheMonthId] = useState<number>()
   const user = useSelector((state: RootState) => state.auth.user);
 
@@ -30,15 +27,12 @@ const App = () => {
     <>
       <StyledEngineProvider injectFirst>
         <Router>
-          <TopAppBar />
-          <NavBar />
           <Routes>
 
             {/* Home route */}
-            <Route path='/' element={<Home productOfTheMonthId={productOfTheMonthId} setProductOfTheMonth={setProductOfTheMonth} productOfTheMonth={productOfTheMonth} onAddToCart={debouncedHandleAddToCart}/> } />
-
+            <Route path='/' element={<LandingPage productOfTheMonthId={productOfTheMonthId} />} />
             {/* product routes */}
-            <Route path='/products' element={<ProductSearch />} />
+            <Route path='/products' element={<ProductsPage />} />
             <Route path='/products/:id' element={<SingleProduct setProductOfTheMonthId={setProductOfTheMonthId} onAddToCart={debouncedHandleAddToCart}/>} />
             <Route path='/checkout' element={<><Header title='Checkout' />,<Cart/></>} />
 

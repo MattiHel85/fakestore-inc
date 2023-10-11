@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch } from '../redux/store';
 import { fetchProductById } from '../redux/slices/productSlice';
 import { removeProductOfTheMonth } from '../redux/slices/productSlice';
+import debouncedHandleAddToCart from '../utils/cartHelpers';
 import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Box, Button } from "@mui/material"
 import { HomeProps } from '../types/types';
 import Header from './Header';
 import styles from '../styles/Home.module.css'
 
-const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
+const Home: React.FC<HomeProps> = ( {productOfTheMonthId} ) => {
   const dispatch: AppDispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.cart);
   const product = useSelector((state: RootState) => state.products.product)
@@ -22,7 +23,7 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId, onAddToCart} ) => {
   }, [dispatch, productOfTheMonthId]);
 
   const handleAddToCart = () => {
-    product && onAddToCart(product, items, dispatch)
+    product && debouncedHandleAddToCart(product, items, dispatch)
     console.log('Added to cart: ', product)
   };
 

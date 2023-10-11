@@ -7,7 +7,7 @@ import styles from '../styles/Products.module.css'
 import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';
 
-import { fetchProducts, fetchProductsByPriceRange, fetchProductsByCategory } from '../redux/slices/productSlice';
+import { fetchProducts, fetchProductsByCategory } from '../redux/slices/productSlice';
 import debouncedHandleAddToCart from '../utils/cartHelpers';
 
 import ProductCard from './ProductCard';
