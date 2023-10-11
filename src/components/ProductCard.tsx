@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
 
     return(
         <>
-            <Card key={product.id} sx={{minHeight: '35em', width: '30%', margin: 'auto', marginTop: '2em'}}>
+            <Card key={product.id} sx={{minHeight: '40em', width: '30%', margin: 'auto', marginTop: '2em'}}>
                 <CardMedia 
                     onClick={navigateToProduct}
                     sx={{
@@ -31,21 +31,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
                     image={firstImage}
                 />
                 <CardContent>
-                    <Typography variant="h5" sx={{marginBottom: '1em'}}>
+                    <Typography variant="h5" sx={{marginBottom: '1.5em'}}>
                         {product.title}
                     </Typography>
                     <Typography sx={{marginBottom: '1em'}}>
                         {product.description}
                     </Typography>
-                    <Typography sx={{marginBottom: '1em'}}>
-                        {product.category.name}
+                    <Typography variant="body1" sx={{marginBottom: '1.5em'}}>
+                        Category: {product.category.name}
                     </Typography>
                 </CardContent>
                 <CardActions
                     sx={{
                         display:'flex',
                         justifyContent: 'space-between',
-                        padding: '2em'
+                        padding: '2em',
+                        marginBottom: '1em'
                     }}
                 >
                     <Typography variant="h5">

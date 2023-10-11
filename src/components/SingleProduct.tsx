@@ -119,12 +119,20 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, o
                     sx={{
                         marginBottom: '15px'
                     }}
-                    variant="h4">€{product.price}</Typography>
+                    variant="h4">€{product.price}
+                </Typography>
                 <Typography
                     sx={{
                         marginBottom: '15px'
                     }}
-                    variant="body1">{product.description}</Typography>
+                    variant="h6">Category: {product.category.name}
+                </Typography>
+                <Typography
+                    sx={{
+                        marginBottom: '15px'
+                    }}
+                    variant="body1">{product.description}
+                </Typography>
 
                 <Box
                     sx={{
