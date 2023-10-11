@@ -113,8 +113,8 @@ function TopAppBar() {
                 <>
                     <IconButton onClick={handleOpenNavMenu}>                    
                       <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
-                        <PersonIcon />
-                        <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >{user?.name }</Typography>
+                        <PersonIcon sx={{ fontSize: '1.75em'}} />
+                        <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >Hello, {user?.name }</Typography>
                       </IconButton>
                     </IconButton>
                     <Menu

@@ -157,6 +157,7 @@ describe('product reducer', () => {
     it('should handle fetchProductsById.pending', () => {
         const state = productSlice(initialState, fetchProductById.pending)
         expect(state.loading).toBe(true);
+        expect(state.product).toBeNull();
         expect(state.error).toBeNull()
     })
 
@@ -196,7 +197,7 @@ describe('product reducer', () => {
         const state = productSlice(initialState, fetchProductById.rejected(error, '', mockProductId, undefined))
 
         expect(state.loading).toBe(false);
-        expect(state.product).toEqual([])
+        expect(state.product).toBeNull();
         expect(state.error).toBe('Rejected')
     })
 
