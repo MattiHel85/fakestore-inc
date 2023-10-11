@@ -77,7 +77,7 @@ function TopAppBar() {
 
     //reroute after slight delay
     setTimeout(() => {
-      navigate('/products');
+      navigate('/');
     }, 1000)
   };
 
