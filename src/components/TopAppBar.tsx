@@ -103,7 +103,7 @@ function TopAppBar() {
               flexGrow: 1, // Expand to fill available space
             }}
           >
-            Fake Shop Inc
+            FakeShop Inc
           </Typography>
 
           {/* User Menu */}
