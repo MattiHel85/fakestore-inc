@@ -40,9 +40,9 @@ const Products: React.FC = () => {
     setMaxPrice(Number(event.target.value));
   };
 
-  const handleSearchByPrice = () => {
-    dispatch(fetchProductsByPriceRange({ minPrice, maxPrice }));
-  };
+  // const handleSearchByPrice = () => {
+  //   dispatch(fetchProductsByPriceRange({ minPrice, maxPrice }));
+  // };
   
   const handleCategoryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedCategory(event.target.value as number | '');
@@ -108,7 +108,7 @@ const Products: React.FC = () => {
             className={styles.textField}
           />
           <br />
-          <Button onClick={handleSearchByPrice} className={styles.secondaryButton}>Search by Price</ Button>
+          {/* <Button onClick={handleSearchByPrice} className={styles.secondaryButton}>Search by Price</ Button> */}
         </FormControl>
       }
       <Container className={styles.productsContainer}>

@@ -2,7 +2,6 @@ import authSlice, {
     loginUser,
     logout,
     loginFailure,
-    // getUserProfile,
     initialState
   } from '../../redux/slices/authSlice';
 import { LoginPayload } from '../../types/Auth';
@@ -25,7 +24,7 @@ import { LoginPayload } from '../../types/Auth';
     expect(state.isAuthenticated).toBe(true);
     expect(state.accessToken).toBe('mockAccessToken');
     expect(state.refreshToken).toBe('mockRefreshToken');
-    // expect(state.user).toEqual(mockUser);
+    expect(state.user).toEqual(mockUser);
     expect(state.loading).toBe(false);
     });
   
