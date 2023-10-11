@@ -31,11 +31,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
                     image={firstImage}
                 />
                 <CardContent>
-                    <Typography variant="h5">
+                    <Typography variant="h5" sx={{marginBottom: '1em'}}>
                         {product.title}
                     </Typography>
-                    <Typography>
+                    <Typography sx={{marginBottom: '1em'}}>
                         {product.description}
+                    </Typography>
+                    <Typography sx={{marginBottom: '1em'}}>
+                        {product.category.name}
                     </Typography>
                 </CardContent>
                 <CardActions
