@@ -59,9 +59,4 @@ import { LoginPayload } from '../../types/Auth';
       expect(state.loading).toBe(false);
       expect(state.error).toBe(error);
     });
-
-    // it('should handle getUserProfile.pending', () => {
-    //   const state = authSlice(initialState, getUserProfile.pending);
-    //   expect(state.loading).toBe(true);
-    // });
   });  
