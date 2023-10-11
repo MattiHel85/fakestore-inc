@@ -8,7 +8,7 @@ import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Box, Button } from "@mui/material"
 import { HomeProps } from '../types/types';
 import Header from './Header';
-import styles from '../styles/Home.module.css'
+import styles from '../styles/styles.module.css'
 
 const Home: React.FC<HomeProps> = ( {productOfTheMonthId} ) => {
   const dispatch: AppDispatch = useDispatch();
@@ -70,16 +70,23 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId} ) => {
                         justifyContent: 'space-between'
                       }}
                     >
-                      <Typography variant='h4'>€{product?.price}</Typography>
-                      <Typography variant='h4'>{product?.title}</Typography>
+                      <Typography  variant='h4'>€{product?.price}</Typography>
+                      <Typography  variant='h4'>{product?.title}</Typography>
                     </Box>
                     <Box>
-                    <Typography variant='body1'>{product?.description}</Typography>
+                      <Typography className={styles.pomTextField} variant='body1'>{product?.description}</Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                      }}
+                    >
                       { user?.role === 'admin' ?
-                        <Button onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
+                        <Button className={styles.potmSecondaryButton} onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
                         <></>
                       }
-                      <Button onClick={handleAddToCart}>Add to cart</Button>
+                      <Button className={styles.potmPrimaryButton} onClick={handleAddToCart}>Add to cart</Button>
                     </Box>
                   </Box>
                 </Box>

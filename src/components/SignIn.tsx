@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { Typography, Container, Button, TextField } from "@mui/material";
-import styles from '../styles/SignIn.module.css'
+import styles from '../styles/styles.module.css';
 
 import { AppDispatch } from '../redux/store';
 import { loginUser } from '../redux/slices/authSlice';

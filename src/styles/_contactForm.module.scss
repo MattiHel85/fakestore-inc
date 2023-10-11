@@ -1,0 +1,58 @@
+@use './variables/colors';
+
+.cfmContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin: auto;
+        .textField{
+            width: 80%;
+            margin: 5px auto;
+        }
+        .primaryButton {
+            background-color: colors.$primary-background-color;
+            color: white;
+            width: 150px;
+            margin: auto;
+            margin-bottom: 2em;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .75em;
+        }
+    }
+    .messageBox{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 60%;
+        margin: auto;
+        .messageHeader{
+            width: 80%;
+            margin: 1.5em auto;
+            text-align: center;
+        }
+        .messageBody{
+            width: 80%;
+            margin: 1em auto;
+        }
+        .secondaryButton {
+            background-color: colors.$update-background-color;
+            color: white;
+            min-width: 150px;
+            margin: auto;
+            margin-bottom: 2em;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .75em;
+        }
+    }
+}

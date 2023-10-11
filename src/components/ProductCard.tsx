@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ProductCardProps } from "../types/Product";
 
 import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
-import styles from '../styles/ProductCard.module.css'
+import styles from '../styles/styles.module.css'
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onAddToCart}) => {
 

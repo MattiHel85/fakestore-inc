@@ -14,7 +14,7 @@ const NavBar: React.FC = () => {
       <Box
         sx={{
           backgroundColor: 'rgb(0, 209, 255)',
-          height: '40px'
+          height: '50px'
         }}
       >
         <Box 
@@ -35,7 +35,7 @@ const NavBar: React.FC = () => {
                 fontWeight: 600,
                 mx: {xs: '1em', md:'5em'},
                 padding: {xs: '.75rem', md: '.5rem'},
-                fontSize: {xs: '12px', md: '18px'}
+                fontSize: {xs: '10px', md: '20px'}
               }}
             >
               {navItem.label}

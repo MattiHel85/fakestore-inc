@@ -4,23 +4,21 @@ import { useSelector } from 'react-redux'
 import { StyledEngineProvider } from '@mui/material'
 import { RootState } from './redux/slices/rootSlice'
 
-import Users from './components/Users'
-import AdminPanel from './components/AdminPanel'
-import SignIn from './components/SignIn'
-import SignUp from './components/SignUp'
-import SingleProduct from './components/SingleProduct'
-import Header from './components/Header'
-import Cart from './components/Cart'
-
-import debouncedHandleAddToCart from './utils/cartHelpers'
-// import Products from './components/Products'
-import SingleUser from './components/SingleUser'
-import ContactForm from './components/ContactForm'
+// imported pages 
 import LandingPage from './pages/LandingPage'
 import ProductsPage from './pages/ProductsPage'
+import SingleProductPage from './pages/SingleProductPage'
+import CheckoutPage from './pages/CheckoutPage'
+import SignInPage from './pages/SignInPage'
+import AlreadySignedInPage from './pages/AlreadySignedInPage'
+import SignUpPage from './pages/SignUpPage'
+import SingleUserPage from './pages/SingleUserPage'
+import ContactPage from './pages/ContactPage'
+import UsersPage from './pages/UsersPage'
+import AdminPage from './pages/AdminPage'
+import AccessDeniedPage from './pages/AccessDeniedPage'
 
 const App = () => {
-  const [productOfTheMonthId, setProductOfTheMonthId] = useState<number>()
   const user = useSelector((state: RootState) => state.auth.user);
 
   return (
@@ -30,24 +28,25 @@ const App = () => {
           <Routes>
 
             {/* Home route */}
-            <Route path='/' element={<LandingPage productOfTheMonthId={productOfTheMonthId} />} />
+            <Route path='/' element={<LandingPage />} />
+
             {/* product routes */}
             <Route path='/products' element={<ProductsPage />} />
-            <Route path='/products/:id' element={<SingleProduct setProductOfTheMonthId={setProductOfTheMonthId} onAddToCart={debouncedHandleAddToCart}/>} />
-            <Route path='/checkout' element={<><Header title='Checkout' />,<Cart/></>} />
+            <Route path='/products/:id' element={<SingleProductPage />} />
+            <Route path='/checkout' element={<CheckoutPage />} />
 
             {/* user routes  */}
-            <Route path='/signup' element={user ? <><Header title={`You're already signed in as user ${user.name}.`} />, <Header title='Log out in the top right corner if you wish to create a new account.'/></> : <SignUp />} />
-            <Route path='/signin' element={user ? <><Header title={`You're already signed in as user ${user.name}`} />, </> : <><Header title='Sign In' />,<SignIn /></>} />
-            <Route path='/users/:id' element={ <SingleUser />} />
+            <Route path='/signup' element={user ? <AlreadySignedInPage /> : <SignUpPage />} />
+            <Route path='/signin' element={user ? <AlreadySignedInPage /> : <SignInPage />} />
+            <Route path='/users/:id' element={ <SingleUserPage />} />
 
             {/* misc routes  */}
-            <Route path='/contact' element={ <ContactForm />} />
+            <Route path='/contact' element={ <ContactPage />} />
 
 
             {/* admin routes */}
-            <Route path='/users' element={ user?.role=== 'admin' ? <Users /> : <Header title='Access to users denied!'/>} />
-            <Route path='/admin' element={ user?.role=== 'admin' ? <AdminPanel /> : <Header title='Access to admin panel denied!'/>} />
+            <Route path='/users' element={ user?.role=== 'admin' ? <UsersPage /> : <AccessDeniedPage />} />
+            <Route path='/admin' element={ user?.role=== 'admin' ? <AdminPage /> : <AccessDeniedPage />} />
 
           </Routes>
         </Router> 

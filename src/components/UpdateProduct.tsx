@@ -7,7 +7,7 @@ import { fetchCategories } from '../redux/slices/categorySlice';
 import { Button, TextField, Select, MenuItem } from '@mui/material';
 import { ProductData } from '../types/Product';
 import { updateProductProps } from '../types/Product';
-import styles from '../styles/AddProduct.module.css'
+import styles from '../styles/styles.module.css'
 
 const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch();

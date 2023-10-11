@@ -4,7 +4,7 @@ import { Typography, Container, Box, ButtonGroup, Button } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
-import styles from '../styles/AdminPanel.module.css'
+import styles from '../styles/styles.module.css';
 
 import { RootState } from '../redux/slices/rootSlice';
 import Users from './Users';

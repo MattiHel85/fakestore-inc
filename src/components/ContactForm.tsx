@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Button, TextField, Box } from "@mui/material";
-import styles from '../styles/ContactForm.module.css'
-import Header from './Header';
+import styles from '../styles/styles.module.css';
 
 const ContactForm: React.FC = () => {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -36,10 +35,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <Container
-      className={styles.formContainer}
-    >
-      <Header title="Contact us" />
+    <Container className={styles.cfmContainer}>
       <form 
         onSubmit={handleSubmit}
         className={styles.form}

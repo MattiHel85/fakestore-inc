@@ -1,0 +1,389 @@
+.cfmContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px;
+}
+.cfmContainer .form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+}
+.cfmContainer .form .textField {
+  width: 80%;
+  margin: 5px auto;
+}
+.cfmContainer .form .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+.cfmContainer .messageBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  margin: auto;
+}
+.cfmContainer .messageBox .messageHeader {
+  width: 80%;
+  margin: 1.5em auto;
+  text-align: center;
+}
+.cfmContainer .messageBox .messageBody {
+  width: 80%;
+  margin: 1em auto;
+}
+.cfmContainer .messageBox .secondaryButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  min-width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.productForm {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  margin: auto;
+}
+.productForm .textField {
+  margin: 5px;
+}
+.productForm .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+
+.adminHeader {
+  text-align: center;
+  margin: 2.5em 0;
+}
+
+.adminContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3em;
+}
+.adminContainer .icon {
+  font-size: 10em;
+  color: rgb(0, 209, 255);
+}
+.adminContainer .icon :hover {
+  cursor: pointer;
+}
+.adminContainer .textField {
+  margin: 5px;
+}
+.adminContainer .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+
+.adminInnerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 2em;
+  border: 0.5em solid rgb(0, 209, 255);
+  border-radius: 25px;
+  padding: 3.5em;
+}
+.adminInnerContainer .containerHeader {
+  text-align: center;
+}
+.adminInnerContainer .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.adminInnerContainer .secondaryButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.adminInnerContainer .tertiaryButton {
+  background-color: rgb(85, 200, 85);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.adminInnerContainer .buttonGroup {
+  display: flex;
+  justify-content: center;
+  margin: 2em;
+}
+.adminInnerContainer .buttonGroup .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.adminInnerContainer .buttonGroup .secondaryButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.adminInnerContainer .buttonGroup .tertiaryButton {
+  background-color: rgb(85, 200, 85);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+
+.headerText {
+  text-align: center;
+  margin: 0.75em 0;
+  letter-spacing: 0.1em;
+}
+
+.potmContainer {
+  border: 2px solid rgb(0, 209, 255);
+  border-radius: 25px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 209, 255, 0.5);
+  padding: 2em;
+}
+.potmContainer .pomTextField {
+  width: 100%;
+  margin: 2em auto;
+  font-weight: 700;
+}
+.potmContainer .potmPrimaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  min-width: 10px;
+  margin: 2em auto;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+.potmContainer .potmSecondaryButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  min-width: 10px;
+  margin: 2em auto;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+.potmContainer .textNotInForm {
+  margin: 5px;
+  text-align: center;
+}
+.potmContainer .linkText {
+  text-decoration: none;
+  color: black;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.secondaryButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  min-width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.tertiaryButton {
+  background-color: rgb(85, 200, 85);
+  color: white;
+  min-width: 150px;
+  margin: auto;
+  margin-bottom: 2em;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+
+.textField {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 0.75em;
+}
+
+.productsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  padding-top: 5em;
+  text-align: center;
+}
+
+.signInContainer {
+  padding: 1.25em;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.signInContainer .signInForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+.signInContainer .signInForm .textField {
+  min-width: 50%;
+  margin: 0.75em auto;
+}
+.signInContainer .signInForm .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  min-width: 10em;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.signInContainer .textNotInForm {
+  margin: 5px;
+  text-align: center;
+}
+.signInContainer .linkText {
+  text-decoration: none;
+  color: black;
+}
+
+.userContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.userContainer .buttonBox {
+  width: 40%;
+  margin: 2em auto;
+  display: flex;
+  justify-content: space-around;
+}
+.userContainer .primaryButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+.userContainer .updateButton {
+  background-color: rgb(0, 160, 255);
+  color: white;
+  width: 150px;
+  margin: auto;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 25px;
+  padding: 0.5em;
+}
+
+.card {
+  min-height: 20em;
+  width: 30%;
+  margin: 1em auto;
+}
+
+.cardMedia {
+  min-height: 10em;
+  cursor: pointer;
+}
+
+.usersContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*# sourceMappingURL=styles.module.css.map */

@@ -5,7 +5,7 @@ import { AppDispatch } from '../redux/store';
 import { updateUser } from '../redux/slices/userSlice'; 
 import { UpdateUserProps } from '../types/User';
 import { User } from '../types/User';
-import styles from '../styles/SignIn.module.css'
+import styles from '../styles/styles.module.css';
 
 const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
   const [userData, setUserData] = useState<User>({

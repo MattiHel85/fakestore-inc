@@ -4,6 +4,7 @@ import { AppDispatch } from "../redux/store";
 
 export interface HeaderProps {
     title: string
+    body?: string | null
 }
 
 export interface HomeProps {

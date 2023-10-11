@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { UserCardProps } from "../types/User";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import styles from '../styles/UserCard.module.css'
+import styles from '../styles/styles.module.css'
 
 const UserCard: React.FC<UserCardProps> = ({ user}) => {
     const navigate = useNavigate()

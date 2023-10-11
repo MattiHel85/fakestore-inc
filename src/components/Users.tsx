@@ -8,7 +8,7 @@ import { AppDispatch } from '../redux/store';
 import UserCard from './UserCard';
 import { Container } from '@mui/system';
 import { RootState } from '../redux/slices/rootSlice';
-import styles from '../styles/Users.module.css'
+import styles from '../styles/styles.module.css'
 
 const Users: React.FC = () => {
   const {users,loading,error} = useSelector((state: RootState) => state.users)

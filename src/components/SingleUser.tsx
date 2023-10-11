@@ -7,7 +7,7 @@ import { RootState } from "../redux/slices/rootSlice";
 import UpdateUser from "./UpdateUser";
 import { Button, Container, Box } from "@mui/material";
 import UserCard from "./UserCard";
-import styles from '../styles/SingleUser.module.css'
+import styles from '../styles/styles.module.css'
 
 const SingleUser: React.FC = () => {
     const {id} = useParams();

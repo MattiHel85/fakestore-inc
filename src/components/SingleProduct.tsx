@@ -7,14 +7,15 @@ import { AppDispatch } from '../redux/store';
 import { fetchProductById } from "../redux/slices/productSlice";
 import { SingleProductProps } from "../types/Product";
 import UpdateProduct from "./UpdateProduct";
-import { ImageList, ImageListItem, Typography } from "@mui/material";
+import { ImageList, ImageListItem, Typography, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { deleteProduct } from "../redux/slices/productSlice";
-import styles from '../styles/ProductCard.module.css'
-import Container from "@mui/material/Container";
+import styles from '../styles/styles.module.css';
+import debouncedHandleAddToCart from '../utils/cartHelpers';
 
-const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, onAddToCart }) => {
+const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId }) => {
+
     const [openProductUpdateForm, setOpenProductUpdateForm] = useState(false)
     const [showDeleteButton, setShowDeleteButton] = useState(false)
 
@@ -58,7 +59,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId, o
 
     const handleAddToCart = () => {
         if (product) {
-            onAddToCart(product, items, dispatch);
+            debouncedHandleAddToCart(product, items, dispatch);
         }
     };
 

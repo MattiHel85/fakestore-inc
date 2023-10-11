@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Container, TextField, Button, MenuItem, FormControl, Box } from '@mui/material';
-import styles from '../styles/Products.module.css'
+import styles from '../styles/styles.module.css'
 
 import { RootState } from '../redux/slices/rootSlice';
 import { AppDispatch } from '../redux/store';

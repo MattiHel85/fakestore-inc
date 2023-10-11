@@ -1,0 +1,42 @@
+@use './variables/colors';
+
+.potmContainer {
+    border: 2px solid colors.$primary-background-color;
+    border-radius: 25px;
+    box-shadow: 0px 0px 15px 0px rgba(0, 209, 255, 0.5);
+    padding: 2em;
+        .pomTextField {
+            width: 100%;
+            margin: 2em auto;
+            font-weight: 700;
+        }
+        .potmPrimaryButton {
+            background-color: colors.$primary-background-color;
+            color: white;
+            min-width: 10px;
+            margin: 2em auto;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 25px;
+            padding: .75em;
+        }
+        .potmSecondaryButton {
+            background-color: colors.$update-background-color;
+            color: white;
+            min-width: 10px;
+            margin: 2em auto;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .75em;
+        }
+    .textNotInForm{
+        margin: 5px;
+        text-align: center;
+    }
+    .linkText{
+        text-decoration: none;
+        color: black;
+    }
+}
