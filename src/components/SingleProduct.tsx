@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../redux/slices/rootSlice";
 import { AppDispatch } from '../redux/store';
 import { fetchProductById } from "../redux/slices/productSlice";
-import { Product, SingleProductProps } from "../types/Product";
+import { fetchProductOfTheMonthById } from "../redux/slices/productOfTheMonthSlice";
+import { Product } from "../types/Product";
 import UpdateProduct from "./UpdateProduct";
 import { ImageList, Typography, Container } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -15,7 +16,7 @@ import styles from '../styles/styles.module.css';
 import debouncedHandleAddToCart from '../utils/cartHelpers';
 import Header from "./Header";
 
-const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId }) => {
+const SingleProduct: React.FC = () => {
     const [product, setProduct] = useState<Product | undefined>(undefined);
 
     const [openProductUpdateForm, setOpenProductUpdateForm] = useState(false)
@@ -61,8 +62,9 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId })
         navigate('/products')
     }
 
-    const handleSetProductOfTheMonthId = (productId: number) => {
-        setProductOfTheMonthId?.(productId)
+    const handleSetProductOfTheMonth = (productId: number) => {
+        dispatch(fetchProductOfTheMonthById(productId))
+        console.log('DONE!')
         navigate(`/`)
     }
 
@@ -197,7 +199,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ setProductOfTheMonthId })
                                     </>
                                 }
                                 <Button 
-                                    onClick={() => handleSetProductOfTheMonthId(Number(product?.id))} 
+                                    onClick={() => handleSetProductOfTheMonth(Number(product?.id))} 
                                     className={styles.potmButton}
                                 >
                                         Make product of month

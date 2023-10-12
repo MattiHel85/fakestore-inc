@@ -1,26 +1,19 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { AppDispatch } from '../redux/store';
-import { fetchProductById } from '../redux/slices/productSlice';
-import { removeProductOfTheMonth } from '../redux/slices/productSlice';
+import { removeProductOfTheMonth } from '../redux/slices/productOfTheMonthSlice';
 import debouncedHandleAddToCart from '../utils/cartHelpers';
 import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Box, Button } from "@mui/material"
-import { HomeProps } from '../types/types';
 import Header from './Header';
 import styles from '../styles/styles.module.css'
 
-const Home: React.FC<HomeProps> = ( {productOfTheMonthId} ) => {
+const Home: React.FC = ( ) => {
   const dispatch: AppDispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.cart);
-  const product = useSelector((state: RootState) => state.products.product)
+  const product = useSelector((state: RootState) => state.productOfTheMonth.productOfTheMonth)
   const user = useSelector((state: RootState) => state.auth.user)
   
-  useEffect(() => {
-    if (productOfTheMonthId) {
-        dispatch(fetchProductById(productOfTheMonthId));
-    }
-  }, [dispatch, productOfTheMonthId]);
 
   const handleAddToCart = () => {
     product && debouncedHandleAddToCart(product, items, dispatch)

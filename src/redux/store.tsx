@@ -11,7 +11,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unk
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['cart', 'auth']
+    whitelist: ['cart', 'auth', 'productOfTheMonth']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

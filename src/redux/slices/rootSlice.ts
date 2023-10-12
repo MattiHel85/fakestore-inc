@@ -1,17 +1,19 @@
 import { combineReducers } from 'redux'
 
-import productReducer from './productSlice'
-import userReducer from './userSlice'
-import categoryReducer from './categorySlice'
-import cartReducer from './cartSlice'
-import authReducer from './authSlice'
+import productSlice from './productSlice'
+import userSlice from './userSlice'
+import categorySlice from './categorySlice'
+import cartSlice from './cartSlice'
+import authSlice from './authSlice'
+import productOfTheMonthSlice from './productOfTheMonthSlice'
 
 export const rootReducer = combineReducers({
-    products: productReducer,
-    users: userReducer,
-    categories: categoryReducer,
-    cart: cartReducer,
-    auth: authReducer
+    products: productSlice,
+    productOfTheMonth: productOfTheMonthSlice,
+    users: userSlice,
+    categories: categorySlice,
+    cart: cartSlice,
+    auth: authSlice
 })
 
 export type RootState = ReturnType<typeof rootReducer>

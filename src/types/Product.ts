@@ -19,8 +19,12 @@ export interface Product {
 }
 
 export interface ProductState {
-  product: Product | null
   products: Product[]
+  loading: boolean
+  error: string | null
+}
+export interface ProductOfTheMonthState {
+  productOfTheMonth: Product | null
   loading: boolean
   error: string | null
 }
@@ -30,10 +34,6 @@ export interface ProductCardProps {
   items?: CartItem[];
   dispatch?: AppDispatch; 
   onAddToCart?: (product: Product, items?: CartItem[], dispatch?: AppDispatch) => void; 
-}
-
-export interface SingleProductProps {
-  setProductOfTheMonthId?: (productId: number) => void;
 }
 
 export interface AddProductData {

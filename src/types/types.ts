@@ -3,7 +3,3 @@ export interface HeaderProps {
     body?: string | null
 }
 
-export interface HomeProps {
-    productOfTheMonthId: number | undefined;
-    setProductOfTheMonthId?: (productId: number) => void;
-}

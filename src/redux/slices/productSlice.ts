@@ -3,7 +3,6 @@ import { Product, AddProductData, ProductData, ProductState } from '../../types/
 
 export const initialState: ProductState = {
   products: [],
-  product: null,
   loading: false,
   error: null
 }
@@ -23,7 +22,7 @@ export const fetchProductById = createAsyncThunk('products/fetchProductById', as
   try {
     const res = await fetch(`https://api.escuelajs.co/api/v1/products/${productId}`)
     const data = await res.json()
-    return data as Product
+    return data as Product[]
   } catch (err) {
       throw err;
   }
@@ -123,11 +122,7 @@ export const deleteProduct = createAsyncThunk('products/deleteProduct', async (p
 export const productSlice = createSlice({
     name: 'products',
     initialState,
-    reducers: {
-      removeProductOfTheMonth: (state) => {
-        state.product = null
-      }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
           .addCase(fetchProducts.pending, (state) => {
@@ -173,12 +168,12 @@ export const productSlice = createSlice({
         })
         .addCase(fetchProductById.fulfilled, (state, action) => {
             state.loading = false;
-            state.product = action.payload;
+            state.products = action.payload;
             state.error = null;
         })
         .addCase(fetchProductById.rejected, (state, action) => {
             state.loading = false;
-            state.product = null;
+            state.products = [];
             state.error = action.error.message || 'An error occurred.';
         })
         .addCase(createProduct.pending, (state) => {
@@ -229,5 +224,5 @@ export const productSlice = createSlice({
       
 })
 
-export const { removeProductOfTheMonth } = productSlice.actions;
+// export const { removeProductOfTheMonth } = productSlice.actions;
 export default productSlice.reducer
