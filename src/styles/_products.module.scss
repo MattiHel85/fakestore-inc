@@ -49,10 +49,37 @@
 
 .productsContainer {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     width: 80%;
     margin: auto;
     padding-top: 5em;
     text-align: center;
+    @media (max-width: 600px){
+        width: 90%;
+        flex-direction: column;
+    }
+    .productCard {
+        min-height: 8em;
+        width: 30%;
+        margin: 1em auto;
+        @media (max-width: 600px){
+            width: 90%;
+        }
+        .primaryCardButton {
+            background-color: colors.$primary-background-color;
+            color: white;
+            width: 150px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .75em;
+            @media (max-width: 600px){
+                width: 120px;
+                font-size: 12px;
+                padding: 1em;
+            }
+        }
+    }
 }

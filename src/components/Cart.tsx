@@ -25,6 +25,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { RootState } from '../redux/slices/rootSlice';
 import { increaseQuantity, decreaseQuantity, removeFromCart, clearCart } from '../redux/slices/cartSlice';
 import { AppDispatch } from '../redux/store';
+import { CartItem } from '../types/Cart';
 
 const Cart: React.FC = () => {
 
@@ -47,29 +48,28 @@ const Cart: React.FC = () => {
     
   const handleBrowse = () => {
     navigate('/products')
-    window.location.reload()
   }
 
   return (
-    <Container>
+    <>
         {items.length > 0 && (
                 <>
                   <TableContainer>
                       <Table>
                         <TableHead>
                           <TableRow>
-                            <TableCell sx={{ textAlign: 'center' }} >Decrease Quantity</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }} >Increase Quantity</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }} >Product Name</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }} >Price</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }} >Quantity</TableCell>
-                            <TableCell sx={{ textAlign: 'center' }} >Remove From Cart</TableCell>
+                            <TableCell sx={{ textAlign: 'center'}} ><RemoveIcon/></TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} ><AddIcon /></TableCell>
+                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >Name</TableCell>
+                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >€</TableCell>
+                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >Qty</TableCell>
+                            <TableCell sx={{ textAlign: 'center' }} ><DeleteIcon /></TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {items.map((item: any) => (
+                          {items.map((item: CartItem) => (
                             <TableRow key={item.id}>
-                              <TableCell sx={{ textAlign: 'center' }}>
+                              <TableCell sx={{ textAlign: 'center'}}>
                                 <IconButton onClick={() => handleDecreaseQuantity(item.id)}>
                                   <RemoveIcon />
                                 </IconButton>
@@ -81,7 +81,7 @@ const Cart: React.FC = () => {
                               </TableCell>
                               <TableCell sx={{ textAlign: 'center' }}>{item.name}</TableCell>
                               <TableCell sx={{ textAlign: 'center' }}>€{item.price}</TableCell>
-                              <TableCell sx={{ textAlign: 'center' }}>{item.quantity}</TableCell>
+                              <TableCell sx={{ textAlign: 'center'}}>{item.quantity}</TableCell>
                               <TableCell sx={{ textAlign: 'center' }}>
                                 <IconButton onClick={() => handleRemoveFromCart(item.id)}>
                                   <DeleteIcon />
@@ -95,7 +95,8 @@ const Cart: React.FC = () => {
                   <Box 
                       sx={{
                           display:'flex',
-                          justifyContent: 'space-between'
+                          justifyContent: 'space-between',
+                          marginTop: '1.5em'
                       }}
                   >
                       <Typography variant='body2'>
@@ -132,7 +133,7 @@ const Cart: React.FC = () => {
             </Container>
         )}
 
-    </ Container>
+    </>
   )
 }
 

@@ -10,7 +10,7 @@ const Header: React.FC<HeaderProps> = ({ title, body }) => {
       <Typography variant='h4' className={styles.headerText}>
         {title}
       </Typography>
-      <Typography variant='h6' className={styles.headerText}>
+      <Typography variant='h6' className={styles.headerBody}>
         {body}
       </Typography>
     </>

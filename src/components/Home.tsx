@@ -33,85 +33,40 @@ const Home: React.FC<HomeProps> = ( {productOfTheMonthId} ) => {
 
   return (
     <>
-      <Container
-        sx={{
-          display:'flex',
-          flexDirection: 'column',
-          padding: '2.75em'
-        }}
-      >
         {
           product ? 
             <>
             <Header title='Product of the month'/>
               <Container className={styles.potmContainer}>              
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <img style={{width: '300px', borderRadius: '25px'}} src={product?.images?.[0]} 
+                <Box className={styles.potmBox} >
+                  <img 
+                    className={styles.potmImage} 
+                    src={product?.images?.[0]} 
                     alt={``} 
                   />
                   <Box
-                    sx={{
-                      width: '500px',
-                      margin: 'auto',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-around'
-                    }}
+                    className={styles.potmBoxOne}
                   >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      <Typography  variant='h4'>€{product?.price}</Typography>
-                      <Typography  variant='h4'>{product?.title}</Typography>
+                    <Box className={styles.potmBoxTwo}>
+                    <Typography className={styles.potmTextFieldTwo}>{product?.title}</Typography>
+                      <Typography className={styles.potmTextFieldTwo}>€{product?.price}</Typography>
                     </Box>
-                    <Box>
-                      <Typography className={styles.pomTextField} variant='body1'>{product?.description}</Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      { user?.role === 'admin' ?
-                        <Button className={styles.potmSecondaryButton} onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
-                        <></>
-                      }
-                      <Button className={styles.potmPrimaryButton} onClick={handleAddToCart}>Add to cart</Button>
+                    <Box className={styles.potmBoxThree}>
+                      <Typography className={styles.potmTextFieldThree}>{product?.description}</Typography>
+                      
+                      <Box className={styles.potmBoxFour}>
+                        { user?.role === 'admin' ?
+                          <Button className={styles.potmSecondaryButton} onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
+                          <></>
+                        }
+                        <Button className={styles.potmPrimaryButton} onClick={handleAddToCart}>Add to cart</Button>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
               </Container>
-            </> : 
-            <>
-              <Typography
-              variant="h6"
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center', 
-                fontFamily: 'monospace',
-                fontWeight: 900,
-                letterSpacing: '.1rem',
-                fontSize: {xs: '1.25rem', md: '1.5rem'},
-                color: 'black',
-                textDecoration: 'none'
-              }}
-              > 
-                Welcome to Fake Shop Inc!
-              </Typography>
-            </>
+            </> : <Header title='Welcome to FakeShop Inc!'/>
         }
-      </Container>
     </>
   )
 }

@@ -200,46 +200,153 @@
   margin: 0.75em 0;
   letter-spacing: 0.1em;
 }
+@media (max-width: 600px) {
+  .headerText {
+    font-size: 1.5em;
+  }
+}
+
+.headerBody {
+  text-align: center;
+  margin: 0.75em 0;
+  letter-spacing: 0.1em;
+}
+@media (max-width: 600px) {
+  .headerBody {
+    margin: 2.5em 0;
+    font-size: 1em;
+  }
+}
 
 .potmContainer {
+  width: 80%;
+  margin: 2em auto;
   border: 2px solid rgb(0, 209, 255);
   border-radius: 25px;
   box-shadow: 0px 0px 15px 0px rgba(0, 209, 255, 0.5);
   padding: 2em;
 }
-.potmContainer .pomTextField {
-  width: 100%;
-  margin: 2em auto;
-  font-weight: 700;
+@media (max-width: 600px) {
+  .potmContainer {
+    padding: 0.25em;
+  }
 }
-.potmContainer .potmPrimaryButton {
+.potmContainer .potmBox {
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox {
+    flex-direction: column;
+  }
+}
+.potmContainer .potmBox .potmImage {
+  width: 40%;
+  height: auto;
+  border-radius: 25px;
+  margin: 2.5em auto;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmImage {
+    width: 75%;
+  }
+}
+.potmContainer .potmBox .potmBoxOne {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3em;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne {
+    padding: 1.5em;
+  }
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxTwo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne .potmBoxTwo {
+    flex-direction: column;
+  }
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxTwo .potmTextFieldTwo {
+  font-size: 1.2em;
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne .potmBoxTwo .potmTextFieldTwo {
+    font-size: 1em;
+    margin: 0.25em 0;
+  }
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxThree {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxThree .potmTextFieldThree {
+  font-size: 1em;
+  width: 100%;
+  margin: 1em 0;
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne .potmBoxThree .potmTextFieldThree {
+    flex-wrap: wrap;
+    width: 80%;
+  }
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxThree .potmBoxFour {
+  width: 80%;
+  display: flex;
+}
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne .potmBoxThree .potmBoxFour {
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+  }
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxThree .potmBoxFour .potmPrimaryButton {
   background-color: rgb(0, 209, 255);
   color: white;
   min-width: 10px;
-  margin: 2em auto;
+  margin: 0 auto;
   font-weight: 600;
   font-size: 15px;
   border-radius: 25px;
   padding: 0.75em;
 }
-.potmContainer .potmSecondaryButton {
-  background-color: rgb(0, 160, 255);
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne .potmBoxThree .potmBoxFour .potmPrimaryButton {
+    font-size: 10px;
+    width: 45%;
+    margin: 0 auto;
+  }
+}
+.potmContainer .potmBox .potmBoxOne .potmBoxThree .potmBoxFour .potmSecondaryButton {
+  background-color: rgb(255, 50, 50);
   color: white;
   min-width: 10px;
-  margin: 2em auto;
+  margin: 0 auto;
   font-weight: 600;
   font-size: 15px;
   border: none;
   border-radius: 25px;
   padding: 0.75em;
 }
-.potmContainer .textNotInForm {
-  margin: 5px;
-  text-align: center;
-}
-.potmContainer .linkText {
-  text-decoration: none;
-  color: black;
+@media (max-width: 600px) {
+  .potmContainer .potmBox .potmBoxOne .potmBoxThree .potmBoxFour .potmSecondaryButton {
+    font-size: 10px;
+    width: 45%;
+    margin: 0 auto;
+  }
 }
 
 .form {
@@ -295,12 +402,45 @@
 
 .productsContainer {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   width: 80%;
   margin: auto;
   padding-top: 5em;
   text-align: center;
+}
+@media (max-width: 600px) {
+  .productsContainer {
+    width: 90%;
+    flex-direction: column;
+  }
+}
+.productsContainer .productCard {
+  min-height: 8em;
+  width: 30%;
+  margin: 1em auto;
+}
+@media (max-width: 600px) {
+  .productsContainer .productCard {
+    width: 90%;
+  }
+}
+.productsContainer .productCard .primaryCardButton {
+  background-color: rgb(0, 209, 255);
+  color: white;
+  width: 150px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 25px;
+  padding: 0.75em;
+}
+@media (max-width: 600px) {
+  .productsContainer .productCard .primaryCardButton {
+    width: 120px;
+    font-size: 12px;
+    padding: 1em;
+  }
 }
 
 .signInContainer {

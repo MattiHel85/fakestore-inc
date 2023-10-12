@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
 
     return(
         <>
-            <Card key={product.id} sx={{minHeight: '40em', width: '30%', margin: 'auto', marginTop: '2em'}}>
+            <Card className={styles.productCard} key={product.id}>
                 <CardMedia 
                     onClick={navigateToProduct}
                     sx={{
@@ -55,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
 
                     <Button 
                         onClick={handleAddToCart} 
-                        className={styles.cardButton}
+                        className={styles.primaryCardButton}
                         size='large'>
                             Add to cart
                     </Button>
