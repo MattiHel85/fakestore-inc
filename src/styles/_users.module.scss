@@ -1,4 +1,14 @@
-@use './variables/colors';
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    .textField {
+        width: 50%;
+        margin: 1em auto;
+        @media (max-width: 600px){
+            width: 80%;
+        }
+    }
+}
 
 .usersContainer {
     display: flex;

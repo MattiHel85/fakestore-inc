@@ -4,49 +4,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    .textField {
+        width: 40%;
+        margin: auto;
+        margin-bottom: .75em;
+        @media (max-width: 600px){
+            width: 75%;
+        }
+    }
 }
-.primaryButton {
-    background-color: colors.$primary-background-color;
-    color: white;
-    width: 150px;
-    margin: auto;
-    margin-bottom: 2em;
-    font-weight: 600;
-    font-size: 15px;
-    border: none;
-    border-radius: 25px;
-    padding: .75em;
-}
-.secondaryButton {
-    background-color: colors.$update-background-color;
-    color: white;
-    min-width: 150px;
-    margin: auto;
-    margin-bottom: 2em;
-    font-weight: 600;
-    font-size: 15px;
-    border: none;
-    border-radius: 25px;
-    padding: .75em;
-}
-.tertiaryButton {
-    background-color: colors.$confirm-background-color;
-    color: white;
-    min-width: 150px;
-    margin: auto;
-    margin-bottom: 2em;
-    font-weight: 600;
-    font-size: 15px;
-    border: none;
-    border-radius: 25px;
-    padding: .75em;
-}
-.textField {
-    width: 50%;
-    margin: auto;
-    margin-bottom: .75em;
-}
-
 .productsContainer {
     display: flex;
     justify-content: center;
@@ -56,15 +22,31 @@
     padding-top: 5em;
     text-align: center;
     @media (max-width: 600px){
-        width: 90%;
+        width: 100%;
         flex-direction: column;
+    }
+    .searchButton {
+        background-color: colors.$update-background-color;
+        color: white;
+        width: 25%;
+        margin: auto;
+        margin-bottom: 2em;
+        font-weight: 600;
+        font-size: 15px;
+        border: none;
+        border-radius: 25px;
+        padding: .75em;
+        @media (max-width: 600px){
+            width: 50%;
+            flex-direction: column;
+        }
     }
     .productCard {
         min-height: 8em;
         width: 30%;
         margin: 1em auto;
         @media (max-width: 600px){
-            width: 90%;
+            width: 100%;
         }
         .primaryCardButton {
             background-color: colors.$primary-background-color;
@@ -82,4 +64,140 @@
             }
         }
     }
+}
+
+.adminButtonsBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 5em;
+    .adminButtons{
+        display: flex;
+        @media (max-width: 600px){
+            flex-direction: column;
+        }
+        .updateButton {
+            background-color: colors.$update-background-color;
+            color: white;
+            width: 150px;
+            margin: auto;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .5em;
+            @media (max-width: 600px){
+                width: 50%;
+                // font-size: 10px;
+                margin-bottom: 1em;
+            }
+        }
+        .hideDeleteButton {
+            background-color: colors.$hide-delete-background-color;
+            color: white;
+            width: 150px;
+            margin: auto;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .5em;
+            @media (max-width: 600px){
+                width: 50%;
+                // font-size: 10px;
+                margin-bottom: 1em;
+            }
+        }
+        .potmButton {
+            background-color: colors.$confirm-background-color;
+            color: white;
+            width: 240px;
+            margin: auto;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .5em;
+            @media (max-width: 600px){
+                width: 50%;
+                font-size: 12px;
+                padding: 1em;
+                margin-bottom: 1em;
+            }
+        }
+        .cardDeleteButton {
+            background-color: colors.$delete-background-color;
+            color: white;
+            width: 150px;
+            margin: auto;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .5em;
+            @media (max-width: 600px){
+                width: 50%;
+                // font-size: 10px;
+                margin-bottom: 1em;
+            }
+        }
+        .doneButton {
+            background-color: colors.$hide-delete-background-color;
+            color: white;
+            width: 150px;
+            margin: auto;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            border-radius: 25px;
+            padding: .5em;
+            @media (max-width: 600px){
+                width: 50%;
+                margin-bottom: 1em;
+            }
+        }
+    }
+    
+}
+.primaryButton {
+    background-color: colors.$primary-background-color;
+    color: white;
+    width: 150px;
+    margin: auto;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: .5em;
+    @media (max-width: 600px){
+        width: 33%;
+        margin-bottom: 1em;
+    }
+}
+
+.secondaryButton {
+    background-color: colors.$update-background-color;
+    color: white;
+    width: 150px;
+    margin: auto;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: .5em;
+    @media (max-width: 600px){
+        width: 33%;
+        margin-bottom: 1em;
+    }
+}
+
+.productImages{
+    width: 20em;
+    border-radius: 25px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 2em;
 }

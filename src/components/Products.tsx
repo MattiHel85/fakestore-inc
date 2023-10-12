@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Container, TextField, Button, MenuItem, FormControl, Box } from '@mui/material';
+import { Container, TextField, Button, MenuItem, FormControl, Box, Pagination } from '@mui/material';
 import styles from '../styles/styles.module.css'
 
 import { RootState } from '../redux/slices/rootSlice';
@@ -61,10 +61,30 @@ const Products: React.FC = () => {
     (maxPrice === 0 || filteredProduct.price <= maxPrice)
   );
 
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5); // Number of items to display per page
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  // Calculate the index of the first and last item to display based on the current page and items per page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Calculate the total number of pages based on the filtered products and items per page
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleItemsPerPageChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setItemsPerPage(event.target.value as number);
+    setCurrentPage(1); // Reset to the first page when changing items per page
+  };
+
   return (
     <>
       <Box className={styles.productsContainer}>
-        <Button onClick={handleShowSearch} className={styles.secondaryButton}> { !showSearchForm ? 'Open Search' : 'Close Search'}</Button>
+        <Button onClick={handleShowSearch} className={styles.searchButton}> { !showSearchForm ? 'Open Search' : 'Close Search'}</Button>
       </Box>
       {
         showSearchForm && 
@@ -107,15 +127,36 @@ const Products: React.FC = () => {
             onChange={handleMaxPriceChange}
             className={styles.textField}
           />
+          <TextField
+            select
+            label="Items Per Page"
+            value={itemsPerPage}
+            onChange={handleItemsPerPageChange}
+            className={styles.textField}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+          </TextField>
           <br />
           {/* <Button onClick={handleSearchByPrice} className={styles.secondaryButton}>Search by Price</ Button> */}
         </FormControl>
       }
       <Container className={styles.productsContainer}>
-        {filteredProducts.map(product => (
+        {currentItems.map(product => (
           <ProductCard key={product.id} product={product} items={items} dispatch={dispatch} onAddToCart={debouncedHandleAddToCart} />
         ))}
       </Container>
+      {totalPages > 1 && (
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            variant="outlined"
+            shape="rounded"
+            className={styles.pagination}
+          />
+      )}
     </>
     
   );

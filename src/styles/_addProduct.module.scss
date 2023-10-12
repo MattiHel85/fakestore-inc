@@ -7,17 +7,30 @@
     justify-content: center;
     width: 35%;
     margin: auto;
+    @media (max-width: 600px){
+        width: 80%;
+        margin-bottom: 1em;
+    }
     .textField {
         margin: 5px;
+        @media (max-width: 600px){
+            width: 100%;
+            margin-bottom: 1em;
+        }
     }
     .primaryButton {
         background-color: colors.$primary-background-color;
         color: white;
-        width: 150px;
-        margin: auto;
+        width: 40%;
+        margin: 1em auto;
         font-weight: 600;
         font-size: 15px;
+        border: none;
         border-radius: 25px;
         padding: .5em;
+        @media (max-width: 600px){
+            width: 60%;
+            margin-bottom: 1em;
+        }
     }
 }

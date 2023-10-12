@@ -118,21 +118,21 @@ const AdminPanel: React.FC = () => {
             <Typography variant='h5' className={styles.containerHeader}>What do you want to do?</Typography>
           
             <ButtonGroup className={styles.buttonGroup}>
-              <Button onClick={() => setViewCurrentUser(true)} className={styles.primaryButton}>View My Info</Button>
-              <Button onClick={() => setUpdateCurrentUser(true)} className={styles.secondaryButton}>Update My Info</Button>
+              <Button onClick={() => setViewCurrentUser(true)} className={styles.primaryButton}>View profile</Button>
+              <Button onClick={() => setUpdateCurrentUser(true)} className={styles.secondaryButton}>Update</Button>
               <Button onClick={() => setChooseCurrentUser(false)} className={styles.tertiaryButton}>Done</Button>
             </ButtonGroup>
             
             { viewCurrentUser && 
               <>
-                <Button onClick={() => setViewCurrentUser(false)} className={styles.tertiaryButton}>Close Info</Button>, 
+                <Button onClick={() => setViewCurrentUser(false)} className={styles.closeButton}>Close Info</Button>, 
                 <UserCard user={user}/>
               </>
             }
 
             { updateCurrentUser && 
               <>
-                <Button onClick={() => setUpdateCurrentUser(false)} className={styles.tertiaryButton}>Close Info</Button>,
+                <Button onClick={() => setUpdateCurrentUser(false)} className={styles.closeButton}>Close form</Button>,
                 <UpdateUser user={user} />
               </>
             }

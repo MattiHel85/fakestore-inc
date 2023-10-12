@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Typography, Container, Button, TextField } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
@@ -11,10 +11,13 @@ const SignUp: React.FC = () => {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     avatar: '',
     role: 'customer',
   });
+  const [message, setMessage] = useState<string>(''); 
 
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const adminCode = 'makeMeAdmin'
 
@@ -39,11 +42,21 @@ const SignUp: React.FC = () => {
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    
+    if (userData.password !== userData.confirmPassword) {
+      setMessage('Passwords do not match. Please try again.');
+      return;
+    }
+
     dispatch(registerUser(userData));
+    setMessage('');
+    navigate('/signin')
   };
 
   return (
     <Container className={styles.signInContainer}>
+      {message && <Typography className={styles.message} variant="body2">{message}</Typography>}
       <form onSubmit={handleSignUp} className={styles.signInForm}>
         <TextField
           label="Name"
@@ -64,6 +77,14 @@ const SignUp: React.FC = () => {
           type="password"
           name="password"
           value={userData.password}
+          onChange={handleInputChange}
+          className={styles.textField}
+        />
+        <TextField
+          label="Confirm Password"
+          type="password"
+          name="confirmPassword"
+          value={userData.confirmPassword}
           onChange={handleInputChange}
           className={styles.textField}
         />

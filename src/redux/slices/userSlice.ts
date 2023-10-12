@@ -5,7 +5,6 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     try {
         const res = await fetch('https://api.escuelajs.co/api/v1/users')
         const data = await res.json()
-        console.log('Data Check: ', data)
         return data as User[]
     } catch (err) {
         throw err;

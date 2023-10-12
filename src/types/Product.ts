@@ -33,7 +33,6 @@ export interface ProductCardProps {
 }
 
 export interface SingleProductProps {
-  // onAddToCart: (product: Product, items: CartItem[], dispatch: AppDispatch) => void; 
   setProductOfTheMonthId?: (productId: number) => void;
 }
 

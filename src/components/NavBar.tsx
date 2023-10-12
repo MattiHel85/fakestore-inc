@@ -34,8 +34,8 @@ const NavBar: React.FC = () => {
                 color: 'white',
                 fontWeight: 600,
                 mx: {xs: '1em', md:'5em'},
-                padding: {xs: '.75rem', md: '.5rem'},
-                fontSize: {xs: '10px', md: '20px'}
+                padding: {xs: '1.75em', md: '0.5em'},
+                fontSize: {xs: '9px', md: '1em'}
               }}
             >
               {navItem.label}

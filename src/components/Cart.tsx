@@ -113,8 +113,8 @@ const Cart: React.FC = () => {
 
         {items.length === 0 && (
             <Container sx={{
-              padding: '1.75rem', 
-              width: '30rem',
+              padding: '2em', 
+              // width: '100%',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center'
@@ -123,8 +123,9 @@ const Cart: React.FC = () => {
               <Typography variant='h5' sx={{marginTop: '1em', textAlign: 'center'}}>Cart Empty</Typography>
               <Typography variant='body1' sx={{marginTop: '1em', textAlign: 'center'}}>You've not added anything yet!</Typography>
                 <Button sx={{
-                  width: '50%',
-                  margin: 'auto'
+                  width: {xs:'80%', md: '100%'},
+                  margin: 'auto',
+                  fontSize: {xs: '12px', md: '15px'}
                 }} 
                 onClick={handleBrowse}
                 >

@@ -97,7 +97,7 @@ function TopAppBar() {
               fontFamily: 'monospace',
               fontWeight: 900,
               letterSpacing: '.1rem',
-              fontSize: {xs: '1.25rem', md: '1.5rem'},
+              fontSize: {xs: '1.5em', md: '2.25em'},
               color: 'black',
               textDecoration: 'none',
               flexGrow: 1, // Expand to fill available space
@@ -111,11 +111,9 @@ function TopAppBar() {
             { isAuthenticated ? (
               <Tooltip title="username">
                 <>
-                    <IconButton onClick={handleOpenNavMenu}>                    
-                      <IconButton sx={{ p: 0, color: 'black', mr: '0.05em' }}>
-                        <PersonIcon sx={{ fontSize: '1.75em'}} />
-                        <Typography sx={{mr: '.25em',fontSize: {xs: '1rem', md: '1.5rem'}}} >Hello, {user?.name }</Typography>
-                      </IconButton>
+                    <IconButton onClick={handleOpenNavMenu} sx={{ p: 0, color: 'black', mr: '0.05em' }}>
+                        <PersonIcon sx={{ fontSize: {xs: '1em', md: '1.5em'}}} />
+                        <Typography sx={{mr: '.25em',fontSize: {xs: '.5em', md: '.75em'}}} >Hello, {user?.name }</Typography>
                     </IconButton>
                     <Menu
                       sx={{ mt: '45px'}}
@@ -232,9 +230,9 @@ function TopAppBar() {
               onClose={handleCloseCartMenu}
             >
               <Cart />
-              <Link style={{ textDecoration: 'none', color: 'rgb(0, 209, 255', fontWeight: 700, display: 'flex', justifyContent: 'flex-end', padding: '0.75em'}} to={'/checkout'}>
+              { items.length > 0 && <Link style={{ textDecoration: 'none', color: 'rgb(0, 209, 255', fontWeight: 700, display: 'flex', justifyContent: 'flex-end', padding: '0.75em'}} to={'/checkout'}>
                 <Typography variant='body1'>Go to checkout</Typography>
-              </Link>
+              </Link>}
             </Menu>
             
           </Box>

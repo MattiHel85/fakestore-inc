@@ -5,6 +5,17 @@
     margin: auto;
     display: flex;
     flex-direction: column;
+    .message {
+        font-size: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 2em;
+        color: red;
+        font-weight: 700;
+        @media (max-width: 600px){
+            font-size: 12px;
+        }
+    }
     .signInForm{
         display: flex;
         flex-direction: column;

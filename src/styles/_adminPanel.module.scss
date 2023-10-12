@@ -3,20 +3,31 @@
 .adminHeader {
     text-align: center;
     margin: 2.5em 0;
+    @media (max-width: 600px){
+        font-size: 35px;
+    }
 }
 
 .adminContainer {
     padding: 10px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 3em;
+    @media (max-width: 600px){
+        padding: 15px;
+    }
 
     .icon {
         font-size: 10em;
         color: colors.$primary-background-color;
+        @media (max-width: 600px){
+            font-size: 5em;
+        }
         :hover{
             cursor: pointer;
         }
+
     }
 
     
@@ -40,47 +51,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 70%;
+    width: 90%;
     margin: auto;
     margin-bottom: 2em;
     border: .5em solid colors.$primary-background-color;
     border-radius: 25px;
-    padding: 3.5em;
+    padding: 10px;
+    @media (max-width: 600px){
+        padding: 10px;
+    }
     .containerHeader {
         text-align: center;
-    }
-    .primaryButton {
-        background-color: colors.$primary-background-color;
-        color: white;
-        width: 150px;
-        margin: auto;
-        font-weight: 600;
-        font-size: 15px;
-        border: none;
-        border-radius: 25px;
-        padding: .5em;
-    }
-    .secondaryButton {
-        background-color: colors.$update-background-color;
-        color: white;
-        width: 150px;
-        margin: auto;
-        font-weight: 600;
-        font-size: 15px;
-        border: none;
-        border-radius: 25px;
-        padding: .5em;
-    }
-    .tertiaryButton {
-        background-color: colors.$confirm-background-color;
-        color: white;
-        width: 150px;
-        margin: auto;
-        font-weight: 600;
-        font-size: 15px;
-        border: none;
-        border-radius: 25px;
-        padding: .5em;
+        @media (max-width: 600px){
+            font-size: 20px;
+            padding: 10px;
+        }
     }
     .buttonGroup {
         display: flex;
@@ -96,6 +81,11 @@
             border: none;
             border-radius: 25px;
             padding: .5em;
+            @media (max-width: 600px){
+                width: 33%;
+                margin-bottom: 1em;
+                font-size: 10px;
+            }
         }
         .secondaryButton {
             background-color: colors.$update-background-color;
@@ -107,6 +97,11 @@
             border: none;
             border-radius: 25px;
             padding: .5em;
+            @media (max-width: 600px){
+                width: 33%;
+                margin-bottom: 1em;
+                font-size: 10px;
+            }
         }
         .tertiaryButton {
             background-color: colors.$confirm-background-color;
@@ -118,6 +113,27 @@
             border: none;
             border-radius: 25px;
             padding: .5em;
+            @media (max-width: 600px){
+                width: 33%;
+                margin-bottom: 1em;
+                font-size: 10px;
+            }
+        }
+    }
+    .closeButton {
+        background-color: colors.$confirm-background-color;
+        color: white;
+        width: 150px;
+        margin: auto;
+        font-weight: 600;
+        font-size: 15px;
+        border: none;
+        border-radius: 25px;
+        padding: .5em;
+        @media (max-width: 600px){
+            width: 33%;
+            margin-bottom: 1em;
+            font-size: 10px;
         }
     }
 }
