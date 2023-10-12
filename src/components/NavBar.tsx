@@ -14,7 +14,7 @@ const NavBar: React.FC = () => {
       <Box
         sx={{
           backgroundColor: 'rgb(0, 209, 255)',
-          height: '50px'
+          height: '40px'
         }}
       >
         <Box 
