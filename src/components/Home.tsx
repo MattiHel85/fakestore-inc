@@ -8,7 +8,12 @@ import { Typography, Container, Box, Button } from "@mui/material"
 import Header from './Header';
 import styles from '../styles/styles.module.css'
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
+
 const Home: React.FC = ( ) => {
+  const { language } = useLanguage()
   const dispatch: AppDispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.cart);
   const product = useSelector((state: RootState) => state.productOfTheMonth.productOfTheMonth)
@@ -29,7 +34,7 @@ const Home: React.FC = ( ) => {
         {
           product ? 
             <>
-            <Header title='Product of the month'/>
+            <Header title={getTranslation(language, 'Product of the month')}/>
               <Container className={styles.potmContainer}>              
                 <Box className={styles.potmBox} >
                   <img 
@@ -49,16 +54,16 @@ const Home: React.FC = ( ) => {
                       
                       <Box className={styles.potmBoxFour}>
                         { user?.role === 'admin' ?
-                          <Button className={styles.potmSecondaryButton} onClick={handleRemoveProductOfTheMonth}>Remove as P.O.M</Button> :
+                          <Button className={styles.potmSecondaryButton} onClick={handleRemoveProductOfTheMonth}> {getTranslation(language, 'Remove as P.O.M')} </Button> :
                           <></>
                         }
-                        <Button className={styles.potmPrimaryButton} onClick={handleAddToCart}>Add to cart</Button>
+                        <Button className={styles.potmPrimaryButton} onClick={handleAddToCart}>{getTranslation(language, 'Add to cart')}</Button>
                       </Box>
                     </Box>
                   </Box>
                 </Box>
               </Container>
-            </> : <Header title='Welcome to FakeShop Inc!'/>
+            </> : <Header title={getTranslation(language, 'Welcome to FakeShop Inc!')}/>
         }
     </>
   )

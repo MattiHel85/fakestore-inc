@@ -27,8 +27,11 @@ import { increaseQuantity, decreaseQuantity, removeFromCart, clearCart } from '.
 import { AppDispatch } from '../redux/store';
 import { CartItem } from '../types/Cart';
 
-const Cart: React.FC = () => {
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
 
+const Cart: React.FC = () => {
+  const { language } = useLanguage()
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const { items } = useSelector((state: RootState) => state.cart)
@@ -60,9 +63,9 @@ const Cart: React.FC = () => {
                           <TableRow>
                             <TableCell sx={{ textAlign: 'center'}} ><RemoveIcon/></TableCell>
                             <TableCell sx={{ textAlign: 'center' }} ><AddIcon /></TableCell>
-                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >Name</TableCell>
+                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >{getTranslation(language, 'Name')}</TableCell>
                             <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >€</TableCell>
-                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >Qty</TableCell>
+                            <TableCell sx={{ textAlign: 'center', fontWeight: '700' }} >{getTranslation(language, 'Qty')}</TableCell>
                             <TableCell sx={{ textAlign: 'center' }} ><DeleteIcon /></TableCell>
                           </TableRow>
                         </TableHead>
@@ -100,13 +103,13 @@ const Cart: React.FC = () => {
                       }}
                   >
                       <Typography variant='body2'>
-                          Total Products: {items.reduce((total, item) => total + item.quantity, 0)}
+                      {getTranslation(language, 'Total products')}: {items.reduce((total, item) => total + item.quantity, 0)}
                       </Typography>
                       <Typography variant='body2'>
-                        Subtotal: €
+                      {getTranslation(language, 'Subtotal')}: €
                         {items.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}
                       </Typography>
-                      <Button onClick={handleClearCart}>Clear cart</Button>
+                      <Button onClick={handleClearCart}>{getTranslation(language, 'Empty cart')}</Button>
                   </Box>
                 </>            
         )}

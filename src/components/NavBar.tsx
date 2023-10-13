@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
 
 
 const NavBar: React.FC = () => {
+    const { language } = useLanguage()
     
     const navItems = [
       { id: 1,  label: 'All products', path: '/products' },
@@ -38,7 +41,7 @@ const NavBar: React.FC = () => {
                 fontSize: {xs: '9px', md: '1em'}
               }}
             >
-              {navItem.label}
+              {getTranslation(language, navItem.label)} 
             </Typography>
           </Link>
           )}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
@@ -7,7 +8,7 @@ import { UpdateUserProps } from '../types/User';
 import { User } from '../types/User';
 import styles from '../styles/styles.module.css';
 
-const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
+const UpdateUser: React.FC<UpdateUserProps> = ({ user, setUser }) => {
   const [userData, setUserData] = useState<User>({
     id: 0,
     name: '',
@@ -33,6 +34,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
 
   const dispatch: AppDispatch = useDispatch();
   const adminCode = 'makeMeAdmin';
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -52,6 +54,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user }) => {
   const handleUpdateUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(updateUser(userData));
+    navigate(`/users/${userData.id}`)
   };
 
   if (!user) {

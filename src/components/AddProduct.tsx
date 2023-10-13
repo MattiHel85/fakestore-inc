@@ -7,6 +7,7 @@ import { fetchCategories } from '../redux/slices/categorySlice';
 import { Typography, Button, TextField, Select, MenuItem } from '@mui/material';
 import { ProductData } from '../types/Product';
 import styles from '../styles/styles.module.css'
+import { Category } from '../types/Category';
 
 
 const AddProduct: React.FC = () => {
@@ -86,7 +87,7 @@ const AddProduct: React.FC = () => {
             className={styles.textField}
           >
             <MenuItem value={0}>Select Category</MenuItem>
-            {categories.map((category: any) => (
+            {categories.map((category: Category) => (
               <MenuItem key={category.id} value={category.id}>
                 {category.name}
               </MenuItem>

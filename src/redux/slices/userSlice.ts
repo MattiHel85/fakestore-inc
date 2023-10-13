@@ -95,6 +95,22 @@ const userSlice = createSlice({
           .addCase(registerUser.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message || 'User registration failed.';
+          })
+          .addCase(updateUser.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+          })
+          .addCase(updateUser.fulfilled, (state, action) => {
+            const updatedUserIndex = state.users.findIndex((user) => user.id === action.payload.id);
+            if (updatedUserIndex !== -1) {
+                state.users[updatedUserIndex] = action.payload;
+            }
+            state.loading = false;
+            state.error = null;
+          })
+          .addCase(updateUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'User update failed.';
           });
       },
       

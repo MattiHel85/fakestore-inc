@@ -4,13 +4,17 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import ContactForm from '../components/ContactForm';
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const ContactPage: React.FC = () => {
+  const { language } = useLanguage()
 
   return (
     <>
         <TopAppBar />
         <NavBar />
-        <Header title='Contact us' />
+        <Header title={getTranslation(language, 'Contact us')} />
         <ContactForm />
     </>
   )

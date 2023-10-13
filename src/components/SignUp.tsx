@@ -6,7 +6,11 @@ import { AppDispatch } from '../redux/store';
 import { registerUser } from '../redux/slices/userSlice';
 import styles from '../styles/styles.module.css';
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const SignUp: React.FC = () => {
+  const {language} = useLanguage();
   const [userData, setUserData] = useState({    
     name: '',
     email: '',
@@ -45,7 +49,7 @@ const SignUp: React.FC = () => {
 
     
     if (userData.password !== userData.confirmPassword) {
-      setMessage('Passwords do not match. Please try again.');
+      setMessage(getTranslation(language, 'Passwords do not match. Please try again.'));
       return;
     }
 
@@ -59,21 +63,21 @@ const SignUp: React.FC = () => {
       {message && <Typography className={styles.message} variant="body2">{message}</Typography>}
       <form onSubmit={handleSignUp} className={styles.signInForm}>
         <TextField
-          label="Name"
+          label={getTranslation(language, 'Name')}
           name="name"
           value={userData.name}
           onChange={handleInputChange}
           className={styles.textField}
         />
         <TextField
-          label="Email"
+          label={getTranslation(language, 'Email')}
           name="email"
           value={userData.email}
           onChange={handleInputChange}
           className={styles.textField}
         />
         <TextField
-          label="Password"
+          label={getTranslation(language, 'Password')}
           type="password"
           name="password"
           value={userData.password}
@@ -81,7 +85,7 @@ const SignUp: React.FC = () => {
           className={styles.textField}
         />
         <TextField
-          label="Confirm Password"
+          label={getTranslation(language, 'Confirm password')}
           type="password"
           name="confirmPassword"
           value={userData.confirmPassword}
@@ -89,24 +93,24 @@ const SignUp: React.FC = () => {
           className={styles.textField}
         />
         <TextField
-          label="Avatar URL"
+          label={getTranslation(language, 'Avatar URL')}
           name="avatar"
           value={userData.avatar}
           onChange={handleInputChange}
           className={styles.textField}
         />
         <TextField
-          label="Admin Code (Optional)"
+          label={getTranslation(language, 'Admin Code (optional)')}
           name="adminCode"
           type="password"
           onChange={handleInputChange}
           className={styles.textField}
         />
-        <Button type='submit' className={styles.primaryButton}>Sign Up</Button>
+        <Button type='submit' className={styles.primaryButton}>{getTranslation(language, 'sign up')}</Button>
       </form>
 
       <Link to={'/signin'} className={styles.linkText}>
-        <Typography className={styles.textNotInForm} >Already have an account? Sign In</Typography>
+        <Typography className={styles.textNotInForm} >{getTranslation(language, 'Already have an account? Sign in')}</Typography>
       </Link>
     </Container>
   );

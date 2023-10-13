@@ -12,8 +12,11 @@ import debouncedHandleAddToCart from '../utils/cartHelpers';
 
 import ProductCard from './ProductCard';
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const Products: React.FC = () => {
-  
+  const {language} = useLanguage();
   const dispatch: AppDispatch = useDispatch();
   const products = useSelector((state: RootState) => state.products.products);
   const categories = useSelector((state: RootState) => state.categories.categories);
@@ -84,13 +87,14 @@ const Products: React.FC = () => {
   return (
     <>
       <Box className={styles.productsContainer}>
-        <Button onClick={handleShowSearch} className={styles.searchButton}> { !showSearchForm ? 'Open Search' : 'Close Search'}</Button>
+      { !showSearchForm && <Button onClick={handleShowSearch} className={styles.searchButton}> {getTranslation(language, 'Open Search')} </Button> }
+      { showSearchForm && <Button onClick={handleShowSearch} className={styles.searchButton}> {getTranslation(language, 'Close Search')} </Button> }
       </Box>
       {
         showSearchForm && 
         <FormControl className={styles.form}>
           <TextField
-            label="Search Products"
+            label={getTranslation(language, 'Search products')} 
             variant="outlined"
             value={searchTerm}
             onChange={handleSearchChange}
@@ -101,10 +105,10 @@ const Products: React.FC = () => {
             id="category"
             value={selectedCategory}
             onChange={handleCategoryChange}
-            label="Category"
+            label={getTranslation(language, 'Category')} 
             className={styles.textField}
           >
-            <MenuItem value="">All Categories</MenuItem>
+            <MenuItem value="">{getTranslation(language, 'Categories')}</MenuItem>
             {categories.map((category) => (
               <MenuItem key={category.id} value={category.id}>
                 {category.name}
@@ -112,7 +116,7 @@ const Products: React.FC = () => {
             ))}
           </TextField>
           <TextField
-            label="Min Price"
+            label={getTranslation(language, 'Min Price')}
             variant="outlined"
             type="number"
             value={minPrice}
@@ -120,7 +124,7 @@ const Products: React.FC = () => {
             className={styles.textField}
           />
           <TextField
-            label="Max Price"
+            label={getTranslation(language, 'Max Price')}
             variant="outlined"
             type="number"
             value={maxPrice}
@@ -129,7 +133,7 @@ const Products: React.FC = () => {
           />
           <TextField
             select
-            label="Items Per Page"
+            label={getTranslation(language, 'Items Per Page')}
             value={itemsPerPage}
             onChange={handleItemsPerPageChange}
             className={styles.textField}
@@ -139,7 +143,6 @@ const Products: React.FC = () => {
             <MenuItem value={20}>20</MenuItem>
           </TextField>
           <br />
-          {/* <Button onClick={handleSearchByPrice} className={styles.secondaryButton}>Search by Price</ Button> */}
         </FormControl>
       }
       <Container className={styles.productsContainer}>

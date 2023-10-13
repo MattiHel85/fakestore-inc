@@ -56,7 +56,7 @@ const SingleUser: React.FC = () => {
                 </Box>
             </Container>
             { 
-                openUserUpdateForm ?  <UpdateUser user={user} /> : <></>            
+                openUserUpdateForm ?  <UpdateUser user={user} setUser={setUser}/> : <></>            
             }  
         </>
     );

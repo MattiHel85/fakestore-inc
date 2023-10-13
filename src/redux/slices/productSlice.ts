@@ -182,7 +182,7 @@ export const productSlice = createSlice({
         })
         .addCase(createProduct.fulfilled, (state, action) => {
             state.loading = false;
-            state.products.push(action.payload);
+            state.products = [...state.products, action.payload]
             state.error = null;
         })
         .addCase(createProduct.rejected, (state, action) => {
@@ -224,5 +224,4 @@ export const productSlice = createSlice({
       
 })
 
-// export const { removeProductOfTheMonth } = productSlice.actions;
 export default productSlice.reducer

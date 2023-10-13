@@ -5,8 +5,11 @@ import { ProductCardProps } from "../types/Product";
 import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
 import styles from '../styles/styles.module.css'
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onAddToCart}) => {
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
 
+const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onAddToCart}) => {
+    const { language } = useLanguage()
     const navigate = useNavigate();
     const id = product?.id;
     const firstImage = product?.images?.[0];
@@ -38,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
                         {product.description}
                     </Typography>
                     <Typography variant="body1" sx={{marginBottom: '1.5em'}}>
-                        Category: {product.category.name}
+                    {getTranslation(language, 'Category')}: {product.category.name}
                     </Typography>
                 </CardContent>
                 <CardActions
@@ -57,7 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, items, dispatch, onA
                         onClick={handleAddToCart} 
                         className={styles.primaryCardButton}
                         size='large'>
-                            Add to cart
+                            {getTranslation(language, 'Add to cart')} 
                     </Button>
                 </CardActions>
             </Card>   

@@ -4,8 +4,12 @@ import { RootState } from '../redux/slices/rootSlice';
 import { Typography, Container, Button, TextField, Box } from "@mui/material";
 import styles from '../styles/styles.module.css';
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const ContactForm: React.FC = () => {
-    const user = useSelector((state: RootState) => state.auth.user);
+  const { language } = useLanguage()
+  const user = useSelector((state: RootState) => state.auth.user);
   const [formData, setFormData] = useState({
     name: user ? user.name : '',
     email: user ? user.email : '',
@@ -41,7 +45,7 @@ const ContactForm: React.FC = () => {
         className={styles.form}
       >
         <TextField
-          label="Name"
+          label={getTranslation(language, 'Name')}
           name="name"
           value={formData.name}
           onChange={handleInputChange}
@@ -49,7 +53,7 @@ const ContactForm: React.FC = () => {
           className={styles.textField}
         />
         <TextField
-          label="Email"
+          label={getTranslation(language, 'Email')}
           name="email"
           value={formData.email}
           onChange={handleInputChange}
@@ -58,7 +62,7 @@ const ContactForm: React.FC = () => {
           className={styles.textField}
         />
         <TextField
-          label="Message"
+          label={getTranslation(language, 'Message')}
           name="message"
           value={formData.message}
           onChange={handleInputChange}
@@ -71,19 +75,19 @@ const ContactForm: React.FC = () => {
           type="submit"
           className={styles.primaryButton}
         >
-          Submit
+          {getTranslation(language, 'Submit')}
         </Button>
       </form>
       {
         showMessage && 
         <Box className={styles.messageBox}>
             <Typography className={styles.messageHeader} variant='h6'>
-                { user ? `User ${user?.name}'s message not sent` : 'Your message could not be sent'}
+                {getTranslation(language, 'Your message could not be sent')}
             </Typography>
             <Typography className={styles.messageBody} variant='body1'>
-                Your form has been submitted successfully. However, your message will not be sent because the API doesn't have the capability and this form is just for show.
+                {getTranslation(language, 'This is because the API does not currently support this feature')}
             </Typography>
-            <Button className={styles.secondaryButton} onClick={() => setShowMessage(false)}>Close message</Button>
+            <Button className={styles.secondaryButton} onClick={() => setShowMessage(false)}>{getTranslation(language, 'Close message')}</Button>
         </ Box>
       }
     </Container>

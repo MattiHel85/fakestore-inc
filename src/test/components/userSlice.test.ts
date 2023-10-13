@@ -1,4 +1,4 @@
-import userSlice, { fetchUsers, registerUser, initialState } from "../../redux/slices/userSlice"
+import userSlice, { fetchUsers, registerUser, updateUser, initialState } from "../../redux/slices/userSlice"
 import { User } from "../../types/User"
 
 describe('userSlice', () => {
@@ -53,4 +53,35 @@ describe('userSlice', () => {
     expect(state.loading).toBe(false)
     expect(state.error).toBe('Registration Failed')
   });
+
+  it('should handle updateUser.pending', () => {
+    const state = userSlice(initialState, updateUser.pending)
+    expect(state.loading).toBe(true)
+    expect(state.error).toBeNull()
+  });
+
+  it('should handle updateUser.fulfilled', () => {
+    const mockUser: User = { id: 1, name: 'User 1', email: 'user1@example.com', password: 'password123', role: 'admin' }
+    const updatedUserData: User = { id: 1, name: 'Updated User 1', email: 'updateduser1@example.com', password: 'updatedpassword', role: 'user' }
+
+    const action = updateUser.fulfilled(updatedUserData, '', mockUser)
+
+    const state = userSlice({ ...initialState, users: [mockUser] }, action)
+    expect(state.users).toEqual([updatedUserData])
+    expect(state.loading).toBe(false)
+    expect(state.error).toBeNull()
+  });
+
+  it('should handle updateUser.rejected', () => {
+    const mockUser: User = { id: 1, name: 'User 1', email: 'user1@example.com', password: 'password123', role: 'admin' }
+    const error = new Error('Update Failed')
+
+    const action = updateUser.rejected(error, '', mockUser)
+    const state = userSlice({ ...initialState, users: [mockUser] }, action)
+
+    expect(state.users).toEqual([mockUser])
+    expect(state.loading).toBe(false)
+    expect(state.error).toBe('Update Failed')
+  });
+
 });

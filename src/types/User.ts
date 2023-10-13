@@ -19,4 +19,5 @@ export interface UserCardProps {
 
 export interface UpdateUserProps {
   user?: User | null
+  setUser?: (userData: User) => void; 
 }
