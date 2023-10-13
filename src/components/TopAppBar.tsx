@@ -23,6 +23,8 @@ import { logout } from '../redux/slices/authSlice';
 import Cart from './Cart';
 import SignIn from './SignIn';
 
+import LanguageSwitcher from './LanguageSwitcher';
+
 import { useLanguage } from '../contextAPI/LanguageContext';
 import { getTranslation } from '../contextAPI/translations/TranslationService';
 
@@ -101,7 +103,7 @@ function TopAppBar() {
               fontFamily: 'monospace',
               fontWeight: 900,
               letterSpacing: '.1rem',
-              fontSize: {xs: '1.5em', md: '2.25em'},
+              fontSize: {xs: '1em', md: '2.25em'},
               color: 'black',
               textDecoration: 'none',
               flexGrow: 1, // Expand to fill available space
@@ -110,10 +112,16 @@ function TopAppBar() {
             FakeShop Inc
           </Typography>
 
+          {/* Language switch*/}
+          <Box
+            sx={{ display: 'flex', alignItems: 'center' }}
+          >
+            <LanguageSwitcher />
+          </Box>  
           {/* User Menu */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             { isAuthenticated ? (
-              <Tooltip title="username">
+              <Tooltip title={getTranslation(language, 'user')}>
                 <>
                     <IconButton onClick={handleOpenNavMenu} sx={{ p: 0, color: 'black', mr: '0.05em' }}>
                         <PersonIcon sx={{ fontSize: {xs: '1em', md: '1.5em'}}} />

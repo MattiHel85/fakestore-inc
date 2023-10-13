@@ -9,8 +9,12 @@ import { ProductData } from '../types/Product';
 import styles from '../styles/styles.module.css'
 import { Category } from '../types/Category';
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 
 const AddProduct: React.FC = () => {
+  const {language} = useLanguage();
   const dispatch: AppDispatch = useDispatch(); 
   const categories = useSelector((state: RootState) => state.categories.categories);
   const [productData, setProductData] = useState<ProductData>({
@@ -55,24 +59,24 @@ const AddProduct: React.FC = () => {
 
   return (
     <>
-      <Typography variant='h4' sx={{ textAlign: 'center', my: '2.5em' }}>Add Product</Typography>
+      <Typography variant='h4' sx={{ textAlign: 'center', my: '2.5em' }}>{getTranslation(language, 'Add product')}</Typography>
         <form className={styles.productForm} onSubmit={handleAddProduct}>
           <TextField
-            label='Title'
+            label={getTranslation(language, 'Name')}
             name='title'
             value={productData.title}
             onChange={handleInputChange}
             className={styles.textField}
           />
           <TextField
-            label='Description'
+            label={getTranslation(language, 'Description')}
             name='description'
             value={productData.description}
             onChange={handleInputChange}
             className={styles.textField}
           />
           <TextField
-            label='Price'
+            label={getTranslation(language, 'Price')}
             type='number'
             name='price'
             value={productData.price}
@@ -80,13 +84,13 @@ const AddProduct: React.FC = () => {
             className={styles.textField}
           />
           <Select
-            label='Category'
+            label={getTranslation(language, 'Category')}
             name='categoryId'
             value={productData.categoryId}
             onChange={handleCategoryChange}
             className={styles.textField}
           >
-            <MenuItem value={0}>Select Category</MenuItem>
+            <MenuItem value={0}>{getTranslation(language, 'Select Category')}</MenuItem>
             {categories.map((category: Category) => (
               <MenuItem key={category.id} value={category.id}>
                 {category.name}
@@ -94,7 +98,7 @@ const AddProduct: React.FC = () => {
             ))}
           </Select>
           <TextField
-            label='Image URLs (comma-separated)'
+            label={getTranslation(language, 'Image URLs (comma-separated)')}
             name='images'
             value={productData.images.join(',')} 
             onChange={handleImageChange}
@@ -104,7 +108,7 @@ const AddProduct: React.FC = () => {
             type="submit"
             className={styles.primaryButton}
           >
-            Add Product
+            {getTranslation(language, 'Add product')}
           </Button>
         </form>
     </>

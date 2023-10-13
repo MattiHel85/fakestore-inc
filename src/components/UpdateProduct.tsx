@@ -7,9 +7,13 @@ import { fetchCategories } from '../redux/slices/categorySlice';
 import { Button, TextField, Select, MenuItem } from '@mui/material';
 import { ProductData } from '../types/Product';
 import { updateProductProps } from '../types/Product';
-import styles from '../styles/styles.module.css'
+import styles from '../styles/styles.module.css';
+
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
 
 const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
+  const {language} = useLanguage();
   const dispatch: AppDispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const [productData, setProductData] = useState<ProductData>({
@@ -72,20 +76,21 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
       className={styles.productForm}
     >
       <TextField
+        label={getTranslation(language, 'Name')}
         name='title'
         value={productData.title}
         onChange={handleInputChange}
         className={styles.textField}
       />
       <TextField
-        label='Description'
+        label={getTranslation(language, 'Description')}
         name='description'
         value={productData.description}
         onChange={handleInputChange}
         className={styles.textField}
       />
       <TextField
-        label='Price'
+        label={getTranslation(language, 'Price')}
         type='number'
         name='price'
         value={productData.price}
@@ -93,13 +98,13 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
         className={styles.textField}
       />
       <Select
-        label='Category'
+        label={getTranslation(language, 'Category')}
         name='categoryId'
         value={productData.categoryId}
         onChange={handleCategoryChange}
         className={styles.textField}
       >
-        <MenuItem value={0}>Select Category</MenuItem>
+        <MenuItem value={0}>{getTranslation(language, 'Select Category')}</MenuItem>
         {categories.map((category: any) => (
           <MenuItem key={category.id} value={category.id}>
             {category.name}
@@ -107,7 +112,7 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
         ))}
       </Select>
       <TextField
-        label='Image URLs (comma-separated)'
+        label={getTranslation(language, 'Image URLs (comma-separated)')}
         name='images'
         value={productData.images.join(',')} // Join the array into a comma-separated string for the input value
         onChange={handleImageChange}
@@ -117,7 +122,7 @@ const UpdateProduct: React.FC<updateProductProps> = ({ product }) => {
         type='submit'
         className={styles.primaryButton}
       >
-        Update
+        {getTranslation(language, 'Update')}
       </Button>
     </form>
   );

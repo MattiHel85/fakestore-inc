@@ -1,0 +1,19 @@
+@use './variables/colors';
+
+.languageButton {
+    background-color: colors.$primary-background-color;
+        color: white;
+        width: 70%;
+        margin: 1em auto;
+        font-weight: 600;
+        font-size: 15px;
+        border: none;
+        border-radius: 25px;
+        padding: 0 2.5em;
+        @media (max-width: 600px){
+            font-size: 10px;
+            width: 60%;
+            margin-bottom: 1em;
+            padding: 1 2.5em;
+        }
+}

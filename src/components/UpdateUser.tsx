@@ -8,7 +8,11 @@ import { UpdateUserProps } from '../types/User';
 import { User } from '../types/User';
 import styles from '../styles/styles.module.css';
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const UpdateUser: React.FC<UpdateUserProps> = ({ user, setUser }) => {
+  const {language} = useLanguage();
   const [userData, setUserData] = useState<User>({
     id: 0,
     name: '',
@@ -66,21 +70,21 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user, setUser }) => {
     <Box className={styles.signInContainer}>
       <form onSubmit={handleUpdateUser} className={styles.signInForm}>
         <TextField
-          label="Name"
+          label={getTranslation(language, 'Name')}
           name="name"
           value={userData.name}
           onChange={handleInputChange}
           className={styles.textField}
         />
         <TextField
-          label="Email"
+          label={getTranslation(language, 'Email')}
           name="email"
           value={userData.email}
           onChange={handleInputChange}
           className={styles.textField}
         />
         <TextField
-          label="Password"
+          label={getTranslation(language, 'Password')}
           type="password"
           name="password"
           value={userData.password}
@@ -88,21 +92,21 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user, setUser }) => {
           className={styles.textField}
         />
         <TextField
-          label="Avatar URL"
+          label={getTranslation(language, 'Avatar URL')}
           name="avatar"
           value={userData.avatar}
           onChange={handleInputChange}
           className={styles.textField}
         />
         <TextField
-          label="Admin Code (Optional)"
+          label={getTranslation(language, 'Admin Code (optional)')}
           name="adminCode"
           type="password"
           onChange={handleInputChange}
           className={styles.textField}
         />
         <Button type='submit' className={styles.primaryButton}>
-          Update User
+          {getTranslation(language, 'Update user')}
         </Button>
       </form>
       

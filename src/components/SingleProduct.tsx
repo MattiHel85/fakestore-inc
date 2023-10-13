@@ -16,7 +16,11 @@ import styles from '../styles/styles.module.css';
 import debouncedHandleAddToCart from '../utils/cartHelpers';
 import Header from "./Header";
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const SingleProduct: React.FC = () => {
+    const {language} = useLanguage();
     const [product, setProduct] = useState<Product | undefined>(undefined);
 
     const [openProductUpdateForm, setOpenProductUpdateForm] = useState(false)
@@ -64,7 +68,6 @@ const SingleProduct: React.FC = () => {
 
     const handleSetProductOfTheMonth = (productId: number) => {
         dispatch(fetchProductOfTheMonthById(productId))
-        console.log('DONE!')
         navigate(`/`)
     }
 
@@ -77,7 +80,7 @@ const SingleProduct: React.FC = () => {
     }
 
     if (!product) {
-        return <p>Product not found.</p>;
+        return <p>{getTranslation(language, 'Product not found')}</p>;
       }
 
     return (
@@ -124,7 +127,7 @@ const SingleProduct: React.FC = () => {
                     sx={{
                         marginBottom: '15px'
                     }}
-                    variant="h6">Category: {product.category.name}
+                    variant="h6">{getTranslation(language, 'Category')}: {product.category.name}
                 </Typography>
                 <Typography
                     sx={{
@@ -145,19 +148,19 @@ const SingleProduct: React.FC = () => {
                         onClick={() => navigate(-1)} 
                         className={styles.secondaryButton}
                     >
-                            Back
+                            {getTranslation(language, 'Back')}
                     </Button>
                     { user?.role === 'admin' && <Button 
                         onClick={() => setAdminFunctions(true)} 
                         className={styles.secondaryButton}
                     >
-                            Admin
+                            {getTranslation(language, 'Admin')}
                     </Button>}
                     <Button 
                         onClick={handleAddToCart}
                         className={styles.primaryButton}
                     >
-                        Add to cart
+                        {getTranslation(language, 'Add to cart')}
                     </Button>
                 </Box>
                 { adminFunctions && user?.role === 'admin' ?
@@ -169,7 +172,10 @@ const SingleProduct: React.FC = () => {
                                     className={styles.updateButton}
                                 >
                                         {
-                                            openProductUpdateForm ? 'Complete' : 'Update'
+                                            openProductUpdateForm && getTranslation(language, 'Done')
+                                        }
+                                        {
+                                            !openProductUpdateForm && getTranslation(language, 'Update')
                                         }
                                 </Button>
                                 {
@@ -178,7 +184,7 @@ const SingleProduct: React.FC = () => {
                                         onClick={handleShowDeleteButton} 
                                         className={styles.cardDeleteButton}
                                     >
-                                            Delete 
+                                            {getTranslation(language, 'delete')}
                                     </Button>
                                 }
                                 { 
@@ -188,13 +194,13 @@ const SingleProduct: React.FC = () => {
                                             onClick={handleHideDeleteButton}
                                             className={styles.hideDeleteButton}
                                         >
-                                            Don't delete
+                                            {getTranslation(language, "don't delete")}
                                         </Button>
                                         <Button 
                                             onClick={handleDelete} 
                                             className={styles.cardDeleteButton}
                                         >
-                                            Yes, delete
+                                            {getTranslation(language, 'yes, delete')}
                                         </Button>                                
                                     </>
                                 }
@@ -202,13 +208,13 @@ const SingleProduct: React.FC = () => {
                                     onClick={() => handleSetProductOfTheMonth(Number(product?.id))} 
                                     className={styles.potmButton}
                                 >
-                                        Make product of month
+                                        {getTranslation(language, 'Make product of month')}
                                 </Button>                                
                                 <Button 
                                     onClick={() => setAdminFunctions(false)} 
                                     className={styles.doneButton}
                                 >
-                                        Done
+                                        {getTranslation(language, 'Done')}
                                 </Button>                                
                             </Box>
                         </ Box> : 

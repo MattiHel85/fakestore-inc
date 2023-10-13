@@ -9,7 +9,11 @@ import { Button, Container, Box } from "@mui/material";
 import UserCard from "./UserCard";
 import styles from '../styles/styles.module.css'
 
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 const SingleUser: React.FC = () => {
+    const {language} = useLanguage();
     const {id} = useParams();
     const navigate = useNavigate()
     const [user, setUser] = useState<User | null>(null);
@@ -47,10 +51,14 @@ const SingleUser: React.FC = () => {
             <Container className={styles.userContainer}>
                 <UserCard user={user} />
                 <Box className={styles.buttonBox}>
-                    <Button className={styles.primaryButton} onClick={handleGoBack}>Go Back</Button>
+                    <Button className={styles.primaryButton} onClick={handleGoBack}>{getTranslation(language, 'Back')}</Button>
                     { 
                         signedInUser?.role === 'admin' || user?.id === signedInUser?.id ?
-                            <Button className={styles.updateButton} onClick={toggleUpdateUserForm}>{openUserUpdateForm ? 'Done' : 'Update User'}</Button> : 
+                            <Button className={styles.updateButton} onClick={toggleUpdateUserForm}>
+                                {/* {openUserUpdateForm ? 'Done' : 'Update User'} */}
+                                {openUserUpdateForm && getTranslation(language, 'Done') }
+                                {!openUserUpdateForm && getTranslation(language, 'Update user')}
+                            </Button> : 
                             <></> 
                     }
                 </Box>

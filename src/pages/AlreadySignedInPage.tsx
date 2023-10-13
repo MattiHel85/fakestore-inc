@@ -1,21 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import TopAppBar from '../components/TopAppBar';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 
-import { RootState } from '../redux/slices/rootSlice';
+import { useLanguage } from '../contextAPI/LanguageContext';
+import { getTranslation } from '../contextAPI/translations/TranslationService';
+
 
 const AlreadySignedInPage: React.FC = () => {
-  
-  const user = useSelector((state: RootState) => state.auth.user);
+  const {language} = useLanguage();
 
   return (
     <>
         <TopAppBar />
         <NavBar />
-        <Header title={`You're already signed in as user ${user?.name}.`} body={'You need to log out before you can perform this action.'}/>
+        <Header title={getTranslation(language, "You're already signed in")} body={getTranslation(language, 'You need to log out before you can perform this action.')}/>
     </>
   )
 }
