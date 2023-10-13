@@ -33,7 +33,7 @@ I created the FakeStore Inc React app using React, Redux, TypeScript, with styli
 
 1. I used context API to switch languages between English and Finnish
 2. I used pagination when displaying all the products and users using MUI
-3. In order to prevent multiple items with single quantities of 1 to be added to the cart I wrote a debounce method and used it to prevent rapid clicks on 'add to cart'
+3. In order to prevent multiple items with quantities of 1 to be added to the cart I wrote a debounce method and used it to prevent rapid clicks on 'add to cart'
 
 ## Instruction to start the project
 
