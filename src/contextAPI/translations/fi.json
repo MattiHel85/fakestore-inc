@@ -69,5 +69,8 @@
     "You're already signed in":"Olette jo kirjautuneena sisään",
     "You need to log out before you can perform this action.":"Teidän tulee kirjautua ulos jatkaaksenne",
     "change language":"vaihda kieli",
-    "suomi":"english"
+    "suomi":"english",
+    "Cart Empty":"Kori tyhjä",
+    "You've not added anything yet":"Ette ole lisänneet mitään vielä",
+    "browse our products":"selaa tuotteemme"
 }
