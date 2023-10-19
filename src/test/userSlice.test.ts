@@ -1,5 +1,5 @@
-import userSlice, { fetchUsers, registerUser, updateUser, initialState } from "../../redux/slices/userSlice"
-import { User } from "../../types/User"
+import userSlice, { fetchUsers, registerUser, updateUser, initialState } from "../redux/slices/userSlice"
+import { User } from "../types/User"
 
 describe('userSlice', () => {
   it('should handle fetchUsers.pending', () => {

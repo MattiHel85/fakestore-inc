@@ -3,8 +3,8 @@ import authSlice, {
     logout,
     loginFailure,
     initialState
-  } from '../../redux/slices/authSlice';
-import { LoginPayload } from '../../types/Auth';
+  } from '../redux/slices/authSlice';
+import { LoginPayload } from '../types/Auth';
   
   describe('authSlice reducers', () => {
     it('should handle loginUser.pending', () => {

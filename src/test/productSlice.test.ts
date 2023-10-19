@@ -1,7 +1,7 @@
 import { 
     ProductData, 
     AddProductData 
-} from "../../types/Product";
+} from "../types/Product";
 
 import productSlice, { 
     fetchProducts, 
@@ -12,7 +12,7 @@ import productSlice, {
     updateProduct,
     deleteProduct,
     initialState,
-} from "../../redux/slices/productSlice";
+} from "../redux/slices/productSlice";
 
 describe('product reducer', () => {
 
@@ -443,35 +443,4 @@ describe('product reducer', () => {
         expect(state.products).toEqual([])
         expect(state.error).toBe('Rejected')
     })
-
-    // it('should handle removeProductOfTheMonth action', () => {
-    //     const mockProduct =         
-    //         {
-    //             id: 1,
-    //             title: 'Product 1',
-    //             price: 10,
-    //             description: 'Description for Product 1',
-    //             images: ['image1.jpg', 'image2.jpg'],
-    //             creationAt: '2023-09-20T10:00:00Z',
-    //             updatedAt: '2023-09-20T10:00:00Z',
-    //             category: {
-    //               id: 1,
-    //               name: 'Category 1',
-    //               image: 'category1.jpg',
-    //               creationAt: '2023-09-20T10:00:00Z',
-    //               updatedAt: '2023-09-20T10:00:00Z',
-    //             },
-    //         }
-
-    //     const state = {
-    //         products: [],
-    //         product: mockProduct,
-    //         loading: false,
-    //         error: null
-    //     }
-
-    //     const nextState = productSlice(state, removeProductOfTheMonth());
-
-    //     expect(nextState.product).toBeNull();
-    // })
 })

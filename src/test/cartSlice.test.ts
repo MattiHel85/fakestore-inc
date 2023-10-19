@@ -4,7 +4,7 @@ import cartSlice, {
     clearCart,
     decreaseQuantity,
     increaseQuantity,
-  } from "../../redux/slices/cartSlice";
+  } from "../redux/slices/cartSlice";
   
   describe('cart reducer', () => {
     it('should handle addToCart', () => {
@@ -107,4 +107,3 @@ import cartSlice, {
       expect(state.items[0].quantity).toEqual(2);
     });
   });
-  

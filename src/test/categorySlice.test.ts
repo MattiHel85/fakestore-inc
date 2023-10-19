@@ -4,7 +4,7 @@ import
         fetchCategories, 
         initialState
     } 
-from "../../redux/slices/categorySlice";
+from "../redux/slices/categorySlice";
 
 describe('categoryApi', () => {
 

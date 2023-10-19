@@ -4,7 +4,7 @@ import productOfTheMonthSlice, {
     fetchProductOfTheMonthById,
     removeProductOfTheMonth,
     initialState
-} from "../../redux/slices/productOfTheMonthSlice";
+} from "../redux/slices/productOfTheMonthSlice";
 
 describe('productOfTheMonth reducer', () => {
 
